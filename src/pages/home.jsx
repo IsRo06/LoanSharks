@@ -27,7 +27,7 @@ export default function Home(){
 
         emailRef.current.value = "";
         passRef.current.value = "";
-        }
+    }
     catch(e){
         console.log(e);
     }

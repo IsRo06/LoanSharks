@@ -5,7 +5,7 @@ function App() {
   return (
     <div className='App'>
       <Home/>
-      {/*<div className='bg'></div>*/}
+      <div className='bg'></div>
       
       
       
