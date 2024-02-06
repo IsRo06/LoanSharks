@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import {firestore} from "../firebase";
 import {addDoc, collection} from "@firebase/firestore"
-import Authorization from "../authorization";
+
 
 
 export default function Home(){
