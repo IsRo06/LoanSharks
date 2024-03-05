@@ -5,11 +5,15 @@ const carSchema = new Schema({
     carMake: String,
     carModel: String,
     carColor: String,
-    carYear: Number,
-    carNumberoOfSeats: Number,
     carMileage: Number,
+    carYear: Number,
+    carType: String,
+    carMaxMilesPerDay: Number,
+    carMileCostAfterMax: Number,
     carCostPerDay: Number,
-    carStatus: String
+    carLocation: String,
+    carStatus: String,
+    carReservations: [Number]
 });
 
 

@@ -19,11 +19,15 @@ module.exports ={
                         carMake: car.carMake,
                         carModel: car.carModel,
                         carColor: car.carColor,
-                        carYear: car.carYear,
-                        carNumberoOfSeats: car.carNumberoOfSeats,
                         carMileage: car.carMileage,
+                        carYear: car.carYear,
+                        carType: cat.carType,
+                        carMaxMilesPerDay: car.carMaxMilesPerDay,
+                        carMileCostAfterMax: car.carMileCostAfterMax,
                         carCostPerDay: car.carCostPerDay,
-                        carStatus: car.carStatus
+                        carLocation: car.carLocation,
+                        carStatus: car.carStatus,
+                        carReservations: car.carReservations
                     }
                     return newcar;
                 }
@@ -34,17 +38,21 @@ module.exports ={
         }
     },
     Mutation: {
-        async createCar(_, {id, make, model, color, year, number_of_seats, mielage, cost_per_day, status}){
+        async createCar(_, {id, make, model, color, year, mileage, type, maxmilesperday, milecostaftermax, costperday, location, status, reservations}){
             const newCar =  new Car({
                 carId: id,
                 carMake: make,
                 carModel: model,
                 carColor: color,
                 carYear: year,
-                carNumberoOfSeats: number_of_seats,
-                carMileage: mielage,
-                carCostPerDay: cost_per_day,
-                carStatus: status
+                carMileage: mileage,
+                carType: type,
+                carMaxMilesPerDay: maxmilesperday,
+                carMileCostAfterMax: milecostaftermax,
+                carCostPerDay: costperday,
+                carLocation: location,
+                carStatus: status,
+                carReservations: reservations
 
             });
             await newCar.save();

@@ -6,11 +6,15 @@ module.exports=gql`
         carMake: String!
         carModel: String!
         carColor: String!
-        carYear: Int!
-        carNumberoOfSeats: Int!
         carMileage: Int!
-        carCostPerDay: Int!
+        carYear: Int!
+        carType: String!
+        carMaxMilesPerDay: Int!
+        carMileCostAfterMax: Int!
+        carCostPerDay: Float!
+        carLocation: String!
         carStatus: String!
+        carReservations: [Int]!
     }
     type Query{
         getCars: [Car]
@@ -22,11 +26,16 @@ module.exports=gql`
         make: String!
         model: String!
         color: String!
+        mileage: Int!
         year: Int!
-        number_of_seats: Int!
-        mielage: Int!
-        cost_per_day: Int!
-        status: String!): Car!
+        type: String!
+        maxmilesperday: Int!
+        milecostaftermax: Int!
+        costperday: Float!
+        location: String!
+        status: String!
+        reservations: [Int]!
+        ): Car!
         deleteCar(id: String!): [Car]!
     }
 `;
