@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import {firestore} from "../firebase";
 import {addDoc, collection} from "@firebase/firestore"
+import { getAuth, createUserWithEmailAndPassword ,signInWithEmailAndPassword } from "firebase/auth";
 
 
 
@@ -11,43 +12,80 @@ export default function Home(){
     const ref = collection(firestore, "messages");
 
     const passRef = useRef();
+    const auth = getAuth();
+
+    
     
     
 
-    const handleSave = async(e) => {
+    const handleCreation = async(e) => {
         e.preventDefault();
         
+        
+        
 
-    let data = {
-        email : emailRef.current.value,
-        password : passRef.current.value,
-    }
-    try{
-        addDoc(ref, data);
+        
+        try{
+                createUserWithEmailAndPassword(auth, emailRef.current.value, passRef.current.value).then((userCredential)=>{
+                    const user = userCredential.user;
+                    console.log("User creation", user.email);
+                }).catch((error)=>{
+                    console.log(error.message);
 
-        emailRef.current.value = "";
-        passRef.current.value = "";
+                });
+                
+            
+            emailRef.current.value = "";
+            passRef.current.value = "";
+            
+        }
+        catch(e){
+            console.log(e);
+            console.log("it did not work");
+        }
     }
-    catch(e){
-        console.log(e);
-    }
+    const handleLogin = async(e) => {
+        e.preventDefault();
+        
+        
 
+    
+        try{
+
+            
+                signInWithEmailAndPassword(auth, emailRef.current.value, passRef.current.value).then((userCredential) => {
+                    const user = userCredential.user;
+                    console.log(user.email);
+                })
+                .catch((error) => {
+                    console.log("fuck");
+                })
+            
+            emailRef.current.value = "";
+            passRef.current.value = "";
+        }
+        catch(e){
+            console.log("fucccck");
+        }
     }
     return (
         <div>
-            <h1>Sign in</h1>
-            <form onSubmit={handleSave}>
+            <h1>Create an Account</h1>
+            <form onSubmit={handleCreation}>
                 <label>Email</label>
                 <input type="text" ref={emailRef}></input>
                 <label>Password</label>
                 <input type="password" ref={passRef}></input>
-                <button type="submit">Save</button>
+                <button type="submit">Submit</button>
             </form>
             <h1>Log in</h1>
-            <form onSubmit={handleSave}>
-
+            <form onSubmit={handleLogin}>
+            <label>Email</label>
+                <input type="text" ref={emailRef}></input>
+                <label>Password</label>
+                <input type="password" ref={passRef}></input>
+                <button type="submit">Submit</button>
             </form>
-
         </div>
     )
 }
