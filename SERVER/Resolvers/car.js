@@ -12,35 +12,21 @@ module.exports ={
         },
         async getCar(_, {car_id}){
             try{
-                const car = await Car.findOne({carId: car_id});
+                const car = await Car.findById(car_id);
                 if(car){
-                    var newcar = {
-                        carId: car.carId,
-                        carMake: car.carMake,
-                        carModel: car.carModel,
-                        carColor: car.carColor,
-                        carMileage: car.carMileage,
-                        carYear: car.carYear,
-                        carType: cat.carType,
-                        carMaxMilesPerDay: car.carMaxMilesPerDay,
-                        carMileCostAfterMax: car.carMileCostAfterMax,
-                        carCostPerDay: car.carCostPerDay,
-                        carLocation: car.carLocation,
-                        carStatus: car.carStatus,
-                        carReservations: car.carReservations
-                    }
-                    return newcar;
+                    return car;
+                }else{
+                    console.log("Could not create a new object")
                 }
             }catch(err){
-                console.log("Cannot return car:", {car_id})
+                console.log("Cannot return car:", car_id)
             }
             
         }
     },
     Mutation: {
-        async createCar(_, {id, make, model, color, year, mileage, type, maxmilesperday, milecostaftermax, costperday, location, status, reservations}){
+        async createCar(_, {make, model, color, year, mileage, type, maxmilesperday, milecostaftermax, costperday, location, status, reservations}){
             const newCar =  new Car({
-                carId: id,
                 carMake: make,
                 carModel: model,
                 carColor: color,
@@ -56,17 +42,18 @@ module.exports ={
 
             });
             await newCar.save();
-            const res = await Car.findOne({carId: id});
+            const res = await Car.findById(newCar.id);
             return res;
         },
-        async deleteCar(_, {id}){
+        async deleteCar(_, {car_id}){
             try{
-                Car.deleteOne({carId: id})
-                console.log("Deleted car: ",{id});
+                const car_to_delete = await Car.findById(car_id);
+                await car_to_delete.deleteOne({id: car_id});
+                console.log("Deleted car: ",{car_id});
                 var cars = await Car.find();
                 return cars;
             }catch(err){
-                console.log("Cannot delete car: ",{id});
+                console.log("Cannot delete car: ",{car_id});
             }
 
         }
