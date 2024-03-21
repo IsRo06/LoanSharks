@@ -1,4 +1,4 @@
-import './App.css';
+import './HomeScreen.css';
 import logo from './images/logo.png'
 import oceanImage from './images/ocean.png';
 import calandarIcon from './images/calandar-icon.jpg';

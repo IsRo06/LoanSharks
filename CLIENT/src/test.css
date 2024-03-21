@@ -115,7 +115,7 @@ input, input:hover, input:focus {
 
 #dateAndTime {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   justify-content: space-evenly;
   margin-left: 35px;
   margin-right: 35px;
@@ -127,7 +127,7 @@ input, input:hover, input:focus {
   }
 }
 
-@media (min-width: 1051px) and (max-width: 1950px) {
+@media (min-width: 1051px) {
   #dateAndTime {
     grid-template-columns: 1fr 1fr;
   }
