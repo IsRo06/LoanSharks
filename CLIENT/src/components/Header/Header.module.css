@@ -1,0 +1,53 @@
+#topBanner {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: hsl(208, 46%, 33%);
+  width: 100%;
+  z-index: 100
+}
+
+#leftSide {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 100%;
+  padding-left: 50px;
+}
+
+#leftSide h4 {
+  color: white;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+#logoImage {
+  height: 70px;
+  padding-right: 15px;
+  cursor: pointer;
+}
+
+#rightSide {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  padding-right: 30px;
+}
+
+.bannerText {
+  font-weight: 500;
+  font-size: 18px;
+  padding: 38px 20px;
+  color: white;
+  cursor: pointer;
+  transition: background-color .15s;
+}
+
+.bannerText:hover{
+  background-color:  hsl(208, 46%, 50%) ;
+}
