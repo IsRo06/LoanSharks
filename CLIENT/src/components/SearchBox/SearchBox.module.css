@@ -38,17 +38,30 @@ input, input:hover, input:focus {
   outline: none;
 }
 
+label {
+  position: absolute;
+  width: 90%;
+  top: 8px;
+}
+
 .searchBoxText {
+  position: relative;
   height: 100%;
   width: 90%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
   margin-left: 10px;
 }
 
 .searchBoxText input {
   width: 90%;
+}
+
+.dropDown {
+  position: absolute;
+  width: 90%;
+  top: 35px;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: white;
 }
 
 #dateAndTime {
@@ -80,6 +93,14 @@ input, input:hover, input:focus {
   border-radius: 10px;
   margin: 10px 15px;
   height: 70px;
+}
+
+.calendar {
+  position: absolute;
+  width: 90%;
+  top: 35px;
+  border: 1px solid black;
+  border-radius: 5px;
 }
 
 #searchBtn {
