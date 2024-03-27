@@ -6,7 +6,7 @@ const { UserInputError } = require('apollo-server')
 const {validateRegisterInput, validateLoginInput} = require('../util/validators')
 
 function generateToken(user){
-    jwt.sign({
+    return jwt.sign({
         id: user.id,
         email: user.email,
         username: user.username
@@ -17,7 +17,7 @@ function generateToken(user){
 module.exports = {
     Mutation: {
         async login(_, {username, password}){
-            console.log("dieidiied");
+            
             const {errors, valid} = validateLoginInput(username, password);
             
             if(!valid){
@@ -38,7 +38,7 @@ module.exports = {
             }
             
             const token = generateToken(user);
-
+            //console.log("dieidiied");
             return{
                 ...user._doc,
                 id:user._id,

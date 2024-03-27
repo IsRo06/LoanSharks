@@ -10,6 +10,7 @@
     "@types/bcryptjs": "^2.4.6",
     "apollo-server": "^3.13.0",
     "bcrypt": "*",
+    "bcryptjs": "^2.4.3",
     "graphql": "^16.8.1",
     "graphql-tag": "^2.12.6",
     "jsonwebtoken": "^9.0.2",
