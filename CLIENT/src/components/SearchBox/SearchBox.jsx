@@ -26,7 +26,7 @@ export default function SearchBox(){
         <div className={styles.searchBoxText}>
           <label>Pick-up</label>
           <div className={styles.dropDown} style={{zIndex: 50}}>
-            <Dropdown name="Pick-up Location" options={locations}/>
+            <Dropdown name="Pick-up Location" options={locations} arrow="↓"/>
           </div>
         </div>
       </div>
@@ -37,7 +37,7 @@ export default function SearchBox(){
           <div className={styles.searchBoxText}>
             <label>Pick-up Date</label>
             <div className={styles.calendar} style={{zIndex:40}}>
-              <OurCalendar name="Pick-up Date"/>
+              <OurCalendar name="Pick-up Date" arrow="↓"/>
             </div>
           </div>
         </div>
@@ -47,7 +47,7 @@ export default function SearchBox(){
           <div className={styles.searchBoxText}>
             <label>Pick-up Time</label>
             <div className={styles.dropDown} style={{zIndex:30}}>
-              <Dropdown name="Pick-up Time" options={times}/>
+              <Dropdown name="Pick-up Time" options={times} arrow="↓"/>
             </div>
           </div>
         </div>
@@ -57,7 +57,7 @@ export default function SearchBox(){
           <div className={styles.searchBoxText}>
             <label>Drop-off Date</label>
             <div className={styles.calendar} style={{zIndex:20}}>
-              <OurCalendar name="Drop-off Date"/>
+              <OurCalendar name="Drop-off Date" arrow="↓"/>
             </div>
           </div>
         </div>
@@ -67,7 +67,7 @@ export default function SearchBox(){
           <div className={styles.searchBoxText}>
             <label>Drop-off Time</label>
             <div className={styles.dropDown} style={{zIndex:10}}>
-              <Dropdown name="Drop-off Time" options={times}/>
+              <Dropdown name="Drop-off Time" options={times} arrow="↓"/>
             </div>
           </div>
         </div>
