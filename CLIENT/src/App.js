@@ -1,14 +1,17 @@
-import Home from './pages/home';
-import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import HomeScreen from "./pages/HomeScreen.jsx";
+import CarsScreen from './pages/CarsScreen.jsx'
 
-function App() {
-  return (
-    <div className='App'>
-      
-      
-      
+export default function App() {
+  return(
+    <div>
+      <BrowserRouter>
+        <Routes>
+          <Route index element={<HomeScreen/>}/>
+          <Route path ="/home" element={<HomeScreen/>}/>
+          <Route path ="/cars" element={<CarsScreen/>}/>
+        </Routes>
+      </BrowserRouter>
     </div>
-  );
+  )
 }
-
-export default App;
