@@ -1,0 +1,42 @@
+#footer {
+  position: relative;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  background-color:hsl(208, 46%, 33%);
+  justify-content: space-between;
+}
+
+#headings {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+}
+
+#headings h4 {
+  font-size: 20px;
+  margin-top: 20px;
+  margin-bottom: 0;
+  margin-left: 20px;
+  color: white;
+}
+
+#text {
+  margin: 20px 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: space-around;
+  color: white;
+}
+
+#teamInformation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#teamInformation div {
+  width: 500px;
+}

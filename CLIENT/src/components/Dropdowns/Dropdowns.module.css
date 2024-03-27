@@ -1,0 +1,23 @@
+#top {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 3px;
+  color: gray;
+  font-size: 20px;
+}
+
+#arrow {
+  cursor: pointer;
+}
+
+
+#optionsContainer {
+  width: 100%;
+}
+
+#option:hover {
+  cursor: pointer;
+  background-color: lightgray;
+}
+

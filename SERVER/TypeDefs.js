@@ -2,7 +2,7 @@ const {gql} = require('apollo-server');
 
 module.exports=gql`
     type Car{
-        id: ID!
+        carId: Int!
         carMake: String!
         carModel: String!
         carColor: String!
@@ -18,10 +18,11 @@ module.exports=gql`
     }
     type Query{
         getCars: [Car]
-        getCar(car_id: ID!): Car!
+        getCar(car_id: String!): Car!
     }
     type Mutation{
         createCar(
+        id: Int!
         make: String!
         model: String!
         color: String!
@@ -35,6 +36,25 @@ module.exports=gql`
         status: String!
         reservations: [Int]!
         ): Car!
-        deleteCar(car_id: ID!): [Car]!
+        deleteCar(id: String!): [Car]!
+
+
+        register(registerInput: RegisterInput): User
+        login(username: String, password: String): User
     }
+    input RegisterInput{
+        username: String!
+        password: String!
+        confirmPassword: String!
+        email: String!
+    }
+    type User{
+        id: ID!
+        email: String!
+        token: String!
+        username: String!
+        createdAt: String!
+
+    }
+    
 `;
