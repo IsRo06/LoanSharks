@@ -16,7 +16,7 @@ export default function Dropdown(props) {
 
   return (
       <>
-        <div id={styles.dropdownDefault}>
+        <div id={styles.top}>
             <p>{picked}</p>
             <div id={styles.arrow} onClick={handleDisplay}>↓</div>
         </div>

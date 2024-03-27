@@ -15,7 +15,7 @@ export default function SearchBox(){
   const [pickupLocation, setpickupLocation] = useState("");
   const [pickupDate, setpickupDate] = useState([]);
   const [pickupTime, setpickupTime] = useState("");
-  const [dropoffDate, setdropoffDste] = useState([]);
+  const [dropoffDate, setdropoffDate] = useState([]);
   const [dropoffTime, setdropoffTime] = useState("");
 
   return(
@@ -36,7 +36,7 @@ export default function SearchBox(){
           <img src={calandarIcon} alt=""/>
           <div className={styles.searchBoxText}>
             <label>Pick-up Date</label>
-            <div className={styles.calendar} style={{zIndex:100}}>
+            <div className={styles.calendar} style={{zIndex:40}}>
               <OurCalendar name="Pick-up Date"/>
             </div>
           </div>
@@ -56,9 +56,9 @@ export default function SearchBox(){
           <img src={calandarIcon} alt=""/>
           <div className={styles.searchBoxText}>
             <label>Drop-off Date</label>
-            {/* <div className={styles.calendar} style={{zIndex:20}} >
-              <OurCalendar/>
-            </div> */}
+            <div className={styles.calendar} style={{zIndex:20}}>
+              <OurCalendar name="Drop-off Date"/>
+            </div>
           </div>
         </div>
 
