@@ -39,8 +39,8 @@ module.exports=gql`
         deleteCar(id: String!): [Car]!
 
 
-        register(registerInput: RegisterInput): User!
-        login(username: String!, password: String!): User!
+        register(registerInput: RegisterInput): User
+        login(username: String, password: String): User
     }
     input RegisterInput{
         username: String!

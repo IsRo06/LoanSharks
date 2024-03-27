@@ -3,12 +3,14 @@ const gql = require('graphql-tag');
 const mongoose = require('mongoose');
 
 const typeDefs = require("./TypeDefs");
-const resolvers = require('./Resolvers/car')
-const { MONGODB } = require('./config.js');
+const resolvers = require("./Resolvers/car")
+const resolvers2 = require("./Resolvers/user")
+const { MONGODB } = require('./config');
 
 const server = new ApolloServer({
   typeDefs,
-  resolvers
+  resolvers,
+  resolvers2
 });
 
 mongoose
