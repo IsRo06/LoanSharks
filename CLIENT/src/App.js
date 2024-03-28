@@ -9,14 +9,12 @@ export default function App() {
     <div>
       <BrowserRouter>
         <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<HomeScreen />} />
-          {/* <Route path="home" element={<HomeScreen />} /> */}
-          <Route path="cars" element={<CarsScreen />} />
-          {/* <Route path="*" element={<NoPage />} /> */}
-          
-        </Route>
-        <Route path="Signin" element={<Signin/>}/>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<HomeScreen />} />
+            <Route path="cars" element={<CarsScreen />} />
+            <Route path="signin" element={<Signin/>}/>
+            {/* <Route path="*" element={<NoPage />} /> */}
+          </Route>
         </Routes>
       </BrowserRouter>
     </div>

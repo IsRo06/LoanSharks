@@ -14,13 +14,14 @@ export default function Dropdown(props) {
   function handlePicked(selectedOption) {
     setPicked(prevPicked => prevPicked = selectedOption);
     setDisplay('none');
+    setArrow('↓');
   }
 
   return (
       <>
-        <div id={styles.top}>
+        <div id={styles.top} onClick={handleDisplay}>
             <p>{picked}</p>
-            <div id={styles.arrow} onClick={handleDisplay}>{arrow}</div>
+            <div>{arrow}</div>
         </div>
         <div id={styles.optionsContainer} style={{display: display}}>
           {props.options.map(option => (
