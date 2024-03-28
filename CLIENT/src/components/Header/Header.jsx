@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styles from './Header.module.css'
 import logo from '../../images/logo.png'
-
+//<Link to="/Signin"></Link>
 export default function Header(){
   return(
     <div id={styles.topBanner}>
@@ -15,7 +15,7 @@ export default function Header(){
         <div className={styles.bannerText}>Help</div>
         <div className={styles.bannerText}>Offers</div>
         <div className={styles.bannerText}>Locations</div>
-        <div className={styles.bannerText}>Sign in</div>
+        <Link to="/Signin" className={styles.bannerText}>Sign in</Link>
       </div>
     </div>
   );

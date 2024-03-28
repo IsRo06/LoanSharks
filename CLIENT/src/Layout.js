@@ -11,6 +11,9 @@ export default function Layout() {
           <li>
             <Link to="/cars">Cars Page</Link>
           </li>
+          <li>
+            <Link to="/Signin">Sign in page</Link>
+          </li>
         </ul>
       </nav>
       <Outlet />
