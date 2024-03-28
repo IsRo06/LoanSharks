@@ -2,7 +2,7 @@ const {gql} = require('apollo-server');
 
 module.exports=gql`
     type Car{
-        carId: Int!
+        id: ID!
         carMake: String!
         carModel: String!
         carColor: String!
@@ -18,11 +18,10 @@ module.exports=gql`
     }
     type Query{
         getCars: [Car]
-        getCar(car_id: String!): Car!
+        getCar(car_id: ID!): Car!
     }
     type Mutation{
         createCar(
-        id: Int!
         make: String!
         model: String!
         color: String!
@@ -36,7 +35,7 @@ module.exports=gql`
         status: String!
         reservations: [Int]!
         ): Car!
-        deleteCar(id: String!): [Car]!
+        deleteCar(car_id: ID!): [Car]!
 
 
         register(registerInput: RegisterInput): User
