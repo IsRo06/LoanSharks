@@ -1,4 +1,4 @@
-const Car = require("../Models/Car");
+const Car = require("../../Models/Car");
 
 module.exports ={
     Query: {
@@ -16,7 +16,7 @@ module.exports ={
                 if(car){
                     return car;
                 }else{
-                    console.log("Could not create a new object")
+                    console.log("Cannot return car:", car_id)
                 }
             }catch(err){
                 console.log("Cannot return car:", car_id)
@@ -47,13 +47,14 @@ module.exports ={
         },
         async deleteCar(_, {car_id}){
             try{
-                const car_to_delete = await Car.findById(car_id);
+                const car_to_delete = await Car.findOne({_id: car_id,});
                 await car_to_delete.deleteOne({id: car_id});
-                console.log("Deleted car: ",{car_id});
+                console.log("Deleted car: ",car_id);
                 var cars = await Car.find();
                 return cars;
             }catch(err){
-                console.log("Cannot delete car: ",{car_id});
+                console.log("Cannot delete car: ",car_id);
+                console.log(err);
             }
 
         }
