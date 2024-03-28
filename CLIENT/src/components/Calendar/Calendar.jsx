@@ -13,10 +13,12 @@ export default function OurCalendar(props) {
 
   const [date, setDate] = useState(new Date());
   const [displayedDate, setdisplayedDate] = useState(props.name);
+  const [arrow, setArrow] = useState(props.arrow);
   const [display, setDisplay] = useState('none');
 
   function handleDisplay() {
-    display === 'none'? setDisplay('block') : setDisplay('none');
+    display === 'none'? setDisplay(d => d = 'block') : setDisplay(d => d ='none');
+    arrow === '↓'? setArrow(a => a = '↑') : setArrow(a => a = '↓');
   }
 
   const handleDate = date => {
@@ -37,7 +39,7 @@ export default function OurCalendar(props) {
     <>
       <div id="top">
         <p>{displayedDate}</p>
-        <div id="arrow" onClick={handleDisplay}>↓</div>
+        <div id="arrow" onClick={handleDisplay}>{arrow}</div>
       </div>
       <div id="calendarContainer"  style={{display: display}}>
         <Calendar onChange={handleDate} value={date}/>

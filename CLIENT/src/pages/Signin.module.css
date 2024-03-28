@@ -1,0 +1,14 @@
+#background{
+    color: orange;
+
+}
+
+#mainbox{
+    border: 1px;
+    border-color: orange;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
