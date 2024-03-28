@@ -4,39 +4,40 @@
   left: 0;
   width: 100%;
   height: auto;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
   background-color:hsl(208, 46%, 33%);
   justify-content: space-between;
 }
 
-#headings {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-}
-
-#headings h4 {
-  font-size: 20px;
-  margin-top: 20px;
-  margin-bottom: 0;
-  margin-left: 20px;
+#leftSide, #rightSide {
   color: white;
+  margin: 10px 20px 20px 20px;
 }
 
-#text {
-  margin: 20px 20px;
+#leftSide h4, #rightSide h4 {
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+
+#leftSide h6, #rightSide h6{
+  margin: 10px 0px;
+  font-size: 16px;
+  text-decoration: underline;
+}
+
+#leftSide p, #rightSide p {
+  font-family: Inter;
+  font-weight: 500;
+  font-size: 14px;  
+  width: 80%;
+}
+
+#rightSide h6, #rightSide p {
+  display: inline-block;
+}
+
+#team {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  justify-content: space-around;
-  color: white;
-}
-
-#teamInformation {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-#teamInformation div {
-  width: 500px;
 }
