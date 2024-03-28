@@ -23,12 +23,10 @@ export default function Signin(){
     return(
     <div className={styles.background}>
         <div className={styles.mainbox}>
-            <div>
-                <input value={username} onChange={usernameFill}></input>
-                <input value={password} onChange={passwordFill}></input>
-                
-                <button onClick={signin}>Submit</button>
-            </div>
+            <input className={styles.usernamebox} value={username} onChange={usernameFill} placeholder="Username"></input>
+            <input className={styles.passwordbox} value={password} onChange={passwordFill} placeholder="Password"></input>
+            <button onClick={signin}>Submit</button>
+            
         </div>
     </div>
     )
