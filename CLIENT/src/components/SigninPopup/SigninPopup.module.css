@@ -1,0 +1,101 @@
+#background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#popup {
+  position: relative;
+  background-color: hsl(194, 63%, 60%);
+  width: 700px;
+  height: 400px;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+#topContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 20px;
+  padding: 10px;
+  border-bottom: 3px solid white;
+}
+
+#signInLabel {
+  font-family: Inter;
+  font-size: 30px;
+  color: white;
+  margin: 0;
+  align-self: center;
+}
+
+#closeBtn {
+  width: 50px;
+  height: 50px;
+  border: 1px solid black;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+#inputContainer {
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 20px;
+  padding: 10px;
+}
+
+.labelAndBox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.labelAndBox p {
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.inputBox{
+  border: 1px solid black;
+  border-radius: 10px;
+  width: 80%;
+  height: 40px;
+  font-family: Inter;
+  font-size: 18px;
+}
+
+#submitBtn{
+  border: 1px solid black;
+  border-radius: 10px;
+  height: 50px;
+  width: 50%;
+  align-self: center;
+  font-size: 20px;
+  font-family: Inter;
+  cursor: pointer;
+}
+
+#noAccount {
+  margin: 0 20px;
+  padding: 0 10px;
+  color: white;
+  font-family: Inter;
+  font-size: 16px;
+}
+
+#link {
+  color: white;
+}
+
+

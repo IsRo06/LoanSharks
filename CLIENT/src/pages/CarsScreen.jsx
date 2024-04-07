@@ -1,7 +1,8 @@
 import styles from './CarsScreen.module.css'
+import Header from '../components/Header/Header'
 
 export default function CarsScreen(){
-  return(<>
-    <p>cars are cool</p>
-  </>)
+  return(
+    <Header></Header>
+  )
 }
