@@ -8,6 +8,16 @@ import SigninPopup from "../SigninPopup/SigninPopup";
 export default function Header(){
   const [popupTriggered, setpopupTriggered] = useState(false);
   const [signedIn, setsignedIn] = useState(false);
+  const [accountDropdownDisplay, setaccountDropdownDisplay] = useState('none');
+
+  function handleaccountDropdownDisplay(){
+    accountDropdownDisplay === 'none' ? setaccountDropdownDisplay(a => a = 'block') : setaccountDropdownDisplay(a => a = 'none');
+  }
+
+  function signOut() {
+    setsignedIn(s => s = false);
+    setaccountDropdownDisplay(a => a = 'none');
+  }
 
   return(
     <div id={styles.topBanner}>
@@ -19,8 +29,16 @@ export default function Header(){
         <div className={styles.bannerText}>Help</div>
         <div className={styles.bannerText}>Offers</div>
         <div className={styles.bannerText}>Locations</div>
-        {!signedIn? <div className={styles.bannerText} onClick={() => setpopupTriggered(true)}>Sign in</div>
-          : <div className={styles.bannerText}>Account</div>};
+        {!signedIn? 
+          <div className={styles.bannerText} onClick={() => setpopupTriggered(true)}>Sign in</div>
+          : <div id={styles.accountDropdown}>
+              <div className={styles.bannerText} onClick={handleaccountDropdownDisplay}>Account</div>
+              <div id={styles.optionsContainer} style={{display: accountDropdownDisplay}}>
+                <div className={styles.options}><Link to='/account' id={styles.link}>Information</Link></div>
+                <div className={styles.options} onClick={signOut}>Sign Out</div>
+              </div>
+            </div>
+        } 
       </div>
       <SigninPopup trigger={popupTriggered} setTrigger={setpopupTriggered} signIn={setsignedIn}></SigninPopup>
     </div>

@@ -1,0 +1,70 @@
+#wholePage {
+  background-color:lightblue;
+  width: 100%;
+  height: 75vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#content {
+  font-family: Inter;
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  height: 90%;
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: white;
+
+}
+
+#content h4 {
+  font-size: 30px;
+  margin: 20px 20px 10px 20px;
+}
+
+#instructions {
+  font-size: 18px;
+  margin: 0 20px;
+  border-bottom: 1px solid black;
+}
+
+.informationContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: 15px 40px;
+}
+
+.informationContainer p {
+  font-size: 20px;
+  text-decoration: none;
+}
+
+.informationContainer input {
+  width: 80%;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+#bottomBtn {
+  height: 50px;
+  width: 150px;
+  margin: 15px 40px;
+  align-self: last baseline;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: hsl(194, 63%, 60%);
+  color: white;
+  font-family: Inter;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+#bottomBtn:hover {
+  background-color: hsl(194, 63%, 50%);
+
+}

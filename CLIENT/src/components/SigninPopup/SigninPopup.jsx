@@ -34,11 +34,11 @@ export default function SigninPopup(props){
         <div id={styles.inputContainer}>
           <div className={styles.labelAndBox}>
             <p>Email:</p>
-            <input className={styles.inputBox} value={email} onChange={emailFill} placeholder="Email"></input>
+            <input type="text" className={styles.inputBox} value={email} onChange={emailFill} placeholder="Email"/>
           </div>
           <div className={styles.labelAndBox}>
             <p>Password:</p>
-            <input className={styles.inputBox} value={password} onChange={passwordFill} placeholder="Password"></input>
+            <input type="text" className={styles.inputBox} value={password} onChange={passwordFill} placeholder="Password"/>
           </div>
           <button id={styles.submitBtn} onClick={signin}>Submit</button>
         </div>

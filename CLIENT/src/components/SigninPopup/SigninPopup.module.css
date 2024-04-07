@@ -67,12 +67,13 @@
 }
 
 .inputBox{
-  border: 1px solid black;
-  border-radius: 10px;
   width: 80%;
   height: 40px;
+  border: 1px solid black;
+  border-radius: 10px;
   font-family: Inter;
   font-size: 18px;
+  transition: none;
 }
 
 #submitBtn{
