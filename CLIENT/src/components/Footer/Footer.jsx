@@ -3,11 +3,9 @@ import styles from './Footer.module.css'
 export default function Footer() {
   return(
     <div id={styles.footer}>
-      <div id={styles.headings}>
+      <div id={styles.leftSide}>
         <h4>Loan Shark Enterprise</h4>
-        <h4>Our Team (Team 71)</h4>
-      </div>
-      <div id={styles.text}>
+        <h6>Our Motto:</h6>
         <p> For clients with a low credit score who need to rent a car, Loan Sharks
             Enterprise is a car rental service that allows them to rent a reliable vehicle for
             their transportation needs. Unlike our competition, we take pride in the fact that 
@@ -16,11 +14,16 @@ export default function Footer() {
             chance at decent transportation. We only ask for one thing as collateral, on the chance 
             that any payments are not made: your kneecaps.
         </p>
-        <div id={styles.teamInformation}>
-          <p>Project Manager: Lennon King- lennon.k@ufl.edu</p>
-          <p>Scrum Master: Isabella Roman Ramierez- isabella.roman1@ufl.edu</p>
-          <p>Front-end Project Developer: Stephanie Fong- fong.s@ufl.edu</p>
-          <p>Back-end Project Developer: Jeevan Munnangi- j.munnangi.ufl@edu</p>
+        <h6>Locations:</h6>
+        <p>Gainesville, FL || Miami, FL || Orlando, FL || Tallahassee, FL || Tampa, FL</p>
+      </div>
+      <div id={styles.rightSide}>
+        <h4>Our Team (Team 71)</h4>
+        <div id={styles.team}>
+          <h6>Project Manager:</h6><p>Lennon King- lennon.k@ufl.edu</p>
+          <h6>Scrum Master:</h6><p>Isabella Roman Ramierez- isabella.roman1@ufl.edu</p>
+          <h6>Front-end Project Developer:</h6><p>Stephanie Fong- fong.s@ufl.edu</p>
+          <h6>Back-end Project Developer:</h6><p>Jeevan Munnangi- j.munnangi.ufl@edu</p>
         </div>
       </div>
     </div>

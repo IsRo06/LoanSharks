@@ -107,17 +107,26 @@ label {
   align-self: center;
   margin: 40px 0;
   color: white;
-  font-size: 24px;
   font-weight: bold;
   background-color: hsl(194, 63%, 60%);
   border: none;
   border-radius: 10px;
   height: 70px;
   width: 200px;
-  cursor: pointer;
   transition: background-color .15s;
 }
 
 #searchBtn:hover {
   background-color: hsl(194, 63%, 50%)
+}
+
+#buttonText {
+  color: white;
+  background-color: transparent;
+  border: none;
+  font-size: 24px;
+  text-decoration: none;
+  height: 70px;
+  width: 200px;  
+  cursor: pointer;
 }

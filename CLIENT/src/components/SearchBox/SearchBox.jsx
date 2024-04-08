@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import { Link } from "react-router-dom";
 import styles from './SearchBox.module.css'
 import Dropdown from '../Dropdowns/Dropdowns.jsx';
 import OurCalendar from '../Calendar/Calendar.jsx';
@@ -73,7 +74,7 @@ export default function SearchBox(){
         </div>
 
       </div>
-      <button id={styles.searchBtn}>Search</button>
+      <Link to="/cars" id={styles.searchBtn}><button id={styles.buttonText}>Search</button></Link>
     </div>
   );
 
