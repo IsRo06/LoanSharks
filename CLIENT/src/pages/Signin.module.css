@@ -1,7 +1,17 @@
 .background{
     background-color: lightblue;
+    display: flex;
+    flex-direction: row;
+    
 
 
+}
+
+.largeBox{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 
 .mainbox{
@@ -14,6 +24,12 @@
     
 }
 
+#logoImage {
+    height: 70px;
+    padding-right: 15px;
+    cursor: pointer;
+}
+
 .usernamebox{
     border: 1px;
     border-color: black;
@@ -22,4 +38,19 @@
 .passwordbox{
     border: 1px;
     border-color: black;
+}
+
+.leftSide{
+    display: flex;
+    flex-direction: row;
+}
+
+.middle{
+    display: flex;
+    flex-direction: row;
+}
+
+.rightSide{
+    display: flex;
+    flex-direction: row;
 }
