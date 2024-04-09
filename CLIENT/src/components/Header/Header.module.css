@@ -43,7 +43,6 @@
   font-family: Inter;
   font-weight: 500;
   font-size: 18px;
-  height: 24px;
   padding: 38px 20px;
   color: white;
   cursor: pointer;
@@ -57,10 +56,10 @@
 #accountDropdown {
   display: flex;
   flex-direction: column;
-  height: 200px;
 }
 
 #optionsContainer {
+  margin-top: 3px;
   background-color: white;
   border: none;
   align-items: center;
