@@ -43,7 +43,9 @@
   font-family: Inter;
   font-weight: 500;
   font-size: 18px;
-  padding: 38px 20px;
+  height: 100%;
+  padding: 0 20px;
+  align-content: center;
   color: white;
   cursor: pointer;
   transition: background-color .15s;
@@ -53,13 +55,9 @@
   background-color: hsl(194, 63%, 60%);
 }
 
-#accountDropdown {
-  display: flex;
-  flex-direction: column;
-}
 
 #optionsContainer {
-  margin-top: 3px;
+  width: 111.88px;
   background-color: white;
   border: none;
   align-items: center;
@@ -70,9 +68,9 @@
   font-family: Inter;
   font-weight: 500;
   font-size: 18px;
-  line-height: 50px;
   text-align: center;
-  vertical-align: middle;;
+  align-content: center;
+  padding: 5px 0;
   cursor: pointer;
   transition: background-color .15s;
 }

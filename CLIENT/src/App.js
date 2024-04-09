@@ -1,14 +1,19 @@
+import React from "react";
+import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Layout from "./Layout.js";
 import HomeScreen from "./pages/HomeScreen.jsx";
 import CarsScreen from './pages/CarsScreen.jsx'
 import AccountScreen from "./pages/AccountScreen.jsx";
 import EmployeeInfo from "./pages/EmployeeInfo.jsx";
 import AdminPanel from "./pages/AdminPanel.jsx";
 
+export const Context = React.createContext();
+
 export default function App() {
+  const [signedIn, setsignedIn] = useState(false);
+
   return(
-    <div>
+    <Context.Provider value={[signedIn, setsignedIn]}>
       <BrowserRouter>
         <Routes>
           <Route path="/">
@@ -21,6 +26,6 @@ export default function App() {
           </Route>
         </Routes>
       </BrowserRouter>
-    </div>
+    </Context.Provider>
   )
 }
