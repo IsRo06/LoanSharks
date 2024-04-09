@@ -9,7 +9,7 @@ export default function App() {
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Layout />}>
+          <Route path="/">
             <Route index element={<HomeScreen />} />
             <Route path="cars" element={<CarsScreen />} />
             <Route path="account" element={<AccountScreen/>} />
