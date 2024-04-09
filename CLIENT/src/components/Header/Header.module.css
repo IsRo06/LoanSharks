@@ -82,7 +82,17 @@
   background-color: hsl(194, 63%, 60%);
 }
 
-#link {
+#link{
+  color: black;
+  text-decoration: none;
+}
+
+#employeeLink{
+  color: black;
+  text-decoration: none;
+}
+
+#adminLink{
   color: black;
   text-decoration: none;
 }
