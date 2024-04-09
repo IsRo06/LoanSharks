@@ -35,6 +35,11 @@ export default function Header(){
               <div className={styles.bannerText} onClick={handleaccountDropdownDisplay}>Account</div>
               <div id={styles.optionsContainer} style={{display: accountDropdownDisplay}}>
                 <div className={styles.options}><Link to='/account' id={styles.link}>Information</Link></div>
+<<<<<<< HEAD
+=======
+                <div className={styles.options}><Link to="/employee-information"id={styles.employeeLink}>Employee info</Link></div>
+                <div className={styles.options}><Link to="/admin-panel"id={styles.adminLink}>Admin Panel</Link></div>
+>>>>>>> d0e25dc6a2f156f010ce1f21be2db46bb41bdf37
                 <div className={styles.options} onClick={signOut}>Sign Out</div>
               </div>
             </div>
