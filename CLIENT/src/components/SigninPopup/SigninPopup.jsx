@@ -1,5 +1,6 @@
 import React from 'react'
-import {useState} from 'react'
+import {useState, useContext} from 'react'
+import { Context } from '../../App';
 import { Link } from "react-router-dom";
 import styles from './SigninPopup.module.css'
 
@@ -16,7 +17,7 @@ export default function SigninPopup(props){
   }
 
   function signin(event){
-      props.signIn(true);
+      props.typeOfUser("Admin")
       props.setTrigger(false);
   }
 

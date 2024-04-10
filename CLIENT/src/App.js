@@ -10,18 +10,17 @@ import AdminPanel from "./pages/AdminPanel.jsx";
 export const Context = React.createContext();
 
 export default function App() {
-  const [signedIn, setsignedIn] = useState(false);
+  const [userType, setUserType] = useState("None");
 
   return(
-    <Context.Provider value={[signedIn, setsignedIn]}>
+    <Context.Provider value={[userType, setUserType]}>
       <BrowserRouter>
         <Routes>
           <Route path="/">
             <Route index element={<HomeScreen />} />
             <Route path="cars" element={<CarsScreen />} />
             <Route path="account" element={<AccountScreen/>} />
-            <Route path="employee-information" element={<EmployeeInfo/>} />
-            <Route path="admin-panel" element={<AdminPanel/>} />
+            <Route path="employees" element={<EmployeeInfo/>} />
             {/* <Route path="*" element={<NoPage />} /> */}
           </Route>
         </Routes>

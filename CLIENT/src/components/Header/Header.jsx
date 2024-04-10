@@ -7,7 +7,7 @@ import logo from '../../images/logo.png'
 import SigninPopup from "../SigninPopup/SigninPopup";
 
 export default function Header(){
-  const [signedIn, setsignedIn] = useContext(Context);
+  const [userType, setUserType] = useContext(Context);
 
   const [popupTriggered, setpopupTriggered] = useState(false);
   const [accountDropdownDisplay, setaccountDropdownDisplay] = useState('none');
@@ -17,7 +17,7 @@ export default function Header(){
   }
 
   function signOut() {
-    setsignedIn(s => s = false);
+    setUserType(u => u = "None");
     setaccountDropdownDisplay(a => a = 'none');
   }
 
@@ -31,20 +31,32 @@ export default function Header(){
         <div className={styles.bannerText}>Help</div>
         <div className={styles.bannerText}>Offers</div>
         <div className={styles.bannerText}>Locations</div>
-        {!signedIn? 
+        {userType === "None"? 
           <div className={styles.bannerText} onClick={() => setpopupTriggered(true)}>Sign in</div>
           : <div>
               <div className={styles.bannerText} onClick={handleaccountDropdownDisplay}>Account</div>
               <div id={styles.optionsContainer} style={{display: accountDropdownDisplay}}>
-                <div className={styles.options}><Link to='/account' id={styles.link}>Account Information</Link></div>                
-                <div className={styles.options}><Link to="/employee-information"id={styles.employeeLink}>Employee Information</Link></div>
-                <div className={styles.options}><Link to="/admin-panel"id={styles.adminLink}>Admin Panel</Link></div>
+                <div className={styles.options}><Link to='/account' className={styles.link}>Account Information</Link></div>
+
+                {userType === "Admin"? 
+                  <div className={styles.options}><Link to='/employees' className={styles.link}>Employee Information</Link></div>
+                  : ""               
+                }
+                
+                {userType === "Employee" || userType === "Admin"? 
+                  <>
+                    <div className={styles.options}><Link to='/dashboard' className={styles.link}>Cars Dashboard</Link></div>
+                    <div className={styles.options}><Link to='/reservations' className={styles.link}>Upcoming Reservations</Link></div>                
+                  </>
+                  : ""               
+                }
+                
                 <div className={styles.options} onClick={signOut}>Sign Out</div>
               </div>
             </div>
         } 
       </div>
-      <SigninPopup trigger={popupTriggered} setTrigger={setpopupTriggered} signIn={setsignedIn}></SigninPopup>
+      <SigninPopup trigger={popupTriggered} setTrigger={setpopupTriggered} typeOfUser={setUserType}></SigninPopup>
     </div>
   );
 }
