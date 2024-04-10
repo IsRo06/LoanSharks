@@ -7,12 +7,16 @@ export default function AccountInfoBox(props){
   const [userType, setUserType] = useContext(Context);
 
   const [userInfo, setUserInfo] = useState(props.information);
-  const [inputsDisabled, setinputsDisabled] = useState(userType === "None");
+  const [inputsDisabled, setinputsDisabled] = useState(userType !== "None");
   const [btnWhenSignedIn, setbtnWhenSignedIn] = useState("Edit Information");
 
   useEffect(() => {
     setUserInfo(props.information)
   }, [props.information]);
+
+  useEffect(() => {
+    setinputsDisabled(userType !== "None")
+  }, [userType]);
 
   function handleNewInfo(event, index) {
     const updatedInfo = [...userInfo];
@@ -24,6 +28,8 @@ export default function AccountInfoBox(props){
     btnWhenSignedIn === "Edit Information" ? setbtnWhenSignedIn(b => "Save Changes") : setbtnWhenSignedIn(b => "Edit Information");
     setinputsDisabled(i => i = !i);
   }
+
+  console.log(inputsDisabled);
 
   return (
     <div id={styles.accountInfoBox}>
