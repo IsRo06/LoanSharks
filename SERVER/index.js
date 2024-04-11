@@ -1,14 +1,22 @@
 const { ApolloServer } = require('apollo-server');
-const gql = require('graphql-tag');
 const mongoose = require('mongoose');
+const path = require('path');
+const fs = require('fs');
 
-const typeDefs = require("./TypeDefs");
-const resolvers = require('./Resolvers/car')
+const typeDefs = require('./graphql/TypeDefs');
+// Since I couldnt get it to work with just using the resolvers path name
+//Went in and iterated through the diff resolver files that end in .js
+const resolvers = fs.readdirSync(path.join(__dirname, './graphql/resolvers'))
+  .filter(file => file.endsWith('.js'))
+  .map(file => require(path.join(__dirname, './graphql/resolvers', file)));
+
+
 const { MONGODB } = require('./config.js');
 
 const server = new ApolloServer({
   typeDefs,
-  resolvers
+  resolvers,
+  context: ({ req }) => ({req})
 });
 
 mongoose

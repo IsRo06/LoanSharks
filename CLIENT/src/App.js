@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import HomeScreen from "./pages/HomeScreen.jsx";
+import CarsScreen from './pages/CarsScreen.jsx'
+import AccountScreen from "./pages/AccountScreen.jsx";
+import EmployeeInfo from "./pages/EmployeeInfo.jsx";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export const Context = React.createContext();
+
+export default function App() {
+  const [userType, setUserType] = useState("None");
+
+  return(
+    <Context.Provider value={[userType, setUserType]}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/">
+            <Route index element={<HomeScreen />} />
+            <Route path="cars" element={<CarsScreen />} />
+            <Route path="account" element={<AccountScreen/>} />
+            {/* <Route path="dashboard" element={} />
+            <Route path="reservations" element={} /> */}
+            <Route path="employees" element={<EmployeeInfo/>} />
+            {/* <Route path="*" element={<NoPage />} /> */}
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </Context.Provider>
+  )
 }
-
-export default App;
