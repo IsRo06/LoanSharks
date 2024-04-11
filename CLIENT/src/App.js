@@ -5,7 +5,6 @@ import HomeScreen from "./pages/HomeScreen.jsx";
 import CarsScreen from './pages/CarsScreen.jsx'
 import AccountScreen from "./pages/AccountScreen.jsx";
 import EmployeeInfo from "./pages/EmployeeInfo.jsx";
-import AdminPanel from "./pages/AdminPanel.jsx";
 
 export const Context = React.createContext();
 
@@ -20,6 +19,8 @@ export default function App() {
             <Route index element={<HomeScreen />} />
             <Route path="cars" element={<CarsScreen />} />
             <Route path="account" element={<AccountScreen/>} />
+            {/* <Route path="dashboard" element={} />
+            <Route path="reservations" element={} /> */}
             <Route path="employees" element={<EmployeeInfo/>} />
             {/* <Route path="*" element={<NoPage />} /> */}
           </Route>
