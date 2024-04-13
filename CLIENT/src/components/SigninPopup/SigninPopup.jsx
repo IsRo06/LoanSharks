@@ -16,7 +16,7 @@ export default function SigninPopup(props){
   }
 
   function signin(event){
-      props.typeOfUser("Admin");
+      props.typeOfUser("Employee");
       props.location("Gainesville");
       props.setTrigger(false);
   }
