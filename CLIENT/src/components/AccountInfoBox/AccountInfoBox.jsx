@@ -1,10 +1,10 @@
 import React from 'react';
 import { useState, useContext, useEffect } from 'react';
 import styles from './AccountInfoBox.module.css'
-import { Context } from '../../App';
+import { userContext } from '../../App';
 
 export default function AccountInfoBox(props){
-  const [userType, setUserType] = useContext(Context);
+  const [userType, setUserType] = useContext(userContext);
 
   const [userInfo, setUserInfo] = useState(props.information);
   const [inputsDisabled, setinputsDisabled] = useState(userType !== "None");

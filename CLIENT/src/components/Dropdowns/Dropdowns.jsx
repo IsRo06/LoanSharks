@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import styles from './Dropdowns.module.css'
 
 export default function Dropdown(props) {
-  const [picked, setPicked] = useState(props.name)
+  const [displayedOption, setdisplayedOption] = useState(props.name)
   const [display, setDisplay] = useState('none');
   const [arrow, setArrow] = useState(props.arrow);
 
@@ -12,15 +12,16 @@ export default function Dropdown(props) {
   }
 
   function handlePicked(selectedOption) {
-    setPicked(prevPicked => prevPicked = selectedOption);
+    setdisplayedOption(prevDisplayedOption => prevDisplayedOption = selectedOption);
     setDisplay('none');
     setArrow('↓');
+    props.locationPicked(selectedOption);
   }
 
   return (
       <>
         <div id={styles.top} onClick={handleDisplay}>
-            <p>{picked}</p>
+            <p>{displayedOption}</p>
             <div>{arrow}</div>
         </div>
         <div id={styles.optionsContainer} style={{display: display}}>
