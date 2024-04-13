@@ -38,7 +38,7 @@ export default function AccountInfoBox(props){
         {props.infoCategories.map((category, index) => (
           <div key={category} className={styles.informationContainer}>
             <p>{category}:</p>
-            <input type="text" required="true" disabled={userType === "Employee" && category === "Place of Employment"? true: inputsDisabled} 
+            <input type="text" required={true} disabled={userType === "Employee" && category === "Place of Employment"? true: inputsDisabled} 
               placeholder={category} value={userInfo[index]} onChange={(event) => handleNewInfo(event, index)}/> 
           </div>
         ))}
