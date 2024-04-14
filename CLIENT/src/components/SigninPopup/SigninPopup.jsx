@@ -3,7 +3,7 @@ import {useState} from 'react'
 import { Link } from "react-router-dom";
 import styles from './SigninPopup.module.css'
 
-import { useMutation } from 'apollo/react-hooks'
+import { useMutation } from '@apollo/client'
 import gql from 'graphql-tag'
 
 
@@ -19,12 +19,17 @@ export default function SigninPopup(props){
     setPassword(event.target.value)
   }
 
-  const [loginUser, {loading}] = useMutation(FETCH_USER_QUERY, {
-    update(proxy, result){
-      console.log(result)
-    },
-    variables: values
-  })
+  // const [values, setValues] = useState({
+  //   username: "",
+  //   password: ""
+  // });
+
+  // const [loginUser, {loading}] = useMutation(FETCH_USER_QUERY, {
+  //   update(proxy, result){
+  //     console.log(result)
+  //   },
+  //   variables: values
+  // })
 
   function signin(event){
 
@@ -68,24 +73,13 @@ export default function SigninPopup(props){
 
 
 const FETCH_USER_QUERY = gql`
-  mutation login(
-    $username: String!
-    $password: String!
-  ){
-    login(
-      username: $username
-      password: $password
-    ){
-      User:{
-        id,
-        email,
-        username,
-        password,
-        createdAt,
-        type
-      },
+   mutation login($username: String!, $password: String!) {
+    login(username: $username, password: $password) {
+      id
+      email
+      username
+      createdAt
       token
     }
-
   }
 `

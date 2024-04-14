@@ -4,10 +4,13 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
-import ApolloProvider from './ApolloProvider';
+import ApolloProviderr from './ApolloProvider';
+import {render} from "react-dom";
 
-ReactDOM.render(ApolloProvider, document.getElementById('root'));
+render(<App/>, document.getElementById("root"))
+//ReactDOM.render(App, document.getElementById('root'));
 serviceWorker.unregister();
+
 
 
 // If you want to start measuring performance in your app, pass a function

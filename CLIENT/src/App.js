@@ -6,6 +6,8 @@ import AccountScreen from "./pages/AccountScreen.jsx";
 import EmployeeInfo from "./pages/EmployeeInfo.jsx";
 import Dashboard from "./pages/CarDashboard.jsx";
 import Reservations from "./pages/Reservations.jsx";
+import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from "@apollo/client";
+
 
 export const userContext = React.createContext();
 export const locationContext = React.createContext();
@@ -23,10 +25,11 @@ export default function App() {
       }
     }, [userType]);
 
-    return props.usersAllowed.includes(userType) ? <props.component/> : null;
+    return props.usersAllowed.includes(userType) ? <props.component/> : null
   }
 
   return(
+    
     <userContext.Provider value={[userType, setUserType]}>
       <locationContext.Provider value={[location, setLocation]}>
         <BrowserRouter>
@@ -45,6 +48,7 @@ export default function App() {
         </BrowserRouter>
       </locationContext.Provider>
     </userContext.Provider>
+    
   )
 }
 
