@@ -1,7 +1,7 @@
 import React from "react";
 import App from "./App";
 import ApolloClient from 'apollo-client';
-import { InMemmoryCache } from 'apollo-cache-inmemmory';
+import { InMemoryCache } from 'apollo-cache-inmemory';
 import { createHttpLink } from 'apollo-link-http'
 import { ApolloProvider } from '@apollo/react-hooks'
 
@@ -11,7 +11,7 @@ const httpLink = createHttpLink({
 
 const client = new ApolloClient({
     link: httpLink,
-    cache: new InMemmoryCache()
+    cache: new InMemoryCache()
 })
 
 export default (
