@@ -1,6 +1,7 @@
 import React, {useState, useContext} from 'react'
 import { Link } from "react-router-dom";
 import { locationContext } from '../../App.js';
+import { pickupDateContext, dropoffDateContext } from '../../pages/CarsScreen.jsx';
 import styles from './SearchBox.module.css'
 import Dropdown from '../Dropdowns/Dropdowns.jsx';
 import OurCalendar from '../Calendar/Calendar.jsx';
@@ -10,15 +11,15 @@ import locationIcon from '../../images/location-icon.jpg';
 
 export default function SearchBox(){
   const [location, setLocation] = useContext(locationContext);
+  // const [pickupDate, setpickupDate] = useContext(pickupDateContext);
+  // const [dropoffDate, setdropoffDate] = useContext(dropoffDateContext);
 
   const locations = [ 'Gainesville', 'Orlando', 'Miami', 'Tallahassee', 'Tampa'];
   const times = ['12:00AM', '1:00AM', '2:00AM', '3:00AM', '4:00AM', '5:00AM', '6:00AM', '7:00AM', 
                 '8:00AM', '9:00AM', '10:00AM', '11:00AM', '12:00PM', '1:00PM', '2:00PM', '3:00PM', 
                 '4:00PM', '5:00PM', '6:00PM', '7:00PM', '8:00PM', '9:00PM', '10:00PM', '11:00PM',  ]
 
-  const [pickupDate, setpickupDate] = useState([]);
   const [pickupTime, setpickupTime] = useState("");
-  const [dropoffDate, setdropoffDate] = useState([]);
   const [dropoffTime, setdropoffTime] = useState("");
 
   return(
