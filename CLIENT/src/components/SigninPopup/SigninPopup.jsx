@@ -1,6 +1,5 @@
 import React from 'react'
-import {useState, useContext} from 'react'
-import { Context } from '../../App';
+import {useState} from 'react'
 import { Link } from "react-router-dom";
 import styles from './SigninPopup.module.css'
 
@@ -13,11 +12,12 @@ export default function SigninPopup(props){
   }
 
   function passwordFill(event){
-      setPassword(event.target.value)
+    setPassword(event.target.value)
   }
 
   function signin(event){
-      props.typeOfUser("Admin")
+      props.typeOfUser("Admin");
+      props.location("Gainesville");
       props.setTrigger(false);
   }
 

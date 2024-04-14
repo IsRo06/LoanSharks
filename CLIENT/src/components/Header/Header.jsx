@@ -1,13 +1,14 @@
 import React from "react";
 import { useState, useContext } from "react";
-import { Context } from "../../App";
+import { userContext, locationContext } from "../../App";
 import { Link } from "react-router-dom";
 import styles from './Header.module.css'
 import logo from '../../images/logo.png'
 import SigninPopup from "../SigninPopup/SigninPopup";
 
 export default function Header(){
-  const [userType, setUserType] = useContext(Context);
+  const [userType, setUserType] = useContext(userContext);
+  const [location, setLocation] = useContext(locationContext);
 
   const [popupTriggered, setpopupTriggered] = useState(false);
   const [accountDropdownDisplay, setaccountDropdownDisplay] = useState('none');
@@ -56,7 +57,7 @@ export default function Header(){
             </div>
         } 
       </div>
-      <SigninPopup trigger={popupTriggered} setTrigger={setpopupTriggered} typeOfUser={setUserType}></SigninPopup>
+      <SigninPopup trigger={popupTriggered} setTrigger={setpopupTriggered} typeOfUser={setUserType} location={setLocation}></SigninPopup>
     </div>
   );
 }
