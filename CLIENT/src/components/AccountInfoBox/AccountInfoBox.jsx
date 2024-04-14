@@ -27,6 +27,9 @@ export default function AccountInfoBox(props){
     else if (props.disabledFields.includes(category)) {
       return true;
     }
+    else if (userType === "Admin" && props.use==="Create New") {
+      return false;
+    }
 
     return inputsDisabled;
   }
@@ -88,8 +91,17 @@ export default function AccountInfoBox(props){
           </div>
         ))}
 
-        {userType === "None"? <button id={styles.bottomBtn} onClick={createNewUser}>Create Account</button>
+        {userType === "None" || (userType === "Admin" && props.use==="Create New") ? <button id={styles.bottomBtn} onClick={createNewUser}>Create Account</button>
         :<button id={styles.bottomBtn} onClick={editMode}>{btnWhenSignedIn}</button> }
+
+        {(userType === "Admin" && props.use==="Create New") ? 
+        <>
+          <input type="radio" id="adminBtn" name="Type of Account" value="Admin"/> 
+          <label htmlFor="adminBtn">Admin Account</label>
+          <input type="radio" id="employeeBtn" name="Type of Account" value="Employee"/>    
+          <label htmlFor="employeeBtn">Employee Account</label>
+        </>
+        : "" }
       </div>
     </div>
   );

@@ -14,6 +14,7 @@ export default function EmployeeInfo() {
     const [selectedEmployee, setSelectedEmployee] = useState([]);
 
     const employeeInfo = ["First Name", "Last Name", "Place of Employment", "Email"];
+    const allInfo = ["First Name", "Last Name", "Place of Employment", "Email", "Password", "Verify Password"];
 
     useEffect(() => {
         setAllEmployees(e => e = [
@@ -60,7 +61,7 @@ export default function EmployeeInfo() {
     }
 
     function handleSelectedEmployee(email) {
-        for (var i = 0; i < allEmployees.length; i++) {
+        for (let i = 0; i < allEmployees.length; i++) {
             if (allEmployees[i].email === email) {
                 setSelectedEmployee(e => e = allEmployees[i]);
                 break;
@@ -69,6 +70,7 @@ export default function EmployeeInfo() {
     }
 
     function getEmployeeInformation() {
+        console.log(selectedEmployee);
         if (selectedEmployee.length === 0){
             return ["", "", location, ""];
         }
@@ -81,19 +83,23 @@ export default function EmployeeInfo() {
         }
     }
 
+    function createNewAccount() {
+        setSelectedEmployee(e => e = []);
+    }
+
     return(
         <>
             <Header/>
             <div id={styles.content}>
                 <div id={styles.sideBar}>
-                    <div id={styles.label}>Employees || {location}, FL</div>
+                    <div id={styles.label} onClick={createNewAccount}>Employees || {location}, FL</div>
                     {getAllEmployees().map((employee) => (
                         <div key={employee.firstName} className={styles.employeeTabs} onClick={() => handleSelectedEmployee(employee.email)}> 
                             {employee.firstName} {employee.lastName}
                         </div>
                     ))}
                 </div>
-                {selectedEmployee.length === 0 ? ""
+                {selectedEmployee.length === 0 ? <AccountInfoBox infoCategories={allInfo} information={getEmployeeInformation()} disabledFields={[]} use="Create New"/>
                 : <AccountInfoBox infoCategories={employeeInfo} information={getEmployeeInformation()} disabledFields={["First Name", "Last Name", "Email"]}/>
                 }
             </div>
