@@ -1,7 +1,6 @@
 import React from 'react';
 import { useContext } from 'react';
 import { userContext } from '../App';
-import styles from './AccountScreen.module.css'
 import Header from '../components/Header/Header'
 import AccountInfoBox from '../components/AccountInfoBox/AccountInfoBox';
 import Footer from '../components/Footer/Footer'
