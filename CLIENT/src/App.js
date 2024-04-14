@@ -1,24 +1,30 @@
+import React from "react";
+import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Layout from "./Layout.js";
 import HomeScreen from "./pages/HomeScreen.jsx";
 import CarsScreen from './pages/CarsScreen.jsx'
-import Signin from "./pages/Signin.jsx";
+import AccountScreen from "./pages/AccountScreen.jsx";
+import EmployeeInfo from "./pages/EmployeeInfo.jsx";
+import AdminPanel from "./pages/AdminPanel.jsx";
+
+export const Context = React.createContext();
 
 export default function App() {
+  const [userType, setUserType] = useState("None");
+
   return(
-    <div>
+    <Context.Provider value={[userType, setUserType]}>
       <BrowserRouter>
         <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<HomeScreen />} />
-          {/* <Route path="home" element={<HomeScreen />} /> */}
-          <Route path="cars" element={<CarsScreen />} />
-          {/* <Route path="*" element={<NoPage />} /> */}
-          
-        </Route>
-        <Route path="Signin" element={<Signin/>}/>
+          <Route path="/">
+            <Route index element={<HomeScreen />} />
+            <Route path="cars" element={<CarsScreen />} />
+            <Route path="account" element={<AccountScreen/>} />
+            <Route path="employees" element={<EmployeeInfo/>} />
+            {/* <Route path="*" element={<NoPage />} /> */}
+          </Route>
         </Routes>
       </BrowserRouter>
-    </div>
+    </Context.Provider>
   )
 }
