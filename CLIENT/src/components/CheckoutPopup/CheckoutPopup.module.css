@@ -1,0 +1,79 @@
+#background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#popup {
+  position: relative;
+  background-color: #ffffff;
+  width: 660px;
+  height: 300px;
+  padding: 20px;
+  border: 1px solid black;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.cardInfo {
+  font-size: 18px;
+  font-family: Inter;
+}
+
+#title {
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+}
+
+#topRow, #bottomRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#topRow {
+  font-size: 28px;
+}
+
+#bottomRow {
+  font-size: 18px;
+}
+
+#intermediateInfo {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin: 20px 0 20px 0;
+  height: 100%;
+}
+
+#leftCol, #middleCol {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#reserveBtn {
+  width: 50%;
+  height: 30%;
+  justify-self: last baseline;
+  font-size: 16px;
+  color: white;
+  font-weight: bold;
+  background-color: hsl(194, 63%, 60%);
+  border: none;
+  border-radius: 10px;
+  transition: background-color .15s;
+}
+
+#reserveBtn:hover {
+  background-color: hsl(194, 63%, 50%);
+  cursor: pointer;
+}
