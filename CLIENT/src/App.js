@@ -14,23 +14,16 @@ export default function App() {
   const [userType, setUserType] = useState("None");
   const [location, setLocation] = useState("None");
 
-  
   function RouteRenderer(props) {
     const navigate = useNavigate();
 
     useEffect(() => {
-      if (userType !== props.userAllowed || userType !== props.userAllowed_2) {
+      if (!props.usersAllowed.includes(userType)) {
         navigate('/');
       }
     }, [userType]);
 
-    console.log(userType === props.userAllowed || userType === props.userAllowed_2)
-    if (userType === props.userAllowed || userType === props.userAllowed_2) {
-      return <props.component/>;
-    } 
-    else {
-      return null;
-    }
+    return props.usersAllowed.includes(userType) ? <props.component/> : null;
   }
 
   return(
@@ -42,10 +35,9 @@ export default function App() {
               <Route index element={<HomeScreen />} />
               <Route path="cars" element={<CarsScreen />} />
               <Route path="account" element={<AccountScreen/>} />
-              {/* Conditional rendering for EmployeeInfo */}
-              <Route path="employees" element={<RouteRenderer userAllowed="Admin" userAllowed_2="None" component={EmployeeInfo}/>} />
-              <Route path="dashboard" element={<RouteRenderer userAllowed="Admin" userAllowed_2="Employee"  component={Dashboard}/>} />
-              <Route path="reservations" element={<RouteRenderer userAllowed="Admin" userAllowed_2="Employee" component={Reservations}/>} />
+              <Route path="employees" element={<RouteRenderer usersAllowed={["Admin"]} component={EmployeeInfo}/>} />
+              <Route path="dashboard" element={<RouteRenderer usersAllowed={["Admin", "Employee"]}  component={Dashboard}/>} />
+              <Route path="reservations" element={<RouteRenderer usersAllowed={["Admin", "Employee"]} component={Reservations}/>} />
 
               {/* <Route path="*" element={<NoPage />} /> */}
             </Route>
