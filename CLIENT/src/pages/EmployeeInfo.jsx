@@ -13,7 +13,6 @@ export default function EmployeeInfo() {
     const [allEmployees, setAllEmployees] = useState([]);
     const [selectedEmployee, setSelectedEmployee] = useState([]);
 
-    const defaultInfo = ["First Name", "Last Name", "Email", "Password", "Verify Password"];
     const employeeInfo = ["First Name", "Last Name", "Place of Employment", "Email"];
 
     useEffect(() => {
@@ -61,7 +60,6 @@ export default function EmployeeInfo() {
     }
 
     function handleSelectedEmployee(email) {
-        console.log(email);
         for (var i = 0; i < allEmployees.length; i++) {
             if (allEmployees[i].email === email) {
                 setSelectedEmployee(e => e = allEmployees[i]);
@@ -71,12 +69,16 @@ export default function EmployeeInfo() {
     }
 
     function getEmployeeInformation() {
-        let employeeInfo = [];
-        for (var key in selectedEmployee) {
-            employeeInfo.push(selectedEmployee[key]);
+        if (selectedEmployee.length === 0){
+            return ["", "", location, ""];
         }
-
-        return employeeInfo;
+        else {
+            let employeeInfo = [];
+            for (var key in selectedEmployee) {
+                employeeInfo.push(selectedEmployee[key]);
+            }
+            return employeeInfo;
+        }
     }
 
     return(
@@ -91,7 +93,9 @@ export default function EmployeeInfo() {
                         </div>
                     ))}
                 </div>
-                <AccountInfoBox infoCategories={userType === "None"? defaultInfo : employeeInfo} information={getEmployeeInformation()}/>
+                {selectedEmployee.length === 0 ? ""
+                : <AccountInfoBox infoCategories={employeeInfo} information={getEmployeeInformation()} disabledFields={["First Name", "Last Name", "Email"]}/>
+                }
             </div>
             <Footer/>
         </>

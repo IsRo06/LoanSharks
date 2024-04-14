@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import styles from './Dropdowns.module.css'
 
 export default function Dropdown(props) {
@@ -6,16 +6,24 @@ export default function Dropdown(props) {
   const [display, setDisplay] = useState('none');
   const [arrow, setArrow] = useState(props.arrow);
 
+  useEffect(() => {
+    setdisplayedOption(props.name);
+  }, [props.name]);
+
   function handleDisplay() {
-    display === 'none'? setDisplay(d => d = 'block') : setDisplay(d => d ='none');
-    arrow === '↓'? setArrow(a => a = '↑') : setArrow(a => a = '↓');
+    if (!props.disabled) {
+      display === 'none'? setDisplay(d => d = 'block') : setDisplay(d => d ='none');
+      arrow === '↓'? setArrow(a => a = '↑') : setArrow(a => a = '↓');
+    }
   }
 
   function handlePicked(selectedOption) {
     setdisplayedOption(prevDisplayedOption => prevDisplayedOption = selectedOption);
     setDisplay('none');
     setArrow('↓');
-    props.locationPicked(selectedOption);
+    if (props.type === "Location") {
+      props.locationPicked(selectedOption);
+    }
   }
 
   return (
