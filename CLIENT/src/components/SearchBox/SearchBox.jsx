@@ -91,7 +91,6 @@ export default function SearchBox(){
 
       </div>
       <button id={styles.searchBtn} onClick={handleSearch}>Search</button>
-      {/* <Link to="/cars" id={styles.searchBtn} onClick={handleSearch}><button id={styles.buttonText}>Search</button></Link> */}
     </div>
   );
 
