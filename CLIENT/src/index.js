@@ -8,7 +8,7 @@ import ApolloProviderr from './ApolloProvider';
 import {render} from "react-dom";
 
 render(<App/>, document.getElementById("root"))
-//ReactDOM.render(App, document.getElementById('root'));
+//ReactDOM.render(ApolloProviderr, document.getElementById('root'));
 serviceWorker.unregister();
 
 

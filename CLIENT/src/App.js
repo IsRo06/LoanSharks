@@ -7,6 +7,7 @@ import EmployeeInfo from "./pages/EmployeeInfo.jsx";
 import Dashboard from "./pages/CarDashboard.jsx";
 import Reservations from "./pages/Reservations.jsx";
 import ChatBotBox from "./components/ChatBot/ChatBot.jsx";
+import ApolloProviderr from "./ApolloProvider.js";
 
 export const userContext = React.createContext();
 export const locationContext = React.createContext();
@@ -52,7 +53,7 @@ export default function App() {
         </rentalRangeContext.Provider>
       </locationContext.Provider>
     </userContext.Provider>
-    
+  
   )
 }
 
