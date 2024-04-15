@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext} from "react";
-import { rentalDateContext } from "../App";
+import { rentalRangeContext } from "../App";
 import styles from './CarsScreen.module.css'
 import Header from '../components/Header/Header'
 import Card from '../components/Card/Card'
@@ -7,6 +7,7 @@ import Footer from '../components/Footer/Footer'
 
 export default function CarsScreen(){
   const [allCars, setAllCars] = useState([]);
+  const [rentalRange, setRentalRange] = useContext(rentalRangeContext);
 
   useEffect(() => {
     setAllCars(c => c = [

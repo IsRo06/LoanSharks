@@ -24,6 +24,19 @@ export default function Dropdown(props) {
     if (props.type === "Location") {
       props.locationPicked(selectedOption);
     }
+
+    if (props.name === "Pick-up Time") {
+      let updatedRentalRange = [...props.range];
+      updatedRentalRange[0] = selectedOption;
+
+      props.setTime(updatedRentalRange);
+    }
+    else if (props.name === "Drop-off Time") {
+      let updatedRentalRange = [...props.range];
+      updatedRentalRange[1] = selectedOption;
+  
+      props.setTime(updatedRentalRange);
+    }
   }
 
   return (
