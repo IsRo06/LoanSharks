@@ -33,6 +33,21 @@ export default function OurCalendar(props) {
     setdisplayedDate(prevdisplayedDate => prevdisplayedDate = dateInWords);
     setDisplay('none');
     setArrow('↓');
+
+    if (props.name === "Pick-up Date") {
+      let updatedRentalRange = [...props.range];
+      updatedRentalRange[0] = date.getMonth() + 1;
+      updatedRentalRange[1] = date.getDate();
+
+      props.setRange(updatedRentalRange);
+    }
+    else if (props.name === "Drop-off Date") {
+      let updatedRentalRange = [...props.range];
+      updatedRentalRange[2] = date.getMonth() + 1;
+      updatedRentalRange[3] = date.getDate();
+  
+      props.setRange(updatedRentalRange);
+    }
   }
 
   return ( 
