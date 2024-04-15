@@ -42,6 +42,7 @@ export default function App() {
                 <Route path="employees" element={<RouteRenderer usersAllowed={["Admin"]} component={EmployeeInfo}/>} />
                 <Route path="dashboard" element={<RouteRenderer usersAllowed={["Admin", "Employee"]}  component={Dashboard}/>} />
                 <Route path="reservations" element={<RouteRenderer usersAllowed={["Admin", "Employee"]} component={Reservations}/>} />
+                <Route path="help" element={<ChatBotBox/>} />
 
                 {/* <Route path="*" element={<NoPage />} /> */}
               </Route>

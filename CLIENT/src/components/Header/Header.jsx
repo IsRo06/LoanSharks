@@ -29,7 +29,7 @@ export default function Header(){
         <h4 id={styles.websiteName}>Loan Sharks Enterprise</h4>
       </div>
       <div id={styles.rightSide}>
-      <Link to="/help"><div className={styles.bannerText}>Help</div></Link>
+        <Link to="/help" className={styles.link}><div className={styles.bannerText}>Help</div></Link>
         <div className={styles.bannerText}>Offers</div>
         <div className={styles.bannerText}>Locations</div>
         {userType === "None"? 

@@ -35,7 +35,7 @@ export default function ChatBotBox(){
                         height: '75',
                         width: '50%'
                     }}
-                    headerTitle="LoanShark Help Center :D"
+                    headerTitle="Loan Sharks Enterprise Help Center :D"
                     steps={[
                     {
                         id: '1',

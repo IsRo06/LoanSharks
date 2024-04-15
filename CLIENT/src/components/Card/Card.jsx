@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react'
+import React, {useState, useContext, useEffect, useRef} from 'react'
 import { userContext, locationContext } from '../../App';
 import penguinImage from '../../images/penguins.jpg'
 import styles from './Card.module.css'
@@ -8,20 +8,41 @@ import CheckoutPopup from '../CheckoutPopup/CheckoutPopup';
 
 export default function Card(props){  
   const [userType, setUserType] = useContext(userContext);
+  const userTypeRef = useRef(userType)
   const [location, setLocation] = useContext(locationContext);
 
   const [signinTriggered, setsigninTriggered] = useState(false);
   const [reservationTriggered, setreservationTriggered] = useState(false);
   const [selectedCar, setselectedCar] = useState([]);
 
+  useEffect(() => {
+    userTypeRef.current = userType
+  }, [userType]);
 
-  function handleReservation(){
+  async function handleReservation(){
     setselectedCar(c => c = props.carObject);
     if (userType === "None") {
       setsigninTriggered(true);
     }
-    setreservationTriggered(true);
+    await waitForSignIn();
+    setTimeout(() => {    
+      setreservationTriggered(true);
+    }, 500);
   }
+
+  function waitForSignIn() {
+    return new Promise((resolve) => {
+      function check() {
+        if (userTypeRef.current !== "None") {
+          resolve();
+        }
+        else {
+          setTimeout(check, 100)
+        }
+      };
+      check();
+    });
+  };
 
   return( 
     <>
@@ -31,7 +52,7 @@ export default function Card(props){
           <div id={styles.title}>
             <div id={styles.topRow}>
               <p>{props.carObject.type}</p>
-              <p>${props.carObject.carCostPerDay}</p>
+              <p>${props.carObject.carCostPerDay} per day</p>
             </div>
             <div id={styles.bottomRow}>
               <p>{props.carObject.make} {props.carObject.model} {props.carObject.year}</p>

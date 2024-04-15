@@ -21,18 +21,19 @@ export default function SearchBox(){
                 '4:00PM', '5:00PM', '6:00PM', '7:00PM', '8:00PM', '9:00PM', '10:00PM', '11:00PM']
 
   function handleSearch() {
-    if (rentalRange.includes(0) || rentalTimes.includes("0") || location === "None"){
-      window.alert("Please fill out all the search boxes")
-    }
-    else if ((rentalRange[0] > rentalRange[2]) || ((rentalRange[0] === rentalRange[2]) && (rentalRange[1] > rentalRange[3])) ) {
-      window.alert("Drop-off Date is before Pick-up Date");
-    }
-    else if (times.indexOf(rentalTimes[0]) > times.indexOf(rentalTimes[1])) {
-      window.alert("Drop-off Time is before Pick-up Time");
-    }
-    else {
-      navigate('/cars')
-    }
+    // if (rentalRange.includes(0) || rentalTimes.includes("0") || location === "None"){
+    //   window.alert("Please fill out all the search boxes")
+    // }
+    // else if ((rentalRange[0] > rentalRange[2]) || ((rentalRange[0] === rentalRange[2]) && (rentalRange[1] > rentalRange[3])) ) {
+    //   window.alert("Drop-off Date is before Pick-up Date");
+    // }
+    // else if (((rentalRange[0] === rentalRange[2]) && (rentalRange[1] === rentalRange[3])) && (times.indexOf(rentalTimes[0]) > times.indexOf(rentalTimes[1]))) {
+    //   window.alert("Drop-off Time is before Pick-up Time");
+    // }
+    // else {
+    //   navigate('/cars')
+    // }
+    navigate('/cars');
   }
 
   return(

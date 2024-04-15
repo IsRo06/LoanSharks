@@ -1,19 +1,28 @@
 import React from 'react'
 import {useState, useContext} from 'react'
 import { Link } from "react-router-dom";
-import { locationContext } from '../../App';
+import { locationContext, rentalRangeContext } from '../../App';
 import styles from './CheckoutPopup.module.css'
 
 export default function CheckoutPopup(props){
   const [location, setLocation] = useContext(locationContext);
+  const [rentalRange, setRentalRange] = useContext(rentalRangeContext);
+
+  function handleConfirmedReservation() {
+    props.setTrigger(false);
+    window.alert("Your Reservation has been confirmed!");
+  }
 
   return(props.trigger) ? (
     <div id={styles.background}>
       <div id={styles.popup}>
+          <button id={styles.closeBtn} onClick={() => props.setTrigger(false)}>
+            {props.children} X
+          </button>
           <div id={styles.title}>
             <div id={styles.topRow}>
               <p>{props.car.type}</p>
-              <p>${props.car.carCostPerDay}</p>
+              <p>${props.car.carCostPerDay} per day</p>
             </div>
             <div id={styles.bottomRow}>
               <p>{props.car.make} {props.car.model} {props.car.year}</p>
@@ -39,9 +48,9 @@ export default function CheckoutPopup(props){
 
             <div id={styles.rightCol}>
               <p className={styles.cardInfo}>Pickup: {location}</p>
-                <p className={styles.cardInfo}>Rental Range:</p>
-              <button id={styles.reserveBtn}>Confirm Reservation</button>
+              <p className={styles.cardInfo}>Rental Range: {rentalRange[0]}/{rentalRange[1]} - {rentalRange[2]}/{rentalRange[3]}</p>
               <br />
+              <button id={styles.reserveBtn} onClick={handleConfirmedReservation}>Confirm Reservation</button>
             </div>
 
           </div>
@@ -50,5 +59,3 @@ export default function CheckoutPopup(props){
    </div>
   ) : "";
 }
-
-// {rentalDate[0]}/{rentalDate[1]} - {rentalDate[2]}/{rentalDate[3]}
