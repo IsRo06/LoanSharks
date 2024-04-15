@@ -30,8 +30,14 @@ export default function Header(){
       </div>
       <div id={styles.rightSide}>
         <Link to="/help" className={styles.link}><div className={styles.bannerText}>Help</div></Link>
-        <div className={styles.bannerText}>Offers</div>
+
+
+
+        <Link to="/offers" className={styles.link}><div className={styles.bannerText}>Offers</div></Link>
         <div className={styles.bannerText}>Locations</div>
+
+
+
         {userType === "None"? 
           <div className={styles.bannerText} onClick={() => setpopupTriggered(true)}>Sign in</div>
           : <div>
