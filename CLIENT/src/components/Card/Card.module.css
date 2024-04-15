@@ -1,0 +1,83 @@
+.card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px hsla(0, 0%, 0%, 0.1);
+  width: 75%;
+  height: 240px;
+  padding: 10px;
+  margin-top: 10px
+}
+
+.cardImage {
+  width: 30%;
+  max-height: 100%;
+  object-fit: contain;
+  display: inline-block;
+  margin: 5px;
+}
+
+#textWrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+}
+
+.cardInfo {
+  font-size: 18px;
+  font-family: Inter;
+}
+
+#title {
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+}
+
+#topRow, #bottomRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#topRow {
+  font-size: 28px;
+}
+
+#bottomRow {
+  font-size: 18px;
+}
+
+#intermediateInfo {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin: 20px 0 20px 0;
+  height: 100%;
+}
+
+#leftCol, #middleCol {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#reserveBtn {
+  width: 50%;
+  height: 30%;
+  justify-self: last baseline;
+  font-size: 16px;
+  color: white;
+  font-weight: bold;
+  background-color: hsl(194, 63%, 60%);
+  border: none;
+  border-radius: 10px;
+  transition: background-color .15s;
+}
+
+#reserveBtn:hover {
+  background-color: hsl(194, 63%, 50%);
+  cursor: pointer;
+}

@@ -1,4 +1,4 @@
-const { ApolloServer, PubSub } = require('apollo-server');
+const { ApolloServer} = require('apollo-server');
 const mongoose = require('mongoose');
 const path = require('path');
 const fs = require('fs');
@@ -16,12 +16,10 @@ const { MONGODB } = require('./config.js');
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: ({ req }) => ({req, pubsub})
+  context: ({ req }) => ({req})
 });
 
 
-
-const express = require('express')
 
 
 mongoose
