@@ -1,6 +1,5 @@
 import React from 'react'
-import {useState, useContext} from 'react'
-import { Link } from "react-router-dom";
+import {useContext} from 'react'
 import { locationContext, rentalRangeContext } from '../../App';
 import styles from './CheckoutPopup.module.css'
 

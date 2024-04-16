@@ -4,7 +4,7 @@ import HomeScreen from "./pages/HomeScreen.jsx";
 import CarsScreen from './pages/CarsScreen.jsx'
 import AccountScreen from "./pages/AccountScreen.jsx";
 import EmployeeInfo from "./pages/EmployeeInfo.jsx";
-import Dashboard from "./pages/CarDashboard.jsx";
+import Dashboard from "./pages/Dashboard.jsx";
 import Reservations from "./pages/Reservations.jsx";
 import ChatBotBox from "./components/ChatBot/ChatBot.jsx";
 
@@ -24,7 +24,7 @@ export default function App() {
       if (!props.usersAllowed.includes(userType)) {
         navigate('/');
       }
-    }, [userType]);
+    }, [userType, navigate, props.usersAllowed]);
 
     return props.usersAllowed.includes(userType) ? <props.component/> : null;
   }

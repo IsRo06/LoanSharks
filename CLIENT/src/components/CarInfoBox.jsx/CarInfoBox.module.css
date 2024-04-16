@@ -1,5 +1,4 @@
 #accountInfoBox {
-  background-color :hsl(194, 63%, 60%);
   width: 100%;
   min-height: 75vh;
   display: flex;
@@ -11,7 +10,7 @@
   margin: 120px 0 20px 0;
   display: flex;
   flex-direction: column;
-  width: 70%;
+  width: 50%;
   border: 1px solid black;
   border-radius: 10px;
   background-color: white;
@@ -22,18 +21,23 @@
   margin: 20px 20px 10px 20px;
 }
 
-#instructions {
-  font-size: 18px;
-  margin: 0 20px;
-  border-bottom: 1px solid black;
+#infoAndBtn {
+  display: flex;
+  flex-direction: row;
+}
+
+#allInfo {
+  width: 75%;
+  margin: 0 40px;
+
 }
 
 .informationContainer {
   display: grid;
-  grid-template-columns: 1fr 3fr;
+  grid-template-columns: 1fr 1fr;
   align-items: center;
   justify-content: space-between;
-  margin: 15px 40px;
+  margin: 10px 0;
 }
 
 .informationContainer p {
@@ -42,50 +46,39 @@
 }
 
 .informationContainer input {
-  margin-left: 5px;
   border: 1px solid black;
   border-radius: 5px;
 }
 
 #dropDown {
-  margin-left: 5px;
   border: 1px solid black;
   border-radius: 5px;
   background-color: white;
 }
 
-#bottom {
-  display: flex;
-  flex-direction: row;
-  align-items: space-between;
-}
-
-#radioBtns {
+#allBtns {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  margin-right: 40px;
 }
 
-.btnandLabel {
-  display: flex;
-  flex-direction: row;
-  margin: 15px 40px;
-  font-size: 18px;
-}
-
-#bottomBtn {
-  height: 50px;
-  width: 150px;
-  margin: 15px 40px;
-  align-self: last baseline;
-  border: 1px solid black;
-  border-radius: 5px;
-  background-color: hsl(194, 63%, 60%);
+.btn {
+  align-self: center;
+  margin: 40px 0;
   color: white;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.15s;
+  font-size: 24px;
+  font-weight: bold;
+  background-color: hsl(194, 63%, 60%);
+  border: none;
+  border-radius: 10px;
+  height: 70px;
+  width: 150px;
+  transition: background-color .15s;
 }
 
-#bottomBtn:hover {
-  background-color: hsl(194, 63%, 50%);
+.btn:hover {
+  cursor: pointer;
+  background-color: hsl(194, 63%, 50%)
 }

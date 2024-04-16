@@ -19,6 +19,7 @@ export default function Header(){
 
   function signOut() {
     setUserType(u => u = "None");
+    setLocation(l => l = "None");
     setaccountDropdownDisplay(a => a = 'none');
   }
 
