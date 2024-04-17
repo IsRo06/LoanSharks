@@ -34,7 +34,8 @@ export default function Header(){
 
 
         <Link to="/offers" className={styles.link}><div className={styles.bannerText}>Offers</div></Link>
-        <div className={styles.bannerText}>Locations</div>
+        <Link to="/locations" className={styles.link}><div className={styles.bannerText}>Locations</div></Link>
+        {/* <div className={styles.bannerText}>Locations</div> */}
 
 
 
