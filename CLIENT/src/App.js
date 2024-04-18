@@ -6,7 +6,7 @@ import AccountScreen from "./pages/AccountScreen.jsx";
 import EmployeeInfo from "./pages/EmployeeInfo.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 import Reservations from "./pages/Reservations.jsx";
-import ChatBotBox from "./components/ChatBot/ChatBot.jsx";
+import HelpPage from "./pages/HelpPage.jsx";
 
 export const userContext = React.createContext();
 export const locationContext = React.createContext();
@@ -24,7 +24,7 @@ export default function App() {
       if (!props.usersAllowed.includes(userType)) {
         navigate('/');
       }
-    }, [userType, navigate, props.usersAllowed]);
+    }, [navigate, props.usersAllowed]);
 
     return props.usersAllowed.includes(userType) ? <props.component/> : null;
   }
@@ -42,7 +42,7 @@ export default function App() {
                 <Route path="employees" element={<RouteRenderer usersAllowed={["Admin"]} component={EmployeeInfo}/>} />
                 <Route path="dashboard" element={<RouteRenderer usersAllowed={["Admin", "Employee"]}  component={Dashboard}/>} />
                 <Route path="reservations" element={<RouteRenderer usersAllowed={["Admin", "Employee"]} component={Reservations}/>} />
-                <Route path="help" element={<ChatBotBox/>} />
+                <Route path="help" element={<HelpPage/>} />
 
                 {/* <Route path="*" element={<NoPage />} /> */}
               </Route>

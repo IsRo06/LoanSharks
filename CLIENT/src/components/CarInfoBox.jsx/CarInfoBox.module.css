@@ -56,17 +56,10 @@
   background-color: white;
 }
 
-#allBtns {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  margin-right: 40px;
-}
 
 .btn {
   align-self: center;
-  margin: 40px 0;
+  margin-right: 40px;
   color: white;
   font-size: 24px;
   font-weight: bold;

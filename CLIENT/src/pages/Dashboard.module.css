@@ -29,7 +29,7 @@
   font-weight: bold;
 }
 
-#label:hover, .carTabs:hover {
+.carTabs:hover {
   background-color :hsl(194, 63%, 60%);
   cursor: pointer;
 }

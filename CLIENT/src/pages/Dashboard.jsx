@@ -8,7 +8,7 @@ import Footer from "../components/Footer/Footer";
 export default function Dashboard(){
   const [location, setLocation] = useContext(locationContext);
   const [allCars, setAllCars] = useState([]);
-  const [selectedCar, setSelectedCar] = useState([]);
+  const [selectedCar, setSelectedCar] = useState({});
 
   useEffect(() => {
     setAllCars(c => c = [
@@ -60,16 +60,7 @@ export default function Dashboard(){
   }
 
   function getCarInfo() {
-    if (selectedCar.length === 0){
-      return [];
-    } 
-    else {
-      return selectedCar;
-    }
-  }
-
-  function emptyInfoBox() {
-    setSelectedCar(c => c = []);
+    return selectedCar;
   }
 
   return (
@@ -77,16 +68,15 @@ export default function Dashboard(){
       <Header/>
        <div id={styles.content}>
         <div id={styles.sideBar}>
-            <div id={styles.label} onClick={emptyInfoBox}>Cars || {location}, FL</div>
+            <div id={styles.label}>Cars || {location}, FL</div>
               {getAllCars().map((car, index) => (
                   <div key={index} className={styles.carTabs} onClick={() => handleSelectedCar(index)}> 
                       {car.year} {car.make} {car.model}
                   </div>
               ))}
         </div>
-        {selectedCar.length === 0 ? <CarInfoBox information={getCarInfo()} disabledFields={["make", "model", "year", "color", "seats", "mileage", "type"]} />
-        : <CarInfoBox information={getCarInfo()} disabledFields={[]}/>
-        }
+        {(typeof selectedCar === 'object') && (Object.keys(selectedCar).length !== 0) ? <CarInfoBox information={getCarInfo()} disabledFields={['make', 'model', 'year', 'color', 'seats', 'mileage', 'type']} />
+        : ""}
       </div>
       <Footer/>
     </>

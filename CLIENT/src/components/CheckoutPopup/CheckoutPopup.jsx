@@ -10,6 +10,8 @@ export default function CheckoutPopup(props){
   function handleConfirmedReservation() {
     props.setTrigger(false);
     window.alert("Your Reservation has been confirmed!");
+
+    //create reservation here in database with rental range dates
   }
 
   return(props.trigger) ? (
