@@ -1,13 +1,46 @@
 import React from "react";
-import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { useState, useContext, useRef, useEffect } from "react";
 import styles from "./Reservations.module.css"
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
+import SigninPopup from "../components/SigninPopup/SigninPopup";
 
-import { locationContext } from "../App";
+import { userContext, locationContext } from "../App";
 
 export default function Reservations(){
+  const [userType, setUserType] = useContext(userContext);
+  const userTypeRef = useRef(userType)
   const [location, setLocation] = useContext(locationContext);
+  const [signinTriggered, setsigninTriggered] = useState(false);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    userTypeRef.current = userType
+  }, [userType]);
+
+  async function handleNewReservation(){
+    setsigninTriggered(true);
+    await waitforNewAccount();
+    setTimeout(() => {    
+      navigate('/');
+    }, 500);
+  }
+
+  function waitforNewAccount() {
+    return new Promise((resolve) => {
+      function check() {
+        if (userTypeRef.current === "Client") {
+          resolve();
+        }
+        else {
+          setTimeout(check, 100)
+        }
+      };
+      check();
+    });
+  };
 
   function getReservations(){
     return [
@@ -54,11 +87,17 @@ export default function Reservations(){
             </div>
           ))}
 
+          <button id={styles.reservationBtn} onClick={handleNewReservation}>
+            Create New
+          </button>
+
         
         </div>
       </div>
 
       <Footer/>
+
+      <SigninPopup trigger={signinTriggered} setTrigger={setsigninTriggered} typeOfUser={setUserType} location={setLocation}></SigninPopup>
     </>
   )
 }

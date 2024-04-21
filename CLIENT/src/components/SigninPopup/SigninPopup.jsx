@@ -16,8 +16,13 @@ export default function SigninPopup(props){
   }
 
   function signin(event){
-    props.typeOfUser("Employee");
+    props.typeOfUser("Admin");
     props.location("Gainesville");
+    props.setTrigger(false);
+  }
+
+  function createNew() {
+    props.typeOfUser("None");
     props.setTrigger(false);
   }
 
@@ -44,7 +49,7 @@ export default function SigninPopup(props){
           <button id={styles.submitBtn} onClick={signin}>Submit</button>
         </div>
 
-        <p id={styles.noAccount}>Don't have an account? <Link to ='/account' id={styles.link} onClick={() => props.setTrigger(false)}>Create One Today</Link> </p>
+        <p id={styles.noAccount}>Don't have an account? <Link to ='/account' id={styles.link} onClick={createNew}>Create One Today</Link> </p>
       </div>
     </div>
   ) : "";

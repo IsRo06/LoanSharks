@@ -3,15 +3,17 @@ import { useState, useContext, useEffect } from 'react';
 import styles from './AccountInfoBox.module.css'
 import { userContext } from '../../App';
 import Dropdown from '../Dropdowns/Dropdowns';
+import { useNavigate } from 'react-router-dom';
 
 export default function AccountInfoBox(props){
   const [userType, setUserType] = useContext(userContext);
-
   const [userInfo, setUserInfo] = useState(props.information);
   const [inputsDisabled, setinputsDisabled] = useState(userType !== "None");
   const [btnWhenSignedIn, setbtnWhenSignedIn] = useState("Edit Information");
   const [newAccountType, setNewAccountType] = useState("Client");
   const locations = [ 'Gainesville', 'Orlando', 'Miami', 'Tallahassee', 'Tampa'];
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     setUserInfo(props.information);
@@ -19,7 +21,7 @@ export default function AccountInfoBox(props){
 
   useEffect(() => {
     setinputsDisabled(userType !== "None");
-  }, [userType]);
+  }, [userType])
 
   function determineIsDisabled(category) {
     if (userType === "Employee" && category === "Place of Employment"){
@@ -56,7 +58,10 @@ export default function AccountInfoBox(props){
   }
 
   function createNewUser() {
-    window.alert(`New ${newAccountType} has been created`)
+    window.alert(`New ${newAccountType} has been created`);
+    //ISAAAAAAAAAAAAA
+    setUserType(u => u = newAccountType);
+    navigate('/');
   }
 
   return (

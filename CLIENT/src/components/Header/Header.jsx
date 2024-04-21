@@ -34,7 +34,7 @@ export default function Header(){
         <div className={styles.bannerText}>Offers</div>
         <div className={styles.bannerText}>Locations</div>
         {userType === "None"? 
-          <div className={styles.bannerText} onClick={() => setpopupTriggered(true)}>Sign in</div>
+          <div className={styles.bannerText} onClick={() => setpopupTriggered(t => t = true)}>Sign in</div>
           : <div>
               <div className={styles.bannerText} onClick={handleaccountDropdownDisplay}>Account</div>
               <div id={styles.optionsContainer} style={{display: accountDropdownDisplay}}>
