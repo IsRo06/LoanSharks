@@ -15,6 +15,7 @@ module.exports=gql`
         carLocation: String!
         carStatus: String!
         carReservations: [Int]!
+        carIMGstring: String!
     }
     type Query{
         getCars: [Car]
@@ -34,6 +35,8 @@ module.exports=gql`
         location: String!
         status: String!
         reservations: [Int]!
+        carIMGstring: String!
+        carKey: String!
         ): Car!
         deleteCar(car_id: ID!): [Car]!
 

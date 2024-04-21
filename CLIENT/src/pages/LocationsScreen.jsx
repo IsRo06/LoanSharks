@@ -9,7 +9,7 @@ import Footer from "../components/Footer/Footer";
 
 export default function LocationsScreen(){
 
-
+    
     return(
         
         <div className={styles.outerBox}>
@@ -17,7 +17,7 @@ export default function LocationsScreen(){
             <div className={styles.space}/>
             <div className={styles.secondBox}>
                 <img id={styles.stateImg} src={FloridaIMg} alt=""/>
-                
+    
             </div>
             <Footer/>
         </div>

@@ -12,7 +12,9 @@ const carSchema = new Schema({
     carCostPerDay: Number,
     carLocation: String,
     carStatus: String,
-    carReservations: [Number]
+    carReservations: [Number],
+    carIMGstring: String,
+    carKey: String
 });
 
 

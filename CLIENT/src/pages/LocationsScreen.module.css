@@ -9,18 +9,15 @@
 
 .secondBox{
     width: 50%;
-    height: fit-content;
     border-style: double;
     display: flex;
 }
 
 #stateImg{
     width: 100%;
-    flex: 1;
+    /* flex: 1; */
     /* z-index: 50; */
 }
-
-
 
 .space{
     height: 100px;
