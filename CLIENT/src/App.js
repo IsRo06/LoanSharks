@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
-import OffersScreen from "./pages/OffersScreen.jsx";
 import HomeScreen from "./pages/HomeScreen.jsx";
 import CarsScreen from './pages/CarsScreen.jsx'
 import AccountScreen from "./pages/AccountScreen.jsx";
@@ -9,6 +8,8 @@ import Dashboard from "./pages/Dashboard.jsx";
 import Reservations from "./pages/Reservations.jsx";
 import HelpPage from "./pages/HelpPage.jsx";
 import LocationsScreen from "./pages/LocationsScreen.jsx";
+import OffersScreen from "./pages/OffersScreen.jsx";
+
 import { jwtDecode } from "jwt-decode";
 import gql from "graphql-tag";
 import { useQuery } from "@apollo/client";
@@ -61,7 +62,9 @@ export default function App() {
                 <Route path="employees" element={<RouteRenderer usersAllowed={["Admin"]} component={EmployeeInfo}/>} />
                 <Route path="dashboard" element={<RouteRenderer usersAllowed={["Admin", "Employee"]}  component={Dashboard}/>} />
                 <Route path="reservations" element={<RouteRenderer usersAllowed={["Admin", "Employee"]} component={Reservations}/>} />
-                <Route path="help" element={<ChatBotBox/>} />
+                <Route path="help" element={<HelpPage/>} />
+                <Route path="locations" element={<LocationsScreen/>} />
+                <Route path="offers" element={<OffersScreen/>} />
 
                 {/* <Route path="*" element={<NoPage />} /> */}
               </Route>
