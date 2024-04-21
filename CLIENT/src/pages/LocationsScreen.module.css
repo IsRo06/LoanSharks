@@ -1,0 +1,24 @@
+.outerBox{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.secondBox{
+    width: 50%;
+    border-style: double;
+    display: flex;
+}
+
+#stateImg{
+    width: 100%;
+    /* flex: 1; */
+    /* z-index: 50; */
+}
+
+.space{
+    height: 100px;
+}

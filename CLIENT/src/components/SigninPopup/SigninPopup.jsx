@@ -3,6 +3,10 @@ import {useState} from 'react'
 import { Link } from "react-router-dom";
 import styles from './SigninPopup.module.css'
 
+
+import gql from 'graphql-tag'
+
+
 export default function SigninPopup(props){
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -15,10 +19,25 @@ export default function SigninPopup(props){
     setPassword(event.target.value)
   }
 
+  // const [values, setValues] = useState({
+  //   username: "",
+  //   password: ""
+  // });
+
+  // const [loginUser, {loading}] = useMutation(FETCH_USER_QUERY, {
+  //   update(proxy, result){
+  //     console.log(result)
+  //   },
+  //   variables: values
+  // })
+
   function signin(event){
-    props.typeOfUser("Admin");
-    props.location("Gainesville");
-    props.setTrigger(false);
+
+
+
+      props.typeOfUser("Admin");
+      props.location("Gainesville");
+      props.setTrigger(false);
   }
 
   function createNew() {
@@ -54,3 +73,18 @@ export default function SigninPopup(props){
     </div>
   ) : "";
 }
+
+
+
+
+const FETCH_USER_QUERY = gql`
+   mutation login($username: String!, $password: String!) {
+    login(username: $username, password: $password) {
+      id
+      email
+      username
+      createdAt
+      token
+    }
+  }
+`
