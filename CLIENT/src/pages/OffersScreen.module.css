@@ -1,0 +1,109 @@
+#oceanImage {
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+    margin-top: 75px;
+    height: 450px;
+    /* filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)); */
+}
+
+
+#screen {
+  margin: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-self: flex-start;
+}
+
+.space{
+  height: 100px;
+}
+
+.offersbox{
+  /* background-color: lightpink; */
+  height: 680px;
+  width: 80%;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* margin-bottom: 180px; */
+}
+
+.offer1{
+  display: flex;
+  flex: 1;
+  width: 80%;
+  background-color: white;
+  margin-top: 20px;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.offer2{
+  display: flex;
+  flex: 1;
+  width: 80%;
+  background-color: white;
+  margin-top: 20px;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.offer3{
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  width: 80%;
+  background-color: white;
+  margin-top: 20px;
+  border: 1px solid black;
+  border-radius: 10px;
+
+  margin-bottom: 20px;
+
+}
+
+.image{
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.offerLeftside{
+  /* background-color: aquamarine; */
+  flex: 2;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.offerLefttop{
+  /* background-color: red; */
+  flex: 4;
+  font-family: Inter;
+  font-weight: 500;
+  font-size: 30px;  
+}
+.offerLeftmid{
+  /* background-color: blue; */
+  flex: 3;
+  font-family: Inter;
+  font-weight: 500;
+  font-size: 14px;  
+}
+.offerLeftbot{
+  /* background-color: green; */
+  flex: 3;
+  font-family: Inter;
+  font-weight: 500;
+  font-size: 14px;  
+}
+
+.offerRightside{
+  background-color: orange;
+  flex: 1;
+  border-radius: 10px;
+}
+

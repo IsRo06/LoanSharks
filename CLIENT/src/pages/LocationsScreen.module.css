@@ -1,0 +1,15 @@
+#imageContainer {
+    margin-top: 125px;
+    margin-bottom: 25px;
+    width: 100%;
+    min-height: 75vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#stateImg {
+    width: 50%;
+    height: auto;
+    display: block;
+}

@@ -42,3 +42,23 @@
   flex-direction: row;
   justify-content: space-between;
 }
+
+#reservationBtn {
+  align-self: last baseline;
+  margin-top: 30px;
+  margin-right: 40px;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: hsl(194, 63%, 60%);
+  border: none;
+  border-radius: 10px;
+  height: 50px;
+  width: 120px;
+  transition: background-color .15s;
+}
+
+#reservationBtn:hover {
+  cursor: pointer;
+  background-color: hsl(194, 63%, 50%)
+}

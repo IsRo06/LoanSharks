@@ -3,14 +3,17 @@ import { useState, useContext, useEffect } from 'react';
 import styles from './AccountInfoBox.module.css'
 import { userContext } from '../../App';
 import Dropdown from '../Dropdowns/Dropdowns';
+import { useNavigate } from 'react-router-dom';
 
 export default function AccountInfoBox(props){
   const [userType, setUserType] = useContext(userContext);
-
   const [userInfo, setUserInfo] = useState(props.information);
   const [inputsDisabled, setinputsDisabled] = useState(userType !== "None");
   const [btnWhenSignedIn, setbtnWhenSignedIn] = useState("Edit Information");
+  const [newAccountType, setNewAccountType] = useState("Client");
   const locations = [ 'Gainesville', 'Orlando', 'Miami', 'Tallahassee', 'Tampa'];
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     setUserInfo(props.information);
@@ -18,7 +21,7 @@ export default function AccountInfoBox(props){
 
   useEffect(() => {
     setinputsDisabled(userType !== "None");
-  }, [userType]);
+  }, [userType])
 
   function determineIsDisabled(category) {
     if (userType === "Employee" && category === "Place of Employment"){
@@ -47,28 +50,18 @@ export default function AccountInfoBox(props){
   }
 
   function editMode() {
-    if (btnWhenSignedIn === "Save Changes") {
-      if ((userType === "Admin" || userType === "Employee") && userInfo[4] !== userInfo[5]) {
-        window.alert("Password not verified");
-        return null;
-      }
-      else if (userType === "Client" && userInfo[3] !== userInfo[4]){
-        window.alert("Password not verified");
-        return null;
-      }
+    if (btnWhenSignedIn === "Save Changes"){
+      window.alert("Change have been saved");
     }
-
     btnWhenSignedIn === "Edit Information" ? setbtnWhenSignedIn(b => "Save Changes") : setbtnWhenSignedIn(b => "Edit Information");
     setinputsDisabled(i => i = !i);
   }
 
   function createNewUser() {
-    if (userInfo[3] !== userInfo[4]) {
-      window.alert("Password not verified");
-    }
-    else {
-      console.log("success")
-    }
+    window.alert(`New ${newAccountType} has been created`);
+    //ISAAAAAAAAAAAAA
+    setUserType(u => u = newAccountType);
+    navigate('/');
   }
 
   return (
@@ -91,17 +84,28 @@ export default function AccountInfoBox(props){
           </div>
         ))}
 
-        {userType === "None" || (userType === "Admin" && props.use==="Create New") ? <button id={styles.bottomBtn} onClick={createNewUser}>Create Account</button>
-        :<button id={styles.bottomBtn} onClick={editMode}>{btnWhenSignedIn}</button> }
+        <div id={styles.bottom}>
+          <div id={styles.radioBtns}>
+            {(userType === "Admin" && props.use==="Create New") ? 
+            <>
+              <div className={styles.btnandLabel}>
+                <input type="radio" value="Employee" checked={newAccountType === "Employee"} onChange={(event) => setNewAccountType(a => a = event.target.value)}/>
+                <p>This is an Employee Account</p>
+              </div>
+              <div className={styles.btnandLabel}>
+                <input type="radio" value="Admin" checked={newAccountType === "Admin"} onChange={(event) => setNewAccountType(a => a = event.target.value)}/>
+                  <p>This is an Admin Account</p>
+              </div>
+              
+            </>
+            : "" }
+          </div>
+          {userType === "None" || (userType === "Admin" && props.use==="Create New") ? <button id={styles.bottomBtn} onClick={createNewUser}>Create Account</button>
+          :<button id={styles.bottomBtn} onClick={editMode}>{btnWhenSignedIn}</button> }
+        </div>
 
-        {(userType === "Admin" && props.use==="Create New") ? 
-        <>
-          <input type="radio" id="adminBtn" name="Type of Account" value="Admin"/> 
-          <label htmlFor="adminBtn">Admin Account</label>
-          <input type="radio" id="employeeBtn" name="Type of Account" value="Employee"/>    
-          <label htmlFor="employeeBtn">Employee Account</label>
-        </>
-        : "" }
+        
+
       </div>
     </div>
   );

@@ -37,6 +37,10 @@ export default function Dropdown(props) {
   
       props.setTime(updatedRentalRange);
     }
+
+    else if (props.type === "Car Status") {
+      props.statusChanged(selectedOption);
+    }
   }
 
   return (

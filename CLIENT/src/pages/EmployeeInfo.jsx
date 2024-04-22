@@ -1,20 +1,19 @@
 import React from "react";
 import { useState, useContext, useEffect } from "react";
 import styles from "./EmployeeInfo.module.css"
-import { userContext, locationContext } from "../App";
+import { locationContext } from "../App";
 import Header from '../components/Header/Header';
 import AccountInfoBox from "../components/AccountInfoBox/AccountInfoBox";
 import Footer from "../components/Footer/Footer";
 
 export default function EmployeeInfo() {
-    const [userType, setUserType] = useContext(userContext);
     const [location, setLocation] = useContext(locationContext);
 
     const [allEmployees, setAllEmployees] = useState([]);
     const [selectedEmployee, setSelectedEmployee] = useState([]);
 
     const employeeInfo = ["First Name", "Last Name", "Place of Employment", "Email"];
-    const allInfo = ["First Name", "Last Name", "Place of Employment", "Email", "Password", "Verify Password"];
+    const allInfo = ["First Name", "Last Name", "Place of Employment", "Email", "Password"];
 
     useEffect(() => {
         setAllEmployees(e => e = [
@@ -60,17 +59,11 @@ export default function EmployeeInfo() {
         return allEmployees;
     }
 
-    function handleSelectedEmployee(email) {
-        for (let i = 0; i < allEmployees.length; i++) {
-            if (allEmployees[i].email === email) {
-                setSelectedEmployee(e => e = allEmployees[i]);
-                break;
-            }
-        }
+    function handleSelectedEmployee(index) {
+        setSelectedEmployee(e => e = allEmployees[index]);
     }
 
     function getEmployeeInformation() {
-        console.log(selectedEmployee);
         if (selectedEmployee.length === 0){
             return ["", "", location, ""];
         }
@@ -83,7 +76,7 @@ export default function EmployeeInfo() {
         }
     }
 
-    function createNewAccount() {
+    function emptyInfoBox() {
         setSelectedEmployee(e => e = []);
     }
 
@@ -92,9 +85,9 @@ export default function EmployeeInfo() {
             <Header/>
             <div id={styles.content}>
                 <div id={styles.sideBar}>
-                    <div id={styles.label} onClick={createNewAccount}>Employees || {location}, FL</div>
-                    {getAllEmployees().map((employee) => (
-                        <div key={employee.firstName} className={styles.employeeTabs} onClick={() => handleSelectedEmployee(employee.email)}> 
+                    <div id={styles.label} onClick={emptyInfoBox}>Employees || {location}, FL</div>
+                    {getAllEmployees().map((employee, index) => (
+                        <div key={index} className={styles.employeeTabs} onClick={() => handleSelectedEmployee(index)}> 
                             {employee.firstName} {employee.lastName}
                         </div>
                     ))}

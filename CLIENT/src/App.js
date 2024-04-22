@@ -4,9 +4,11 @@ import HomeScreen from "./pages/HomeScreen.jsx";
 import CarsScreen from './pages/CarsScreen.jsx'
 import AccountScreen from "./pages/AccountScreen.jsx";
 import EmployeeInfo from "./pages/EmployeeInfo.jsx";
-import Dashboard from "./pages/CarDashboard.jsx";
+import Dashboard from "./pages/Dashboard.jsx";
 import Reservations from "./pages/Reservations.jsx";
-import ChatBotBox from "./components/ChatBot/ChatBot.jsx";
+import HelpPage from "./pages/HelpPage.jsx";
+import LocationsScreen from "./pages/LocationsScreen.jsx";
+import OffersScreen from "./pages/OffersScreen.jsx";
 
 
 export const usernameContext = React.createContext();
@@ -15,7 +17,7 @@ export const lastNameContext = React.createContext();
 export const passwordContext = React.createContext();
 export const userContext = React.createContext();
 export const locationContext = React.createContext();
-export const rentalRangeContext =React.createContext();
+export const rentalRangeContext = React.createContext();
 
 export default function App() {
   const [userType, setUserType] = useState("None");
@@ -24,7 +26,7 @@ export default function App() {
   const [lastName, setlastName]=useState("None");
   const [password, setPassword]= useState("None");
   const [location, setLocation] = useState("None");
-  const [rentalRange, setRentalRange] = useState([0, 0, 0, 0]);
+  const [rentalRange, setRentalRange] = useState([0,0,0,0]);
 
   function RouteRenderer(props) {
     const navigate = useNavigate();
@@ -33,7 +35,7 @@ export default function App() {
       if (!props.usersAllowed.includes(userType)) {
         navigate('/');
       }
-    }, [userType]);
+    }, [navigate, props.usersAllowed]);
 
     return props.usersAllowed.includes(userType) ? <props.component/> : null
   } 
@@ -56,7 +58,9 @@ export default function App() {
                 <Route path="employees" element={<RouteRenderer usersAllowed={["Admin"]} component={EmployeeInfo}/>} />
                 <Route path="dashboard" element={<RouteRenderer usersAllowed={["Admin", "Employee"]}  component={Dashboard}/>} />
                 <Route path="reservations" element={<RouteRenderer usersAllowed={["Admin", "Employee"]} component={Reservations}/>} />
-                <Route path="help" element={<ChatBotBox/>} />
+                <Route path="help" element={<HelpPage/>} />
+                <Route path="locations" element={<LocationsScreen/>} />
+                <Route path="offers" element={<OffersScreen/>} />
 
                 {/* <Route path="*" element={<NoPage />} /> */}
               </Route>

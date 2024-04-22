@@ -81,7 +81,7 @@ export default function SigninPopup(props){
           <button id={styles.submitBtn} onClick={signin}>Submit</button>
         </div>
 
-        <p id={styles.noAccount}>Don't have an account? <Link to ='/account' id={styles.link} onClick={() => props.setTrigger(false)}>Create One Today</Link> </p>
+        <p id={styles.noAccount}>Don't have an account? <Link to ='/account' id={styles.link} onClick={createNew}>Create One Today</Link> </p>
       </div>
     </div>
   ) : "";

@@ -54,6 +54,24 @@
   background-color: white;
 }
 
+#bottom {
+  display: flex;
+  flex-direction: row;
+  align-items: space-between;
+}
+
+#radioBtns {
+  display: flex;
+  flex-direction: column;
+}
+
+.btnandLabel {
+  display: flex;
+  flex-direction: row;
+  margin: 15px 40px;
+  font-size: 18px;
+}
+
 #bottomBtn {
   height: 50px;
   width: 150px;

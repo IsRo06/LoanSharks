@@ -87,16 +87,3 @@ export default function Card(props){
     
   );
 }
-
-Card.propTypes = {
-  name: PropTypes.string,
-  seats: PropTypes.string,
-  isTired: PropTypes.bool
-}
-
-Card.defaultProps = {
-  name: "Weinermobile",
-  seats: "5",
-  isTired: false
-}
-
