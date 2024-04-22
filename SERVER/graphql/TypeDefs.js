@@ -46,21 +46,30 @@ module.exports=gql`
 
         register(registerInput: RegisterInput): User
         login(username: String, password: String): User
+
+        UpdateInfo(input: UpdateInput!): User
     }
     input RegisterInput{
         firstName: String!
         lastName: String!
-        username: String!
         password: String!
         confirmPassword: String!
         email: String!
+    }
+
+    input UpdateInput{
+        oldemail: String! 
+        firstName: String! 
+        lastName: String!
+        email: String!
+        password: String! 
+        location:String
     }
     type User{
         id: ID!
         firstName: String!
         lastName: String!
         email: String!
-        username: String!
         password: String!
         createdAt: String!
         type: String!

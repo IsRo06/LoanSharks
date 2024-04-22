@@ -11,15 +11,12 @@ query {
     firstName
     lastName
     email
-    username
     password
     type
     location
   }
   }
 `
-
-
 export default function SigninPopup(props){
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -33,7 +30,10 @@ export default function SigninPopup(props){
   function passwordFill(event){
     setPassword(event.target.value)
   }
-
+  function createNew() {
+    props.typeOfUser("None");
+    props.setTrigger(false);
+  }
 
   
   let desiredUser = null;

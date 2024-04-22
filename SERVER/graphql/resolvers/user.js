@@ -81,31 +81,23 @@ module.exports = {
         },
         async register(_,
             {
-                registerInput: {firstName, lastName, username, email, password, confirmPassword}
+                registerInput: {firstName, lastName, email, password, confirmPassword}
             }
             
         ){
 
-            const {valid, errors} = validateRegisterInput(firstName, lastName, username, email, password, confirmPassword);
+            const {valid, errors} = validateRegisterInput(firstName, lastName, email, password, confirmPassword);
             if(!valid){
                 throw new UserInputError('Errors', {errors});
             }
 
-            const user = await User.findOne({username});
-            if(user){
-                throw new UserInputError('Username is taken', {
-                    errors: {
-                        username: 'This username is taken'
-                    }
-                });
-            }
-
+            
+            password = await bcrypt.hash(password, 12);
 
             const newUser = new User({
                 firstName,
                 lastName,
                 email,
-                username,
                 password,
                 createdAt: new Date().toISOString(),
                 type: "Client",
@@ -121,6 +113,32 @@ module.exports = {
             id:res._id,
             //token
         };
+        },
+        async UpdateInfo(_,  {input: {oldemail,
+            firstName, 
+            lastName,
+            email,
+            password, 
+            location}}
+        ){
+            try{
+                const user = await User.findOne({email: oldemail,});
+                if(user){
+                    user.firstName = firstName;
+                    user.lastName = lastName;
+                    user.email = email;
+                    user.password = password;
+                    user.location = location;
+                    user.save();
+                    return user;
+                }else{
+                    console.log("Cannot update user:", oldemail);
+                }
+
+            }catch(err){
+                console.log("Cannot update user", oldemail ,err)
+            }
+
         }
     }
 }

@@ -7,7 +7,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import App from './App';
 
 const client = new ApolloClient({
-
+  connectToDevTools: true,
   uri: 'http://localhost:5000',
   cache: new InMemoryCache(),
 
