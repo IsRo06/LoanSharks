@@ -1,14 +1,28 @@
 import React from "react";
 import { useState, useContext } from "react";
-import { userContext, locationContext } from "../../App";
+import { userContext, locationContext, usernameContext, firstNameContext, lastNameContext, passwordContext } from "../../App";
 import { Link } from "react-router-dom";
 import styles from './Header.module.css'
 import logo from '../../images/logo.png'
 import SigninPopup from "../SigninPopup/SigninPopup";
 
 export default function Header(){
+  const [firstName, setfirstName] =  useContext(firstNameContext);
+  const [lastName, setlastName]=useContext(lastNameContext);;
+  const[username, setUsername] = useContext(usernameContext);
   const [userType, setUserType] = useContext(userContext);
   const [location, setLocation] = useContext(locationContext);
+  const [password, setPassword] = useContext(passwordContext);
+
+  function sendData({desiredUser}) {
+    setfirstName(desiredUser.firstName);
+    setlastName(desiredUser.lastName);
+    setUsername(desiredUser.email);
+    setUserType(desiredUser.type);
+    setLocation(desiredUser.location);
+    setPassword(desiredUser.password);
+    
+  }
 
   const [popupTriggered, setpopupTriggered] = useState(false);
   const [accountDropdownDisplay, setaccountDropdownDisplay] = useState('none');
@@ -35,7 +49,7 @@ export default function Header(){
         {userType === "None"? 
           <div className={styles.bannerText} onClick={() => setpopupTriggered(true)}>Sign in</div>
           : <div>
-              <div className={styles.bannerText} onClick={handleaccountDropdownDisplay}>Account</div>
+              <div className={styles.bannerText} onClick={handleaccountDropdownDisplay}>{username}</div>
               <div id={styles.optionsContainer} style={{display: accountDropdownDisplay}}>
                 <div className={styles.options}><Link to='/account' className={styles.link}>Account Information</Link></div>
 
@@ -57,7 +71,7 @@ export default function Header(){
             </div>
         } 
       </div>
-      <SigninPopup trigger={popupTriggered} setTrigger={setpopupTriggered} typeOfUser={setUserType} location={setLocation}></SigninPopup>
+      <SigninPopup trigger={popupTriggered} setTrigger={setpopupTriggered} typeOfUser={setUserType} location={setLocation} sendData={sendData}></SigninPopup>
     </div>
   );
 }

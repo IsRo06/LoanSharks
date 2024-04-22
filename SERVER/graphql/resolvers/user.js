@@ -15,6 +15,40 @@ function generateToken(user){
 }
 
 module.exports = {
+    Query:{
+        async getUsers(){
+            try{
+                const users = await User.find();
+                return users;
+            }catch(err){
+                console.log("Cannot return users error: ",{err})
+            }
+        },
+        async getUser(_, {user_id}){
+            try{
+                const user = await User.findById(user_id);
+                if(user){
+                    return user;
+                }else{
+                    console.log("Cannot return user:", user_id)
+                }
+            }catch(err){
+                console.log("Cannot return user:", user_id)
+            }
+        },
+        async getUserEmail(_, {user_email}){
+            try{
+                const user = await User.findOne({email: user_email,});
+                if(user){
+                    return user;
+                }else{
+                    console.log("Cannot return user:", user_email);
+                }
+            }catch(err){
+                console.log("Cannot return user:", user_email);
+            }
+        },
+    },
     Mutation: {
         async login(_, {username, password}){
             
@@ -47,12 +81,12 @@ module.exports = {
         },
         async register(_,
             {
-                registerInput: {username, email, password, confirmPassword}
+                registerInput: {firstName, lastName, username, email, password, confirmPassword}
             }
             
         ){
 
-            const {valid, errors} = validateRegisterInput(username, email, password, confirmPassword);
+            const {valid, errors} = validateRegisterInput(firstName, lastName, username, email, password, confirmPassword);
             if(!valid){
                 throw new UserInputError('Errors', {errors});
             }
@@ -66,24 +100,26 @@ module.exports = {
                 });
             }
 
-            password = await bcrypt.hash(password, 12);
 
             const newUser = new User({
+                firstName,
+                lastName,
                 email,
                 username,
                 password,
                 createdAt: new Date().toISOString(),
-                type: "user"
+                type: "Client",
+                location: "Gainesvile"
             });
 
             const res = await newUser.save();
 
-            const token = generateToken(res);
+            //const token = generateToken(res);
 
         return{
             ...res._doc,
             id:res._id,
-            token
+            //token
         };
         }
     }

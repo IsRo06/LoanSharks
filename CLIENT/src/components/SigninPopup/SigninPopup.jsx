@@ -2,14 +2,29 @@ import React from 'react'
 import {useState} from 'react'
 import { Link } from "react-router-dom";
 import styles from './SigninPopup.module.css'
+import { gql, useQuery } from '@apollo/client';
 
-
-import gql from 'graphql-tag'
+const FETCH_USERS_QUERY= gql`
+query {
+  getUsers {
+    id
+    firstName
+    lastName
+    email
+    username
+    password
+    type
+    location
+  }
+  }
+`
 
 
 export default function SigninPopup(props){
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const {loading, error, data} = useQuery(FETCH_USERS_QUERY);
+ 
 
   function emailFill(event){
     setEmail(event.target.value)
@@ -19,23 +34,29 @@ export default function SigninPopup(props){
     setPassword(event.target.value)
   }
 
-  // const [values, setValues] = useState({
-  //   username: "",
-  //   password: ""
-  // });
 
-  // const [loginUser, {loading}] = useMutation(FETCH_USER_QUERY, {
-  //   update(proxy, result){
-  //     console.log(result)
-  //   },
-  //   variables: values
-  // })
+  
+  let desiredUser = null;
 
   function signin(event){
-    props.typeOfUser("Admin");
-    props.location("Gainesville");
+    const desiredEmail = email; 
+    for (const user of data.getUsers) {
+      if (user.email === email) {
+        desiredUser = user;
+        break; 
+      }
+    }
+  
+    if (!desiredUser) return <p>No user found with email {desiredEmail}</p>;
+    
+    props.sendData({desiredUser});
+    props.typeOfUser(desiredUser.type);
+    props.location(desiredUser.location);
     props.setTrigger(false);
   }
+  
+  if (loading) return null;
+  if (error) return `${error}`;
 
   return(props.trigger) ? (
     <div id={styles.background}>
@@ -64,19 +85,7 @@ export default function SigninPopup(props){
       </div>
     </div>
   ) : "";
+
+
 }
 
-
-
-
-const FETCH_USER_QUERY = gql`
-   mutation login($username: String!, $password: String!) {
-    login(username: $username, password: $password) {
-      id
-      email
-      username
-      createdAt
-      token
-    }
-  }
-`
