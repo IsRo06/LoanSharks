@@ -15,6 +15,8 @@ export default function AccountScreen(){
     return userType === "None"? ["", "", "", "", "", ""] : ["Stephanie", "Fong", "Gainesville", "steph.t.fong@gmail.com", "password123"];
   }
 
+  //merp
+
 
   return(
     <>
