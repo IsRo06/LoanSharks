@@ -24,6 +24,15 @@ module.exports = {
                 console.log("Cannot return users error: ",{err})
             }
         },
+        async getEmployees(){
+            try{
+                const employees = await User.find({ type: "Employee" });
+                return employees;
+            }catch(err){
+                console.log("Cannot return employees")
+            }
+            
+        },
         async getUser(_, {user_id}){
             try{
                 const user = await User.findById(user_id);
@@ -48,6 +57,7 @@ module.exports = {
                 console.log("Cannot return user:", user_email);
             }
         },
+        
     },
     Mutation: {
         async login(_, {username, password}){
@@ -114,6 +124,40 @@ module.exports = {
             //token
         };
         },
+        async registerByAdmin(_,
+            {
+                registerAdminInput: {firstName, lastName, email, password, confirmPassword, type, location}
+            }
+            
+        ){
+
+            const {valid, errors} = validateRegisterInput(firstName, lastName, email, password, confirmPassword);
+            if(!valid){
+                throw new UserInputError('Errors', {errors});
+            }
+            password = await bcrypt.hash(password, 12);
+
+            const newUser = new User({
+                firstName,
+                lastName,
+                email,
+                password,
+                createdAt: new Date().toISOString(),
+                type,
+                location,
+            });
+
+            const res = await newUser.save();
+
+            //const token = generateToken(res);
+
+        return{
+            ...res._doc,
+            id:res._id,
+            //token
+        };
+        },    
+    
         async UpdateInfo(_,  {input: {oldemail,
             firstName, 
             lastName,
@@ -139,6 +183,20 @@ module.exports = {
                 console.log("Cannot update user", oldemail ,err)
             }
 
-        }
+        },
+        async UpdateLocation(_,{input: {email, location}}){
+            try{
+                const user = await User.findOne({email: email,});
+                if(user){
+                    user.location = location;
+                    user.save();
+                    return user;
+                }else{
+                    console.log("Cannot run mutation")
+                }
+            }catch(err){
+               console.log(err)
+            }
+        }   
     }
 }

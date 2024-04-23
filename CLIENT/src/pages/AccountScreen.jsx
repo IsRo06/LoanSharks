@@ -6,7 +6,6 @@ import AccountInfoBox from '../components/AccountInfoBox/AccountInfoBox';
 import Footer from '../components/Footer/Footer'
 
 
-
 export default function AccountScreen(){
   const [firstName, setfirstName] =  useContext(firstNameContext);
   const [lastName, setlastName]=useContext(lastNameContext);;
@@ -16,12 +15,12 @@ export default function AccountScreen(){
   const [password, setPassword]= useContext(passwordContext);
  
 
-  const clientInfo = ["First Name", "Last Name", "Email", "Password", "Verify Password"];
-  const employeeAndAdminInfo = ["First Name", "Last Name", "Place of Employment", "Email", "Password", "Verify Password"];
+  const clientInfo = ["First Name", "Last Name", "Email", "Password"];
+  const employeeAndAdminInfo = ["First Name", "Last Name", "Place of Employment", "Email", "Password"];
 
   function getAccountInformation() {
       if(userType === "None"){
-        return ["", "", "", "", "", ""]
+        return [firstName, lastName, username, password]
       }else if (userType ==="Client"){
           return [firstName, lastName, username, password, password];
       }else{

@@ -26,7 +26,7 @@ module.exports ={
         }
     },
     Mutation: {
-        async createCar(_, {make, model, color, year, mileage, type, maxmilesperday, milecostaftermax, costperday, location, status, reservations}){
+        async createCar(_, {make, model, color, year, mileage, type, maxmilesperday, milecostaftermax, costperday, location, status, reservations, IMGstring}){
             const newCar =  new Car({
                 carMake: make,
                 carModel: model,
@@ -39,7 +39,8 @@ module.exports ={
                 carCostPerDay: costperday,
                 carLocation: location,
                 carStatus: status,
-                carReservations: reservations
+                carReservations: reservations,
+                carIMGstring: IMGstring
 
             });
             await newCar.save();

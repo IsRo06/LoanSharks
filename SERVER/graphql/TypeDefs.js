@@ -21,6 +21,7 @@ module.exports=gql`
         getCars: [Car]
         getCar(car_id: ID!): Car!
         getUsers: [User]
+        getEmployees: [User]
         getUser(user_id: ID!): User!
         getUserEmail(user_email: String!): User!
     }
@@ -38,16 +39,29 @@ module.exports=gql`
         location: String!
         status: String!
         reservations: [Int]!
-        carIMGstring: String!
-        carKey: String!
+        IMGstring: String!
         ): Car!
         deleteCar(car_id: ID!): [Car]!
-
-
         register(registerInput: RegisterInput): User
+        registerByAdmin(registerAdminInput: RegisterAdminInput): User,
         login(username: String, password: String): User
-
         UpdateInfo(input: UpdateInput!): User
+        UpdateLocation(input: updateInputLocation!): User
+
+    }
+
+    input updateInputLocation{
+        email: String!
+        location: String!
+    }
+    input RegisterAdminInput{
+        firstName: String!
+        lastName: String!
+        password: String!
+        confirmPassword: String!
+        email: String!
+        type: String!
+        location: String!
     }
     input RegisterInput{
         firstName: String!

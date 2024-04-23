@@ -1,59 +1,61 @@
 import React from "react";
 import { useState, useContext, useEffect } from "react";
 import styles from "./EmployeeInfo.module.css"
-import { locationContext } from "../App";
+import {locationContext } from "../App";
 import Header from '../components/Header/Header';
-import AccountInfoBox from "../components/AccountInfoBox/AccountInfoBox";
+import AccountInfoBox2 from "../components/AccountInfoBox2/AccountInfoBox2";
 import Footer from "../components/Footer/Footer";
+import { gql, useQuery } from '@apollo/client';
+
+const FETCH_EMPLOYEE_QUERY= gql`
+query {
+    getEmployees {
+        id
+        firstName
+        lastName
+        email
+        password
+        type
+        location
+    }
+  }
+`
 
 export default function EmployeeInfo() {
+    const {loading, error, data, refetch} = useQuery(FETCH_EMPLOYEE_QUERY);    
+    //const {loading, error, data} = useQuery(FETCH_USERS_QUERY);
     const [location, setLocation] = useContext(locationContext);
-
     const [allEmployees, setAllEmployees] = useState([]);
     const [selectedEmployee, setSelectedEmployee] = useState([]);
 
     const employeeInfo = ["First Name", "Last Name", "Place of Employment", "Email"];
     const allInfo = ["First Name", "Last Name", "Place of Employment", "Email", "Password"];
-
+    
+    function reload(truth){
+        if(truth === false){
+            refetch();
+        }
+            
+    }
     useEffect(() => {
-        setAllEmployees(e => e = [
-            {firstName: "Joe",
-                lastName: "Brown",
-                placeOfEmployment: "Gainesville",
-                email: "joebrown@lse.com"
-            },
-            {firstName: "Molly",
-                lastName: "Smith",
-                placeOfEmployment: "Gainesville",
-                email: "mollysmith@lse.com"
-            },
-            {firstName: "Carter",
-                lastName: "McKnight",
-                placeOfEmployment: "Gainesville",
-                email: "cartermcknight@lse.com"
-            },
-            {firstName: "Riya",
-                lastName: "Nicholas",
-                placeOfEmployment: "Gainesville",
-                email: "riyanicholas@lse.com"
-            },
-            {firstName: "Tom",
-                lastName: "Nelson",
-                placeOfEmployment: "Gainesville",
-                email: "tomnelson@lse.com"
-            },
-            {firstName: "Patty",
-                lastName: "Clair",
-                placeOfEmployment: "Gainesville",
-                email: "pattyclair@lse.com"
-            },
-            {firstName: "Brenda",
-                lastName: "Williams",
-                placeOfEmployment: "Gainesville",
-                email: "brendawillams@lse.com"
+        const tempEmployees = [];
+        refetch();
+            if(data && data.getEmployees){
+                for (let i = 0; i < data.getEmployees.length; i++) {
+                    if (data.getEmployees[i].location === location){
+                        tempEmployees.push({
+                            firstName: data.getEmployees[i].firstName,
+                            lastName: data.getEmployees[i].lastName,
+                            placeOfEmployment: data.getEmployees[i].location,
+                            email: data.getEmployees[i].email
+                        });
+                    }
+                    
+                }
             }
-        ])
-    }, []);
+        // Update the state of allEmployees with the accumulated employees
+        setAllEmployees(tempEmployees);
+    }, [data]);
 
     function getAllEmployees() {
         return allEmployees;
@@ -92,8 +94,8 @@ export default function EmployeeInfo() {
                         </div>
                     ))}
                 </div>
-                {selectedEmployee.length === 0 ? <AccountInfoBox infoCategories={allInfo} information={getEmployeeInformation()} disabledFields={[]} use="Create New"/>
-                : <AccountInfoBox infoCategories={employeeInfo} information={getEmployeeInformation()} disabledFields={["First Name", "Last Name", "Email"]}/>
+                {selectedEmployee.length === 0 ? <AccountInfoBox2 infoCategories={allInfo} information={getEmployeeInformation()} disabledFields={[]} use="Create New" reload={reload}/>
+                : <AccountInfoBox2 infoCategories={employeeInfo} information={getEmployeeInformation()} disabledFields={["First Name", "Last Name", "Email"]} reload={reload}/>
                 }
             </div>
             <Footer/>

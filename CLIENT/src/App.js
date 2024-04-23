@@ -21,11 +21,11 @@ export const rentalRangeContext = React.createContext();
 
 export default function App() {
   const [userType, setUserType] = useState("None");
-  const [username, setUsername] = useState("None");
-  const [firstName, setfirstName] =  useState("None");
-  const [lastName, setlastName]=useState("None");
-  const [password, setPassword]= useState("None");
-  const [location, setLocation] = useState("None");
+  const [username, setUsername] = useState("");
+  const [firstName, setfirstName] =  useState("");
+  const [lastName, setlastName]=useState("");
+  const [password, setPassword]= useState("");
+  const [location, setLocation] = useState("");
   const [rentalRange, setRentalRange] = useState([0,0,0,0]);
 
   function RouteRenderer(props) {

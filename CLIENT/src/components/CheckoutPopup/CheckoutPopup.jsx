@@ -2,14 +2,20 @@ import React from 'react'
 import {useContext} from 'react'
 import { locationContext, rentalRangeContext } from '../../App';
 import styles from './CheckoutPopup.module.css'
+import { useNavigate } from 'react-router-dom';
+
 
 export default function CheckoutPopup(props){
   const [location, setLocation] = useContext(locationContext);
   const [rentalRange, setRentalRange] = useContext(rentalRangeContext);
+  const navigate = useNavigate();
+
 
   function handleConfirmedReservation() {
     props.setTrigger(false);
     window.alert("Your Reservation has been confirmed!");
+    navigate('/');
+
 
     //create reservation here in database with rental range dates
   }
