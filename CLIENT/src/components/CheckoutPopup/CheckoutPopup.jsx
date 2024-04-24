@@ -8,8 +8,7 @@ import { gql, useMutation } from '@apollo/client';
 const UPDATE_RESERVATION = gql`
   mutation UpdateCarRegistration($registrationInput: updateCarRegistrationInput!) {
   UpdateCarRegistration(registrationInput: $registrationInput) {
-    id
-  }
+    id }
 }
 `
 export default function CheckoutPopup(props){
