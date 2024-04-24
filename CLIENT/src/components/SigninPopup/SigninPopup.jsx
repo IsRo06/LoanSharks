@@ -1,15 +1,45 @@
-import React from 'react'
-import {useState} from 'react'
+import React, { useContext, useState } from 'react';
 import { Link } from "react-router-dom";
 import styles from './SigninPopup.module.css'
+import { gql, useQuery } from '@apollo/client';
+import { AuthContext } from '../../context/auth';
+import { useMutation } from '@apollo/client';
+const bcrypt = require("bcryptjs");
 
 
-import gql from 'graphql-tag'
+const FETCH_USERS_QUERY= gql`
+query {
+  getUsers {
+    id
+    firstName
+    lastName
+    email
+    password
+    createdAt
+    type
+    location
+  }
+  }
+`
 
+const LOGIN_USER = gql`
+  mutation login($username: String!, $password: String!) {
+    login(username: $username, password: $password) {
+      id
+      email
+      username
+      createdAt
+    }
+  }
+`;
 
 export default function SigninPopup(props){
+  const {errors, loading, data} = useQuery(FETCH_USERS_QUERY);
   const [email, setEmail] = useState("");
+  const context = useContext(AuthContext);
   const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const [error, setErrors] = useState("");
 
   function emailFill(event){
     setEmail(event.target.value)
@@ -18,32 +48,40 @@ export default function SigninPopup(props){
   function passwordFill(event){
     setPassword(event.target.value)
   }
-
-  // const [values, setValues] = useState({
-  //   username: "",
-  //   password: ""
-  // });
-
-  // const [loginUser, {loading}] = useMutation(FETCH_USER_QUERY, {
-  //   update(proxy, result){
-  //     console.log(result)
-  //   },
-  //   variables: values
-  // })
-
-  function signin(event){
-
-
-
-      props.typeOfUser("Admin");
-      props.location("Gainesville");
-      props.setTrigger(false);
-  }
-
   function createNew() {
     props.typeOfUser("None");
     props.setTrigger(false);
   }
+
+  
+  
+  let desiredUser = null;
+
+  async function signin(event){
+    for (const user of data.getUsers) {
+      if (user.email === email) {  
+        desiredUser = user;     
+      }
+    }
+    //after here we either found the username or didn't
+    if(!desiredUser){
+      window.alert("Email does not exist!");
+    }else{
+        const login = await bcrypt.compare(password, desiredUser.password)
+        if(login){
+          setUsername(email);
+          props.sendData({desiredUser});
+          props.typeOfUser(desiredUser.type);
+          props.location(desiredUser.location);
+          props.setTrigger(false);
+        }else{
+          window.alert("Incorrect password! Try again");
+        }
+      } 
+  }
+  
+  if (loading) return null;
+ /* if (error) return `${error}`;*/
 
   return(props.trigger) ? (
     <div id={styles.background}>
@@ -72,19 +110,7 @@ export default function SigninPopup(props){
       </div>
     </div>
   ) : "";
+
+
 }
 
-
-
-
-const FETCH_USER_QUERY = gql`
-   mutation login($username: String!, $password: String!) {
-    login(username: $username, password: $password) {
-      id
-      email
-      username
-      createdAt
-      token
-    }
-  }
-`

@@ -1,74 +1,59 @@
 import React from 'react';
 import { useState, useContext, useEffect } from 'react';
-import styles from './AccountInfoBox.module.css'
-import { firstNameContext, userContext, usernameContext, lastNameContext, locationContext, passwordContext } from '../../App';
+import styles from './AccountInfoBox2.module.css'
+import { userContext } from '../../App';
 import Dropdown from '../Dropdowns/Dropdowns';
 import { useNavigate } from 'react-router-dom';
-import { useMutation, gql, useQuery } from '@apollo/client';
-const bcrypt = require("bcryptjs");
+import { useMutation, gql } from '@apollo/client';
 
-const UPDATE_USER = gql`
-  mutation UpdateInfo($input: UpdateInput!) {
-  UpdateInfo(input: $input) {
+const REGISTER_BY_ADMIN = gql`
+  mutation registerByAdmin($registerAdminInput: RegisterAdminInput!) {
+  registerByAdmin(registerAdminInput: $registerAdminInput) {
     id
     firstName
     lastName
   }
-}
-`;
-
-const REGISTER = gql`
-  mutation register($registerInput: RegisterInput) {
-  register(registerInput: $registerInput){
-    id
-    firstName
-    lastName
-  }}
-`
-
-const FETCH_USERS_QUERY= gql`
-query {
-  getUsers {
-    id
+}`
+const UPDATE_EMPLOYEE_LOCATION = gql`
+mutation UpdateLocation($input: updateInputLocation!) {
+  UpdateLocation(input: $input) {
     firstName
     lastName
     email
-    password
-    createdAt
-    type
     location
   }
-  }
+}
 `
-
 export default function AccountInfoBox(props){
-  const {errors, loading, data} = useQuery(FETCH_USERS_QUERY);
-  const [firstName, setfirstName] =  useContext(firstNameContext);
-  const [lastName, setlastName]=useContext(lastNameContext);;
-  const[email, setEmail] = useContext(usernameContext);
-  const [oldemail, setOldemail] = useContext(usernameContext);
+  const [pressed, setPressed] = useState(false);
   const [userType, setUserType] = useContext(userContext);
-  const [location, setLocation] = useContext(locationContext);
-  const [password, setPassword]= useContext(passwordContext);
-  const [confirmPassword, setConfirmPassword] = useContext(passwordContext);
-
-  const [sendtodatabase] = useMutation(UPDATE_USER);
-  const [register] =useMutation(REGISTER);
-
-  async function updateUser(){
-    sendtodatabase({variables: {input: {oldemail,firstName,lastName,email,password,location},},});
-  }
-  async function registerUser(){
-    register({variables: {registerInput: {firstName, lastName, email, password, confirmPassword },},});
-  }
-
   const [userInfo, setUserInfo] = useState(props.information);
   const [inputsDisabled, setinputsDisabled] = useState(userType !== "None");
   const [btnWhenSignedIn, setbtnWhenSignedIn] = useState("Edit Information");
-  const [newAccountType, setNewAccountType] = useState("Client");
+  const [type, setNewAccountType] = useState("Client");
   const locations = [ 'Gainesville', 'Orlando', 'Miami', 'Tallahassee', 'Tampa'];
 
+
+  const [firstName, setfirstName] =  useState("");
+  const [lastName, setlastName]=useState("");
+  const[email, setEmail] = useState("");
+  const [oldemail, setOldemail] = useState("");
+  const [location, setLocation] = useState("Gainesville");
+  const [password, setPassword]= useState("");
+  const [confirmPassword, setConfirmPassword] =useState("");
+
   const navigate = useNavigate();
+  const [registerbyadmin] = useMutation(REGISTER_BY_ADMIN);
+  const [updateemployee] = useMutation(UPDATE_EMPLOYEE_LOCATION);
+
+  async function registerUser(){
+    props.reload(pressed);
+    registerbyadmin({variables: {registerAdminInput: {firstName, lastName, email, password, confirmPassword, type, location },},});
+  }
+  async function updatelocation(){
+    props.reload(pressed);
+    updateemployee({variables: {input: {email, location}}});
+  }
 
   useEffect(() => {
     setUserInfo(props.information);
@@ -92,7 +77,7 @@ export default function AccountInfoBox(props){
     return inputsDisabled;
   }
 
-  async function handleNewInfo(event, index) {
+  function handleNewInfo(event, index) {
     const updatedInfo = [...userInfo];
     updatedInfo[index] = event.target.value;
     if(index === 0){
@@ -102,45 +87,41 @@ export default function AccountInfoBox(props){
     }else if(index===2){
       setEmail(updatedInfo[2]);
     }else if(index === 3){
-      setPassword(updatedInfo[3]);
-      setConfirmPassword(updatedInfo[3]);
+      setEmail(updatedInfo[3]);
+    }else if(index===4){
+        setPassword(updatedInfo[4]);
+        setConfirmPassword(updatedInfo[4])
     }
-    setUserInfo(u => u =updatedInfo);
+    setUserInfo(u => u = updatedInfo);
   }
 
   function handleLocationChange(newLocation) {
     const updatedInfo = [...userInfo];
     updatedInfo[2] = newLocation;
-    setLocation(newLocation);
-    setUserInfo(u => u =updatedInfo);
+    setLocation(updatedInfo[2])
+    setEmail(updatedInfo[3]);
+    setUserInfo(u => u = updatedInfo);
   }
 
-   async function editMode() {
-    
-    if (btnWhenSignedIn === "Save Changes"){ 
-      window.alert("Changes have been saved");
-      updateUser();
+  function editMode() {
+    if (btnWhenSignedIn === "Save Changes"){
+      setPressed(true);
+      updatelocation();
+      window.alert("Change have been saved");
+      setPressed(false);
+      navigate('/');
     }
     btnWhenSignedIn === "Edit Information" ? setbtnWhenSignedIn(b => "Save Changes") : setbtnWhenSignedIn(b => "Edit Information");
     setinputsDisabled(i => i = !i);
   }
 
   function createNewUser() {
-    let desiredUser = null;
-    for (const user of data.getUsers) {
-      if (user.email === email) {  
-        desiredUser = user;     
-      }
-    }
-    if(!desiredUser){
-      window.alert(`New ${newAccountType} has been created`);
-      registerUser();
-      setUserType(u => u = newAccountType);
-      navigate('/');
-    }else{
-      window.alert("Email already in use");
-    }
-    
+    window.alert(`New ${type} has been created`);
+    //Create new employee account
+    setPressed(true);
+    registerUser()
+    setPressed(false);
+    navigate('/');
   }
 
   return (
@@ -168,11 +149,11 @@ export default function AccountInfoBox(props){
             {(userType === "Admin" && props.use==="Create New") ? 
             <>
               <div className={styles.btnandLabel}>
-                <input type="radio" value="Employee" checked={newAccountType === "Employee"} onChange={(event) => setNewAccountType(a => a = event.target.value)}/>
+                <input type="radio" value="Employee" checked={type === "Employee"} onChange={(event) => setNewAccountType(a => a = event.target.value)}/>
                 <p>This is an Employee Account</p>
               </div>
               <div className={styles.btnandLabel}>
-                <input type="radio" value="Admin" checked={newAccountType === "Admin"} onChange={(event) => setNewAccountType(a => a = event.target.value)}/>
+                <input type="radio" value="Admin" checked={type === "Admin"} onChange={(event) => setNewAccountType(a => a = event.target.value)}/>
                   <p>This is an Admin Account</p>
               </div>
               

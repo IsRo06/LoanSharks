@@ -50,11 +50,19 @@ export default function Reservations(){
     setUserType(desiredUser.type);
     setLocation(desiredUser.location);
     setPassword(desiredUser.password);
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 73fc2a44cf0c907f17a69bb2ceeddd63c7070647
   }
 
   const navigate = useNavigate();
 
+<<<<<<< HEAD
   function fetch_cars(){
+=======
+  function fecth_cars(){
+>>>>>>> 73fc2a44cf0c907f17a69bb2ceeddd63c7070647
     const tempCars = [];
     if(data && data.getCars){
       for (let i = 0; i < data.getCars.length; i++) {
@@ -101,7 +109,11 @@ export default function Reservations(){
   };
 
   function getReservations(){
+<<<<<<< HEAD
     return fetch_cars();
+=======
+    return fecth_cars();
+>>>>>>> 73fc2a44cf0c907f17a69bb2ceeddd63c7070647
   }
 
   return(
@@ -131,6 +143,10 @@ export default function Reservations(){
       </div>
 
       <Footer/>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 73fc2a44cf0c907f17a69bb2ceeddd63c7070647
       <SigninPopup trigger={signinTriggered} setTrigger={setsigninTriggered} typeOfUser={setUserType} location={setLocation} sendData={sendData}></SigninPopup>
     </>
   )

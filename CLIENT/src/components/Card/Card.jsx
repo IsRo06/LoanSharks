@@ -1,8 +1,10 @@
 import React, {useState, useContext, useEffect, useRef} from 'react'
 import { userContext, locationContext, usernameContext, firstNameContext, lastNameContext, passwordContext } from "../../App";
+import { userContext, locationContext, usernameContext, firstNameContext, lastNameContext, passwordContext } from "../../App";
 import styles from './Card.module.css'
 import SigninPopup from '../SigninPopup/SigninPopup';
 import CheckoutPopup from '../CheckoutPopup/CheckoutPopup';
+
 
 export default function Card(props){  
   const [firstName, setfirstName] =  useContext(firstNameContext);
@@ -10,9 +12,17 @@ export default function Card(props){
   const [username, setUsername] = useContext(usernameContext);
   const [password, setPassword] = useContext(passwordContext);
 
+  
+  const [firstName, setfirstName] =  useContext(firstNameContext);
+  const [lastName, setlastName]=useContext(lastNameContext);;
+  const[username, setUsername] = useContext(usernameContext);
+  const [password, setPassword] = useContext(passwordContext);
+
+
   const [userType, setUserType] = useContext(userContext);
   const userTypeRef = useRef(userType)
   const [location, setLocation] = useContext(locationContext);
+
 
   function sendData({desiredUser}) {
     setfirstName(desiredUser.firstName);
@@ -21,6 +31,7 @@ export default function Card(props){
     setUserType(desiredUser.type);
     setLocation(desiredUser.location);
     setPassword(desiredUser.password);
+    
   }
 
   const [signinTriggered, setsigninTriggered] = useState(false);
@@ -60,6 +71,7 @@ export default function Card(props){
     <>
       <div className={styles.card}>
         <img className={styles.cardImage} src={props.carObject.carIMGstring} alt="profile picture" />
+        <img className={styles.cardImage} src={props.carObject.carIMGstring} alt="profile picture" />
         <div id={styles.textWrapper}>
           <div id={styles.title}>
             <div id={styles.topRow}>
@@ -92,7 +104,7 @@ export default function Card(props){
           
         </div>
       </div>
-      <SigninPopup trigger={signinTriggered} setTrigger={setsigninTriggered} typeOfUser={setUserType} location={setLocation} sendData={sendData}></SigninPopup>
+      <SigninPopup trigger={signinTriggered} setTrigger={setsigninTriggered} typeOfUser={setUserType} location={setLocation} sendData={sendData} sendData={sendData}></SigninPopup>
       <CheckoutPopup trigger={reservationTriggered} setTrigger={setreservationTriggered} car={selectedCar}/>
     </>
     

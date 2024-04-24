@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@types/bcryptjs": "^2.4.6",
     "apollo-server": "^3.13.0",
+    "aws-sdk": "^2.1603.0",
     "bcrypt": "*",
     "bcryptjs": "^2.4.3",
     "graphql": "^16.8.1",

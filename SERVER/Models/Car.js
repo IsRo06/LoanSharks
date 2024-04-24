@@ -2,6 +2,7 @@ const {model, Schema} =  require('mongoose');
 
 const carSchema = new Schema({
     carMake: String,
+    carEmail: String,
     carModel: String,
     carColor: String,
     carMileage: Number,
@@ -14,7 +15,7 @@ const carSchema = new Schema({
     carStatus: String,
     carReservations: [Number],
     carIMGstring: String,
-    carKey: String
+
 });
 
 

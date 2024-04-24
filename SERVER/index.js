@@ -33,34 +33,6 @@ const server = new ApolloServer({
 });
 
 
-// const imageFile = fs.readFileSync('../CLIENT/src/images/redhondacivic.jpg');
-// (async () => {
-//   await s3
-//     .putObject({
-//       Body: imageFile,
-//       Bucket: "lseimages",
-//       Key: "31",
-//       ContentType: "image/jpeg"
-//     }).promise();
-// })();
-
-
-// function uploadImageToS3(imageFile) {
-//   const params = {
-//     Bucket: 'your-bucket-name', // Replace with your S3 bucket name
-//     Key: 'image.jpg', // Specify the key (filename) for the image in the bucket
-//     Body: imageFile, // Pass the image file data
-//     ContentType: 'image/jpeg' // Adjust the content type as needed
-//   };
-
-//   s3.putObject(params, (err, data) => {
-//     if (err) {
-//       console.error('Error uploading image to S3:', err);
-//     } else {
-//       console.log('Successfully uploaded image to S3:', data);
-//     }
-//   });
-// }
 
 mongoose
   .connect(MONGODB, { useNewUrlParser: true })
