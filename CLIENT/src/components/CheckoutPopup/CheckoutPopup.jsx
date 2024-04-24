@@ -1,18 +1,35 @@
 import React from 'react'
 import {useContext} from 'react'
-import { locationContext, rentalRangeContext } from '../../App';
+import { locationContext, rentalRangeContext, usernameContext } from '../../App';
 import styles from './CheckoutPopup.module.css'
 import { useNavigate } from 'react-router-dom';
+import { gql, useQuery, useMutation } from '@apollo/client';
+
+const UPDATE_RESERVATION = gql`
+  mutation UpdateCarRegistration($registrationInput: updateCarRegistrationInput!) {
+  UpdateCarRegistration(registrationInput: $registrationInput) {
+    id
+  }
+}
+`
 
 
 export default function CheckoutPopup(props){
+  const [updateres] = useMutation(UPDATE_RESERVATION);
   const [location, setLocation] = useContext(locationContext);
   const [rentalRange, setRentalRange] = useContext(rentalRangeContext);
+  const [email, setEmail ] =useContext(usernameContext)
   const navigate = useNavigate();
 
+  function update(){
+    var car_id = props.car.id;
+    var reservations = rentalRange;
+    updateres({variables: {registrationInput: {car_id, email, reservations} }});
+  }
 
   function handleConfirmedReservation() {
     props.setTrigger(false);
+    update();
     window.alert("Your Reservation has been confirmed!");
     navigate('/');
 

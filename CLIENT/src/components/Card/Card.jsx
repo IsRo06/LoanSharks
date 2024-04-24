@@ -5,7 +5,9 @@ import PropTypes from 'prop-types'
 import SigninPopup from '../SigninPopup/SigninPopup';
 import CheckoutPopup from '../CheckoutPopup/CheckoutPopup';
 
+
 export default function Card(props){  
+  
   const [firstName, setfirstName] =  useContext(firstNameContext);
   const [lastName, setlastName]=useContext(lastNameContext);;
   const[username, setUsername] = useContext(usernameContext);

@@ -1,11 +1,40 @@
 import React, {useState, useEffect} from 'react';
 import styles from './CarInfoBox.module.css'
 import Dropdown from '../Dropdowns/Dropdowns';
+import { gql, useQuery, useMutation } from '@apollo/client';
+
+const UPDATE_CAR = gql`
+  mutation UpdateCarInfo($carInput: updateCarInput!) {
+  UpdateCarInfo(carInput: $carInput) {
+    id
+    carMake
+    carModel
+    carColor
+  }
+}
+`;
 
 export default function CarInfoBox(props){
+  const [pressed, setPressed] = useState(false);
+  const [sendtodatabase] = useMutation(UPDATE_CAR);
   const [carInfo, setCarInfo] = useState(props.information);
   const [inputsDisabled, setinputsDisabled] = useState(true);
   const [editSaveBtn, setseditSaveBtn] = useState("Edit Car");
+
+
+
+  const [status, setStatus] = useState(props.information.status);
+  const [maxmilesperday, setMaxMilesPerDay]= useState(0);
+  const [milecostaftermax, setMilesCostAfterMax]= useState(0);
+  const [costperday, setCostPerDay] =useState(0);
+  const [id] =useState(props.information.id);
+
+
+  async function updatecar(){
+    sendtodatabase({variables: { carInput: {id, maxmilesperday, milecostaftermax, costperday, status}}});
+    props.reload(pressed);
+
+  }
 
   useEffect(() => {
     setCarInfo(props.information);
@@ -24,6 +53,9 @@ export default function CarInfoBox(props){
 
   function editMode() {
     if (editSaveBtn === "Save Changes"){
+      setPressed(true);
+      updatecar();
+      setPressed(false);
       window.alert("Change have been saved");
     }
 
@@ -34,12 +66,20 @@ export default function CarInfoBox(props){
   function handleNewInfo(event, key) {
     const updatedInfo = {...carInfo};
     updatedInfo[key] = event.target.value;
+    if(key === "maxMilesPerDay"){
+      setMaxMilesPerDay(parseInt(updatedInfo[key]));
+    }else if(key === "carMileCostAfterMax"){
+      setMilesCostAfterMax(parseInt(updatedInfo[key]))
+    }else if(key === "carCostPerDay"){
+      setCostPerDay(parseInt(updatedInfo[key]))
+    }
     setCarInfo(c => c = updatedInfo);
   }
 
   function handleStatusChange(newStatus) {
     const updatedInfo = {...carInfo};
     updatedInfo.status =  newStatus;
+    setStatus(newStatus);
     setCarInfo(c => c = updatedInfo);
   }
 
@@ -62,7 +102,7 @@ export default function CarInfoBox(props){
                 }
                 {key === "status" ? 
                   <div id={styles.dropDown}>
-                      <Dropdown type="Car Status" name={carInfo[key]} options={["Avaliable", "In repair", "Out"]} arrow="↓" disabled={determineIsDisabled(key)} statusChanged={handleStatusChange}/>
+                      <Dropdown type="Car Status" name={carInfo[key]} options={["Available", "In repair", "Out"]} arrow="↓" disabled={determineIsDisabled(key)} statusChanged={handleStatusChange}/>
                   </div>
                   : ""
                 } 

@@ -3,6 +3,7 @@ const {gql} = require('apollo-server');
 module.exports=gql`
     type Car{
         id: ID!
+        carEmail: String!
         carMake: String!
         carModel: String!
         carColor: String!
@@ -42,6 +43,8 @@ module.exports=gql`
         IMGstring: String!
         ): Car!
         deleteCar(car_id: ID!): [Car]!
+        UpdateCarInfo(carInput: updateCarInput!): Car
+        UpdateCarRegistration(registrationInput: updateCarRegistrationInput! ): Car
         register(registerInput: RegisterInput): User
         registerByAdmin(registerAdminInput: RegisterAdminInput): User,
         login(username: String, password: String): User
@@ -49,7 +52,18 @@ module.exports=gql`
         UpdateLocation(input: updateInputLocation!): User
 
     }
-
+    input updateCarRegistrationInput{
+        car_id: ID!
+        email: String!
+        reservations:[Int]!
+    }
+    input updateCarInput{
+        id: ID!
+        maxmilesperday: Int!
+        milecostaftermax: Int!
+        costperday: Float!
+        status: String!
+    }
     input updateInputLocation{
         email: String!
         location: String!

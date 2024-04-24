@@ -5,16 +5,75 @@ import styles from "./Reservations.module.css"
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import SigninPopup from "../components/SigninPopup/SigninPopup";
+import { gql, useQuery, useMutation } from '@apollo/client';
 
-import { userContext, locationContext } from "../App";
+import { userContext, locationContext, usernameContext, firstNameContext, lastNameContext, passwordContext } from "../App";
+
+const FETCH_CAR_QUERY= gql`
+query {
+  getCars {
+    id
+    carMake
+    carModel
+    carColor
+    carMileage
+    carYear
+    carType
+    carMaxMilesPerDay
+    carMileCostAfterMax
+    carCostPerDay
+    carLocation
+    carStatus
+    carReservations
+    carIMGstring
+  }
+  }
+`
 
 export default function Reservations(){
+  const {loading, error, data, refetch} = useQuery(FETCH_CAR_QUERY);
   const [userType, setUserType] = useContext(userContext);
   const userTypeRef = useRef(userType)
   const [location, setLocation] = useContext(locationContext);
   const [signinTriggered, setsigninTriggered] = useState(false);
 
+
+  const [firstName, setfirstName] =  useContext(firstNameContext);
+  const [lastName, setlastName]=useContext(lastNameContext);;
+  const[username, setUsername] = useContext(usernameContext);
+  const [password, setPassword] = useContext(passwordContext);
+
+  function sendData({desiredUser}) {
+    setfirstName(desiredUser.firstName);
+    setlastName(desiredUser.lastName);
+    setUsername(desiredUser.email);
+    setUserType(desiredUser.type);
+    setLocation(desiredUser.location);
+    setPassword(desiredUser.password);
+    
+  }
+
   const navigate = useNavigate();
+
+  function fecth_cars(){
+    const tempCars = [];
+    if(data && data.getCars){
+      for (let i = 0; i < data.getCars.length; i++) {
+        if(data.getCars[i].carReservations[0] !== 0 && data.getCars[i].carLocation === location){
+          tempCars.push({
+            year: data.getCars[i].carYear,
+            make: data.getCars[i].carMake,
+            model: data.getCars[i].carModel,
+            email: data.getCars[i].carEmail,
+            range: data.getCars[i].carReservations
+          });
+        }
+        
+      }
+    }
+    return tempCars;
+
+  }
 
   useEffect(() => {
     userTypeRef.current = userType
@@ -43,29 +102,7 @@ export default function Reservations(){
   };
 
   function getReservations(){
-    return [
-      {
-        year: 2016,
-        make: "Toyota",
-        model: "Corolla", 
-        email: "bobsmith@gmail.com",
-        range: [1, 31, 2, 15]
-      },
-      {
-        year: 2012,
-        make: "Honda",
-        model: "Civic", 
-        email: "andrewlawson@gmail.com",
-        range: [2, 2, 2, 4]
-      },
-      {
-        year: 2020,
-        make: "Ford",
-        model: "F150", 
-        email: "jessiegraham@gmail.com",
-        range: [3, 1, 3, 15]
-      }
-    ];
+    return fecth_cars();
   }
 
   return(
@@ -97,7 +134,7 @@ export default function Reservations(){
 
       <Footer/>
 
-      <SigninPopup trigger={signinTriggered} setTrigger={setsigninTriggered} typeOfUser={setUserType} location={setLocation}></SigninPopup>
+      <SigninPopup trigger={signinTriggered} setTrigger={setsigninTriggered} typeOfUser={setUserType} location={setLocation} sendData={sendData}></SigninPopup>
     </>
   )
 }
