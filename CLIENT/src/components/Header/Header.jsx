@@ -21,7 +21,6 @@ export default function Header(){
     setUserType(desiredUser.type);
     setLocation(desiredUser.location);
     setPassword(desiredUser.password);
-    
   }
 
   const [popupTriggered, setpopupTriggered] = useState(false);
@@ -45,14 +44,8 @@ export default function Header(){
       </div>
       <div id={styles.rightSide}>
         <Link to="/help" className={styles.link}><div className={styles.bannerText}>Help</div></Link>
-
-
-
         <Link to="/offers" className={styles.link}><div className={styles.bannerText}>Offers</div></Link>
         <Link to="/locations" className={styles.link}><div className={styles.bannerText}>Locations</div></Link>
-        {/* <div className={styles.bannerText}>Locations</div> */}
-
-
 
         {userType === "None"? 
           <div className={styles.bannerText} onClick={() => setpopupTriggered(t => t = true)}>Sign in</div>

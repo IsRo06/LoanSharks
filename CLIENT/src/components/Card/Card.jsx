@@ -62,7 +62,6 @@ export default function Card(props){
     <>
       <div className={styles.card}>
         <img className={styles.cardImage} src={props.carObject.carIMGstring} alt="profile picture" />
-        <img className={styles.cardImage} src={props.carObject.carIMGstring} alt="profile picture" />
         <div id={styles.textWrapper}>
           <div id={styles.title}>
             <div id={styles.topRow}>
