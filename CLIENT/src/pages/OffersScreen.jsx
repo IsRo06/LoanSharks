@@ -9,8 +9,6 @@ import vanImage from '../images/van.jpg'
 
 
 export default function OffersScreen(){
-
-
     return(
         <div id={styles.screen}>
             <Header></Header>
