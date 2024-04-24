@@ -1,26 +1,52 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import styles from './Dropdowns.module.css'
 
 export default function Dropdown(props) {
-  const [picked, setPicked] = useState(props.name)
+  const [displayedOption, setdisplayedOption] = useState(props.name)
   const [display, setDisplay] = useState('none');
   const [arrow, setArrow] = useState(props.arrow);
 
+  useEffect(() => {
+    setdisplayedOption(props.name);
+  }, [props.name]);
+
   function handleDisplay() {
-    display === 'none'? setDisplay(d => d = 'block') : setDisplay(d => d ='none');
-    arrow === '↓'? setArrow(a => a = '↑') : setArrow(a => a = '↓');
+    if (!props.disabled) {
+      display === 'none'? setDisplay(d => d = 'block') : setDisplay(d => d ='none');
+      arrow === '↓'? setArrow(a => a = '↑') : setArrow(a => a = '↓');
+    }
   }
 
   function handlePicked(selectedOption) {
-    setPicked(prevPicked => prevPicked = selectedOption);
+    setdisplayedOption(prevDisplayedOption => prevDisplayedOption = selectedOption);
     setDisplay('none');
     setArrow('↓');
+    if (props.type === "Location") {
+      props.locationPicked(selectedOption);
+    }
+
+    if (props.name === "Pick-up Time") {
+      let updatedRentalRange = [...props.range];
+      updatedRentalRange[0] = selectedOption;
+
+      props.setTime(updatedRentalRange);
+    }
+    else if (props.name === "Drop-off Time") {
+      let updatedRentalRange = [...props.range];
+      updatedRentalRange[1] = selectedOption;
+  
+      props.setTime(updatedRentalRange);
+    }
+
+    else if (props.type === "Car Status") {
+      props.statusChanged(selectedOption);
+    }
   }
 
   return (
       <>
         <div id={styles.top} onClick={handleDisplay}>
-            <p>{picked}</p>
+            <p>{displayedOption}</p>
             <div>{arrow}</div>
         </div>
         <div id={styles.optionsContainer} style={{display: display}}>

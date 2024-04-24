@@ -1,4 +1,5 @@
 const Car = require("../../Models/Car");
+// const fs = require('fs');
 
 module.exports ={
     Query: {
@@ -25,7 +26,7 @@ module.exports ={
         }
     },
     Mutation: {
-        async createCar(_, {make, model, color, year, mileage, type, maxmilesperday, milecostaftermax, costperday, location, status, reservations}){
+        async createCar(_, {make, model, color, year, mileage, type, maxmilesperday, milecostaftermax, costperday, location, status, reservations, IMGstring}){
             const newCar =  new Car({
                 carMake: make,
                 carModel: model,
@@ -38,7 +39,8 @@ module.exports ={
                 carCostPerDay: costperday,
                 carLocation: location,
                 carStatus: status,
-                carReservations: reservations
+                carReservations: reservations,
+                carIMGstring: IMGstring
 
             });
             await newCar.save();
@@ -57,6 +59,40 @@ module.exports ={
                 console.log(err);
             }
 
+        },
+
+
+        async UpdateCarInfo(_,{carInput: {id, maxmilesperday, milecostaftermax, costperday, status}}){
+            try{
+                var car = await Car.findById(id);
+                if(car){
+                    car.carMaxMilesPerDay= maxmilesperday
+                    car.carMileCostAfterMax= milecostaftermax
+                    car.carCostPerDay= costperday
+                    car.carStatus= status
+                    car.save();
+                    return car;
+                }else{
+                    console.log("Cannot run mutation")
+                }
+            }catch(err){
+               console.log(err)
+            }
+        },
+        async UpdateCarRegistration(_, {registrationInput: {car_id, email, reservations} }){
+            try{
+                var car = await Car.findById(car_id);
+                if(car){
+                    car.carEmail = email;
+                    car.carReservations= reservations
+                    car.save();
+                    return car;
+                }else{
+                    console.log("Cannot run mutation")
+                }
+            }catch(err){
+               console.log(err)
+            }
         }
     }
 };

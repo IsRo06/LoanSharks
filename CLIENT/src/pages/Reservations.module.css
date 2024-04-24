@@ -1,0 +1,64 @@
+#content {
+  background-color :hsl(194, 63%, 60%);
+  width: 100%;
+  min-height: 75vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#reservationBox {
+  margin: 120px 0 20px 0;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  min-height: 400px;
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: white;
+}
+
+#reservationBox h4 {
+  font-size: 30px;
+  margin: 20px 20px 10px 20px;
+}
+
+#location {
+  font-size: 18px;
+  margin: 0 20px;
+  border-bottom: 1px solid black;
+}
+
+.reservations {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 15px 40px;
+  font-size: 18px;
+}
+
+.carAndDate {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#reservationBtn {
+  align-self: last baseline;
+  margin-top: 30px;
+  margin-right: 40px;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: hsl(194, 63%, 60%);
+  border: none;
+  border-radius: 10px;
+  height: 50px;
+  width: 120px;
+  transition: background-color .15s;
+}
+
+#reservationBtn:hover {
+  cursor: pointer;
+  background-color: hsl(194, 63%, 50%)
+}
