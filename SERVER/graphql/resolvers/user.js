@@ -9,7 +9,6 @@ function generateToken(user){
     return jwt.sign({
         id: user.id,
         email: user.email,
-        username: user.username
 
     }, SECRET_KEY, {expiresIn: '1h'});
 }
@@ -61,7 +60,8 @@ module.exports = {
     },
     Mutation: {
         async login(_, {username, password}){
-            
+            username = username.toLowerCase();
+
             const {errors, valid} = validateLoginInput(username, password);
             
             if(!valid){
@@ -82,7 +82,7 @@ module.exports = {
             }
             
             const token = generateToken(user);
-            //console.log("dieidiied");
+
             return{
                 ...user._doc,
                 id:user._id,
@@ -100,8 +100,20 @@ module.exports = {
             if(!valid){
                 throw new UserInputError('Errors', {errors});
             }
-
-            
+            const isUsernameDuplicate = await User.findOne({
+                email,
+              });
+        
+              if (isUsernameDuplicate) {
+                errors.general = "An account with that email already exists.";
+              }
+              const isEmailDuplicate = await User.findOne({
+                email,
+              });
+        
+              if (isEmailDuplicate) {
+                errors.general = "An account with that e-mail already exists.";
+              }
             password = await bcrypt.hash(password, 12);
 
             const newUser = new User({
@@ -111,7 +123,8 @@ module.exports = {
                 password,
                 createdAt: new Date().toISOString(),
                 type: "Client",
-                location: "Gainesvile"
+                location: "Gainesville",
+                token: ""
             });
 
             const res = await newUser.save();
@@ -168,6 +181,7 @@ module.exports = {
             try{
                 const user = await User.findOne({email: oldemail,});
                 if(user){
+                    password = await bcrypt.hash(password, 12);
                     user.firstName = firstName;
                     user.lastName = lastName;
                     user.email = email;

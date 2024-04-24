@@ -9,6 +9,7 @@ import Reservations from "./pages/Reservations.jsx";
 import HelpPage from "./pages/HelpPage.jsx";
 import LocationsScreen from "./pages/LocationsScreen.jsx";
 import OffersScreen from "./pages/OffersScreen.jsx";
+import {AuthProvider} from "./context/auth.js"
 
 
 export const usernameContext = React.createContext();
@@ -20,6 +21,9 @@ export const locationContext = React.createContext();
 export const rentalRangeContext = React.createContext();
 
 export default function App() {
+
+
+
   const [userType, setUserType] = useState("None");
   const [username, setUsername] = useState("");
   const [firstName, setfirstName] =  useState("");
@@ -42,6 +46,7 @@ export default function App() {
 
 
   return(
+    <AuthProvider>
     <userContext.Provider value={[userType, setUserType]}>
       <usernameContext.Provider value={[username, setUsername]}>
       <firstNameContext.Provider value={[firstName, setfirstName]}>
@@ -51,6 +56,7 @@ export default function App() {
         <rentalRangeContext.Provider value={[rentalRange, setRentalRange]}>
           <BrowserRouter>
             <Routes>
+              
               <Route path="/">
                 <Route index element={<HomeScreen/>} />
                 <Route path="cars" element={<CarsScreen />} />
@@ -63,6 +69,7 @@ export default function App() {
                 <Route path="offers" element={<OffersScreen/>} />
 
                 {/* <Route path="*" element={<NoPage />} /> */}
+                
               </Route>
             </Routes>
           </BrowserRouter>
@@ -73,6 +80,7 @@ export default function App() {
       </firstNameContext.Provider>
       </usernameContext.Provider>
     </userContext.Provider>
+    </AuthProvider>
 
     
   )

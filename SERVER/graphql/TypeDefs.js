@@ -80,9 +80,10 @@ module.exports=gql`
     input RegisterInput{
         firstName: String!
         lastName: String!
+        email: String!
         password: String!
         confirmPassword: String!
-        email: String!
+        
     }
 
     input UpdateInput{
@@ -102,6 +103,7 @@ module.exports=gql`
         createdAt: String!
         type: String!
         location: String
+        token: String!
 
     }
     

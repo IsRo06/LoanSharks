@@ -4,7 +4,8 @@ import styles from './AccountInfoBox.module.css'
 import { firstNameContext, userContext, usernameContext, lastNameContext, locationContext, passwordContext } from '../../App';
 import Dropdown from '../Dropdowns/Dropdowns';
 import { useNavigate } from 'react-router-dom';
-import { useMutation, gql } from '@apollo/client';
+import { useMutation, gql, useQuery } from '@apollo/client';
+const bcrypt = require("bcryptjs");
 
 const UPDATE_USER = gql`
   mutation UpdateInfo($input: UpdateInput!) {
@@ -25,8 +26,23 @@ const REGISTER = gql`
   }}
 `
 
+const FETCH_USERS_QUERY= gql`
+query {
+  getUsers {
+    id
+    firstName
+    lastName
+    email
+    password
+    createdAt
+    type
+    location
+  }
+  }
+`
+
 export default function AccountInfoBox(props){
-  
+  const {errors, loading, data} = useQuery(FETCH_USERS_QUERY);
   const [firstName, setfirstName] =  useContext(firstNameContext);
   const [lastName, setlastName]=useContext(lastNameContext);;
   const[email, setEmail] = useContext(usernameContext);
@@ -76,7 +92,7 @@ export default function AccountInfoBox(props){
     return inputsDisabled;
   }
 
-  function handleNewInfo(event, index) {
+  async function handleNewInfo(event, index) {
     const updatedInfo = [...userInfo];
     updatedInfo[index] = event.target.value;
     if(index === 0){
@@ -89,21 +105,19 @@ export default function AccountInfoBox(props){
       setPassword(updatedInfo[3]);
       setConfirmPassword(updatedInfo[3]);
     }
-    setUserInfo(u => u = updatedInfo);
+    setUserInfo(u => u =updatedInfo);
   }
 
   function handleLocationChange(newLocation) {
     const updatedInfo = [...userInfo];
     updatedInfo[2] = newLocation;
     setLocation(newLocation);
-    setUserInfo(u => u = updatedInfo);
+    setUserInfo(u => u =updatedInfo);
   }
 
    async function editMode() {
     
-    if (btnWhenSignedIn === "Save Changes"){
-      //call mutation here :D
-      //eventually figure out hashing the password bc oml   
+    if (btnWhenSignedIn === "Save Changes"){ 
       window.alert("Changes have been saved");
       updateUser();
     }
@@ -112,10 +126,21 @@ export default function AccountInfoBox(props){
   }
 
   function createNewUser() {
-    window.alert(`New ${newAccountType} has been created`);
-    registerUser();
-    setUserType(u => u = newAccountType);
-    navigate('/');
+    let desiredUser = null;
+    for (const user of data.getUsers) {
+      if (user.email === email) {  
+        desiredUser = user;     
+      }
+    }
+    if(!desiredUser){
+      window.alert(`New ${newAccountType} has been created`);
+      registerUser();
+      setUserType(u => u = newAccountType);
+      navigate('/');
+    }else{
+      window.alert("Email already in use");
+    }
+    
   }
 
   return (

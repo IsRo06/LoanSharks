@@ -1,8 +1,11 @@
-import React from 'react'
-import {useState} from 'react'
+import React, { useContext, useState } from 'react';
 import { Link } from "react-router-dom";
 import styles from './SigninPopup.module.css'
 import { gql, useQuery } from '@apollo/client';
+import { AuthContext } from '../../context/auth';
+import { useMutation } from '@apollo/client';
+const bcrypt = require("bcryptjs");
+
 
 const FETCH_USERS_QUERY= gql`
 query {
@@ -12,16 +15,31 @@ query {
     lastName
     email
     password
+    createdAt
     type
     location
   }
   }
 `
+
+const LOGIN_USER = gql`
+  mutation login($username: String!, $password: String!) {
+    login(username: $username, password: $password) {
+      id
+      email
+      username
+      createdAt
+    }
+  }
+`;
+
 export default function SigninPopup(props){
+  const {errors, loading, data} = useQuery(FETCH_USERS_QUERY);
   const [email, setEmail] = useState("");
+  const context = useContext(AuthContext);
   const [password, setPassword] = useState("");
-  const {loading, error, data} = useQuery(FETCH_USERS_QUERY);
- 
+  const [username, setUsername] = useState("");
+  const [error, setErrors] = useState("");
 
   function emailFill(event){
     setEmail(event.target.value)
@@ -36,27 +54,34 @@ export default function SigninPopup(props){
   }
 
   
+  
   let desiredUser = null;
 
-  function signin(event){
-    const desiredEmail = email; 
+  async function signin(event){
     for (const user of data.getUsers) {
-      if (user.email === email) {
-        desiredUser = user;
-        break; 
+      if (user.email === email) {  
+        desiredUser = user;     
       }
     }
-  
-    if (!desiredUser) return <p>No user found with email {desiredEmail}</p>;
-    
-    props.sendData({desiredUser});
-    props.typeOfUser(desiredUser.type);
-    props.location(desiredUser.location);
-    props.setTrigger(false);
+    //after here we either found the username or didn't
+    if(!desiredUser){
+      window.alert("Email does not exist!");
+    }else{
+        const login = await bcrypt.compare(password, desiredUser.password)
+        if(login){
+          setUsername(email);
+          props.sendData({desiredUser});
+          props.typeOfUser(desiredUser.type);
+          props.location(desiredUser.location);
+          props.setTrigger(false);
+        }else{
+          window.alert("Incorrect password! Try again");
+        }
+      } 
   }
   
   if (loading) return null;
-  if (error) return `${error}`;
+ /* if (error) return `${error}`;*/
 
   return(props.trigger) ? (
     <div id={styles.background}>
