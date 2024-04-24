@@ -1,0 +1,38 @@
+.card {
+  border: 1px solid black;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px hsla(0, 0%, 0%, 0.1);
+  padding: 20px;
+  margin-top: 10px;
+  width: 750px;
+  height: 150px;
+  display: block;
+  margin-left: 50%;
+  margin-bottom: 10px;
+}
+
+.cardImage {
+  max-height: 100%;
+  object-fit: contain;
+  display: inline-block;
+}
+
+.cardTitle {
+  font-size: 24px;
+  line-height: 24px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: hsl(0, 0%, 20%);
+  display: block;
+}
+
+.cardText {
+  font-family: Arial, Helvetica, sans-serif;
+  color: hsl(0, 0%, 30%);
+  display: block;
+}
+
+.textWrapper {
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 10px;
+}

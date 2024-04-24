@@ -1,13 +1,13 @@
 import React, {useState} from 'react'
 import { Link } from "react-router-dom";
-import styles from './SearchBox.module.css'
+import styles from './SearchBoxSaved.module.css'
 import Dropdown from '../Dropdowns/Dropdowns.jsx';
 import OurCalendar from '../Calendar/Calendar.jsx';
 import calandarIcon from '../../images/calandar-icon.jpg';
 import clockIcon  from '../../images/clock-icon.jpg';
 import locationIcon from '../../images/location-icon.jpg';
 
-export default function SearchBox(){
+export default function SearchBoxSaved(){
   const locations = [ 'Gainesville', 'Orlando', 'Miami', 'Tallahassee', 'Tampa'];
   const times = ['12:00AM', '1:00AM', '2:00AM', '3:00AM', '4:00AM', '5:00AM', '6:00AM', '7:00AM', 
                 '8:00AM', '9:00AM', '10:00AM', '11:00AM', '12:00PM', '1:00PM', '2:00PM', '3:00PM', 
@@ -20,11 +20,10 @@ export default function SearchBox(){
   const [dropoffTime, setdropoffTime] = useState("");
 
   return(
-    <div id={styles.searchBox}>
-      <h4>Find a Vehicle</h4>
+    <div id={styles.searchBoxSaved}>
       <div id={styles.pickUpLocation}>
         <img src={locationIcon} alt=""/>
-        <div className={styles.searchBoxText}>
+        <div className={styles.searchBoxSavedText}>
           <label>Pick-up</label>
           <div className={styles.dropDown} style={{zIndex: 50}}>
             <Dropdown name="Pick-up Location" options={locations} arrow="↓"/>
@@ -32,20 +31,30 @@ export default function SearchBox(){
         </div>
       </div>
 
+      <div id={styles.pickUpLocation}>
+        <img src={locationIcon} alt=""/>
+        <div className={styles.searchBoxSavedText}>
+          <label>Pick-up</label>
+          <div className={styles.dropDown} style={{zIndex: 50}}>
+            <Dropdown name="Pick-up Location" options={locations} arrow="↓"/>
+          </div>
+        </div>
+      </div>
+      
       <div id={styles.dateAndTime}>
         <div className={styles.dateAndTimeContainer}>
           <img src={calandarIcon} alt=""/>
-          <div className={styles.searchBoxText}>
+          <div className={styles.searchBoxSavedText}>
             <label>Pick-up Date</label>
             <div className={styles.calendar} style={{zIndex:40}}>
               <OurCalendar name="Pick-up Date" arrow="↓"/>
             </div>
           </div>
         </div>
-
+        
         <div className={styles.dateAndTimeContainer}>
           <img src={clockIcon} alt=""/>
-          <div className={styles.searchBoxText}>
+          <div className={styles.searchBoxSavedText}>
             <label>Pick-up Time</label>
             <div className={styles.dropDown} style={{zIndex:30}}>
               <Dropdown name="Pick-up Time" options={times} arrow="↓"/>
@@ -55,7 +64,7 @@ export default function SearchBox(){
 
         <div className={styles.dateAndTimeContainer}>
           <img src={calandarIcon} alt=""/>
-          <div className={styles.searchBoxText}>
+          <div className={styles.searchBoxSavedText}>
             <label>Drop-off Date</label>
             <div className={styles.calendar} style={{zIndex:20}}>
               <OurCalendar name="Drop-off Date" arrow="↓"/>
@@ -65,7 +74,7 @@ export default function SearchBox(){
 
         <div className={styles.dateAndTimeContainer}>
           <img src={clockIcon} alt=""/>
-          <div className={styles.searchBoxText}>
+          <div className={styles.searchBoxSavedText}>
             <label>Drop-off Time</label>
             <div className={styles.dropDown} style={{zIndex:10}}>
               <Dropdown name="Drop-off Time" options={times} arrow="↓"/>

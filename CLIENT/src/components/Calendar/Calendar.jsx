@@ -8,8 +8,7 @@ export default function OurCalendar(props) {
                   {number: 4, name: 'May'}, {number: 5, name: 'June'},
                   {number: 6, name: 'July'}, {number: 7, name: 'August'},
                   {number: 8, name: 'September'}, {number: 9, name: 'October'},
-                  {number: 10, name: 'November'}, {number: 11, name: 'December'}
-                  ]
+                  {number: 10, name: 'November'}, {number: 11, name: 'December'}]
 
   const [date, setDate] = useState(new Date());
   const [displayedDate, setdisplayedDate] = useState(props.name);
@@ -33,13 +32,14 @@ export default function OurCalendar(props) {
     const dateInWords = `${month} ${date.getDate()}, ${date.getFullYear()}`
     setdisplayedDate(prevdisplayedDate => prevdisplayedDate = dateInWords);
     setDisplay('none');
+    setArrow('↓');
   }
 
   return ( 
     <>
-      <div id="top">
+      <div id="top" onClick={handleDisplay}>
         <p>{displayedDate}</p>
-        <div id="arrow" onClick={handleDisplay}>{arrow}</div>
+        <div>{arrow}</div>
       </div>
       <div id="calendarContainer"  style={{display: display}}>
         <Calendar onChange={handleDate} value={date}/>

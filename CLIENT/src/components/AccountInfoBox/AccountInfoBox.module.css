@@ -1,0 +1,88 @@
+#accountInfoBox {
+  background-color :hsl(194, 63%, 60%);
+  width: 100%;
+  min-height: 75vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#content {
+  margin: 120px 0 20px 0;
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: white;
+}
+
+#content h4 {
+  font-size: 30px;
+  margin: 20px 20px 10px 20px;
+}
+
+#instructions {
+  font-size: 18px;
+  margin: 0 20px;
+  border-bottom: 1px solid black;
+}
+
+.informationContainer {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  align-items: center;
+  justify-content: space-between;
+  margin: 15px 40px;
+}
+
+.informationContainer p {
+  font-size: 20px;
+  text-decoration: none;
+}
+
+.informationContainer input {
+  margin-left: 5px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+#dropdowns {
+  width: 80%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: space-around;
+}
+
+#top {
+  margin: 0;
+  border: 1px solid black;
+}
+
+#optionsContainer {
+  width: 40%;
+}
+
+
+#option:hover {
+  cursor: pointer;
+  background-color: lightgray;
+}
+
+#bottomBtn {
+  height: 50px;
+  width: 150px;
+  margin: 15px 40px;
+  align-self: last baseline;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: hsl(194, 63%, 60%);
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+#bottomBtn:hover {
+  background-color: hsl(194, 63%, 50%);
+}
