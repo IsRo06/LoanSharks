@@ -3,7 +3,7 @@ import {useContext} from 'react'
 import { locationContext, rentalRangeContext, usernameContext } from '../../App';
 import styles from './CheckoutPopup.module.css'
 import { useNavigate } from 'react-router-dom';
-import { gql, useQuery, useMutation } from '@apollo/client';
+import { gql, useMutation } from '@apollo/client';
 
 const UPDATE_RESERVATION = gql`
   mutation UpdateCarRegistration($registrationInput: updateCarRegistrationInput!) {
