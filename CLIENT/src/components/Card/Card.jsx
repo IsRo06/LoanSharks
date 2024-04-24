@@ -1,6 +1,5 @@
 import React, {useState, useContext, useEffect, useRef} from 'react'
 import { userContext, locationContext, usernameContext, firstNameContext, lastNameContext, passwordContext } from "../../App";
-import { userContext, locationContext, usernameContext, firstNameContext, lastNameContext, passwordContext } from "../../App";
 import styles from './Card.module.css'
 import SigninPopup from '../SigninPopup/SigninPopup';
 import CheckoutPopup from '../CheckoutPopup/CheckoutPopup';
@@ -12,17 +11,9 @@ export default function Card(props){
   const [username, setUsername] = useContext(usernameContext);
   const [password, setPassword] = useContext(passwordContext);
 
-  
-  const [firstName, setfirstName] =  useContext(firstNameContext);
-  const [lastName, setlastName]=useContext(lastNameContext);;
-  const[username, setUsername] = useContext(usernameContext);
-  const [password, setPassword] = useContext(passwordContext);
-
-
   const [userType, setUserType] = useContext(userContext);
   const userTypeRef = useRef(userType)
   const [location, setLocation] = useContext(locationContext);
-
 
   function sendData({desiredUser}) {
     setfirstName(desiredUser.firstName);
@@ -104,7 +95,7 @@ export default function Card(props){
           
         </div>
       </div>
-      <SigninPopup trigger={signinTriggered} setTrigger={setsigninTriggered} typeOfUser={setUserType} location={setLocation} sendData={sendData} sendData={sendData}></SigninPopup>
+      <SigninPopup trigger={signinTriggered} setTrigger={setsigninTriggered} typeOfUser={setUserType} location={setLocation} sendData={sendData}></SigninPopup>
       <CheckoutPopup trigger={reservationTriggered} setTrigger={setreservationTriggered} car={selectedCar}/>
     </>
     

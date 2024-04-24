@@ -9,7 +9,7 @@ import SigninPopup from "../SigninPopup/SigninPopup";
 export default function Header(){
   const [firstName, setfirstName] =  useContext(firstNameContext);
   const [lastName, setlastName]=useContext(lastNameContext);;
-  const[username, setUsername] = useContext(usernameContext);
+  const [username, setUsername] = useContext(usernameContext);
   const [userType, setUserType] = useContext(userContext);
   const [location, setLocation] = useContext(locationContext);
   const [password, setPassword] = useContext(passwordContext);

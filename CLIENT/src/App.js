@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from "react";
-import React, { useState, useEffect, useContext } from "react";
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import HomeScreen from "./pages/HomeScreen.jsx";
 import CarsScreen from './pages/CarsScreen.jsx'
@@ -12,11 +11,6 @@ import LocationsScreen from "./pages/LocationsScreen.jsx";
 import OffersScreen from "./pages/OffersScreen.jsx";
 import {AuthProvider} from "./context/auth.js"
 
-
-export const usernameContext = React.createContext();
-export const firstNameContext = React.createContext();
-export const lastNameContext = React.createContext();
-export const passwordContext = React.createContext();
 export const usernameContext = React.createContext();
 export const firstNameContext = React.createContext();
 export const lastNameContext = React.createContext();
@@ -26,20 +20,12 @@ export const locationContext = React.createContext();
 export const rentalRangeContext = React.createContext();
 
 export default function App() {
-
-
-
   const [userType, setUserType] = useState("None");
-  const [username, setUsername] = useState("");
   const [firstName, setfirstName] =  useState("");
   const [lastName, setlastName]=useState("");
   const [password, setPassword]= useState("");
   const [location, setLocation] = useState("");
   const [username, setUsername] = useState("");
-  const [firstName, setfirstName] =  useState("");
-  const [lastName, setlastName]=useState("");
-  const [password, setPassword]= useState("");
-  const [location, setLocation] = useState("");
   const [rentalRange, setRentalRange] = useState([0,0,0,0]);
 
   function RouteRenderer(props) {
@@ -53,9 +39,6 @@ export default function App() {
 
     return props.usersAllowed.includes(userType) ? <props.component/> : null
   } 
-  } 
-
-
   return(
     <AuthProvider>
     <userContext.Provider value={[userType, setUserType]}>
@@ -91,12 +74,6 @@ export default function App() {
       </firstNameContext.Provider>
       </usernameContext.Provider>
     </userContext.Provider>
-    </AuthProvider>
-
-    
+    </AuthProvider>   
   )
-
- 
 }
-
-

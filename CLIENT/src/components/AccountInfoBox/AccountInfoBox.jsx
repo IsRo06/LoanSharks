@@ -45,7 +45,7 @@ export default function AccountInfoBox(props){
   const {errors, loading, data} = useQuery(FETCH_USERS_QUERY);
   const [firstName, setfirstName] =  useContext(firstNameContext);
   const [lastName, setlastName]=useContext(lastNameContext);;
-  const[email, setEmail] = useContext(usernameContext);
+  const [email, setEmail] = useContext(usernameContext);
   const [oldemail, setOldemail] = useContext(usernameContext);
   const [userType, setUserType] = useContext(userContext);
   const [location, setLocation] = useContext(locationContext);
