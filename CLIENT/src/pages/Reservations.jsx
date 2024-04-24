@@ -14,6 +14,7 @@ query {
   getCars {
     id
     carMake
+    carEmail
     carModel
     carColor
     carMileage
