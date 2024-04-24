@@ -54,8 +54,6 @@ export default function SigninPopup(props){
     props.setTrigger(false);
   }
 
-  
-  
   let desiredUser = null;
 
   async function signin(event){
@@ -64,7 +62,6 @@ export default function SigninPopup(props){
         desiredUser = user;     
       }
     }
-    //after here we either found the username or didn't
     if(!desiredUser){
       window.alert("Email does not exist!");
     }else{
