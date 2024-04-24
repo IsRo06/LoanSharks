@@ -9,7 +9,7 @@ import SigninPopup from "../SigninPopup/SigninPopup";
 export default function Header(){
   const [firstName, setfirstName] =  useContext(firstNameContext);
   const [lastName, setlastName]=useContext(lastNameContext);;
-  const[username, setUsername] = useContext(usernameContext);
+  const [username, setUsername] = useContext(usernameContext);
   const [userType, setUserType] = useContext(userContext);
   const [location, setLocation] = useContext(locationContext);
   const [password, setPassword] = useContext(passwordContext);
@@ -21,7 +21,6 @@ export default function Header(){
     setUserType(desiredUser.type);
     setLocation(desiredUser.location);
     setPassword(desiredUser.password);
-    
   }
 
   const [popupTriggered, setpopupTriggered] = useState(false);
@@ -45,14 +44,8 @@ export default function Header(){
       </div>
       <div id={styles.rightSide}>
         <Link to="/help" className={styles.link}><div className={styles.bannerText}>Help</div></Link>
-
-
-
         <Link to="/offers" className={styles.link}><div className={styles.bannerText}>Offers</div></Link>
         <Link to="/locations" className={styles.link}><div className={styles.bannerText}>Locations</div></Link>
-        {/* <div className={styles.bannerText}>Locations</div> */}
-
-
 
         {userType === "None"? 
           <div className={styles.bannerText} onClick={() => setpopupTriggered(t => t = true)}>Sign in</div>

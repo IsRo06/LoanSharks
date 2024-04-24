@@ -41,7 +41,7 @@ export default function Reservations(){
 
   const [firstName, setfirstName] =  useContext(firstNameContext);
   const [lastName, setlastName]=useContext(lastNameContext);;
-  const[username, setUsername] = useContext(usernameContext);
+  const [username, setUsername] = useContext(usernameContext);
   const [password, setPassword] = useContext(passwordContext);
 
   function sendData({desiredUser}) {

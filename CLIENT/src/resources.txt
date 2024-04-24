@@ -1,2 +1,0 @@
-Calendar: https://blog.logrocket.com/react-calendar-tutorial-build-customize-calendarCalendar
-Dropdown: https://upmostly.com/tutorials/how-to-react-dropdown-menu

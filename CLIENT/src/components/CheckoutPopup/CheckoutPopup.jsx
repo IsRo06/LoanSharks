@@ -3,22 +3,19 @@ import {useContext} from 'react'
 import { locationContext, rentalRangeContext, usernameContext } from '../../App';
 import styles from './CheckoutPopup.module.css'
 import { useNavigate } from 'react-router-dom';
-import { gql, useQuery, useMutation } from '@apollo/client';
+import { gql, useMutation } from '@apollo/client';
 
 const UPDATE_RESERVATION = gql`
   mutation UpdateCarRegistration($registrationInput: updateCarRegistrationInput!) {
   UpdateCarRegistration(registrationInput: $registrationInput) {
-    id
-  }
+    id }
 }
 `
-
-
 export default function CheckoutPopup(props){
   const [updateres] = useMutation(UPDATE_RESERVATION);
   const [location, setLocation] = useContext(locationContext);
   const [rentalRange, setRentalRange] = useContext(rentalRangeContext);
-  const [email, setEmail ] =useContext(usernameContext)
+  const [email, setEmail ] = useContext(usernameContext)
   const navigate = useNavigate();
 
   function update(){
@@ -32,9 +29,6 @@ export default function CheckoutPopup(props){
     update();
     window.alert("Your Reservation has been confirmed!");
     navigate('/');
-
-
-    //create reservation here in database with rental range dates
   }
 
   return(props.trigger) ? (
@@ -54,7 +48,6 @@ export default function CheckoutPopup(props){
             </div>
           </div>
         
-
           <div id={styles.intermediateInfo}>
             <div id={styles.leftCol}>
               <p className={styles.cardInfo}>Number of Seats: {props.car.seats}</p>

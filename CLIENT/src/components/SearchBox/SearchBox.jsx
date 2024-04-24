@@ -21,7 +21,14 @@ export default function SearchBox(){
                 '4:00PM', '5:00PM', '6:00PM', '7:00PM', '8:00PM', '9:00PM', '10:00PM', '11:00PM']
 
   function handleSearch() {
-    if (rentalRange.includes(0) || rentalTimes.includes("0") || location === "None"){
+    let currentDate = new Date();
+    let pickupDate = new Date(2024, rentalRange[0] - 1, rentalRange[1]);
+    let dropOffDate = new Date(2024, rentalRange[2] - 1, rentalRange[3]);
+
+    if ((currentDate.getTime() > pickupDate.getTime()) || (currentDate.getTime() > dropOffDate.getTime()) ) {
+      window.alert("Dates have already passed")
+    }
+    else if (rentalRange.includes(0) || rentalTimes.includes("0") || location === "None"){
       window.alert("Please fill out all the search boxes")
     }
     else if ((rentalRange[0] > rentalRange[2]) || ((rentalRange[0] === rentalRange[2]) && (rentalRange[1] > rentalRange[3])) ) {
@@ -33,7 +40,6 @@ export default function SearchBox(){
     else {
       navigate('/cars')
     }
-    // navigate('/cars');
   }
 
   return(

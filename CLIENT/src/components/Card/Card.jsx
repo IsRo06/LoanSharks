@@ -1,23 +1,19 @@
 import React, {useState, useContext, useEffect, useRef} from 'react'
 import { userContext, locationContext, usernameContext, firstNameContext, lastNameContext, passwordContext } from "../../App";
 import styles from './Card.module.css'
-import PropTypes from 'prop-types'
 import SigninPopup from '../SigninPopup/SigninPopup';
 import CheckoutPopup from '../CheckoutPopup/CheckoutPopup';
 
 
 export default function Card(props){  
-  
   const [firstName, setfirstName] =  useContext(firstNameContext);
-  const [lastName, setlastName]=useContext(lastNameContext);;
-  const[username, setUsername] = useContext(usernameContext);
+  const [lastName, setlastName]= useContext(lastNameContext);;
+  const [username, setUsername] = useContext(usernameContext);
   const [password, setPassword] = useContext(passwordContext);
-
 
   const [userType, setUserType] = useContext(userContext);
   const userTypeRef = useRef(userType)
   const [location, setLocation] = useContext(locationContext);
-
 
   function sendData({desiredUser}) {
     setfirstName(desiredUser.firstName);
@@ -78,7 +74,6 @@ export default function Card(props){
             </div>
           </div>
         
-
           <div id={styles.intermediateInfo}>
             <div id={styles.leftCol}>
               <p className={styles.cardInfo}>Number of Seats: {props.carObject.seats}</p>
