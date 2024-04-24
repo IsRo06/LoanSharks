@@ -1,15 +1,27 @@
 import React, {useState, useContext, useEffect, useRef} from 'react'
-import { userContext, locationContext } from '../../App';
-import penguinImage from '../../images/penguins.jpg'
+import { userContext, locationContext, usernameContext, firstNameContext, lastNameContext, passwordContext } from "../../App";
 import styles from './Card.module.css'
-import PropTypes from 'prop-types'
 import SigninPopup from '../SigninPopup/SigninPopup';
 import CheckoutPopup from '../CheckoutPopup/CheckoutPopup';
 
 export default function Card(props){  
+  const [firstName, setfirstName] =  useContext(firstNameContext);
+  const [lastName, setlastName]= useContext(lastNameContext);;
+  const [username, setUsername] = useContext(usernameContext);
+  const [password, setPassword] = useContext(passwordContext);
+
   const [userType, setUserType] = useContext(userContext);
   const userTypeRef = useRef(userType)
   const [location, setLocation] = useContext(locationContext);
+
+  function sendData({desiredUser}) {
+    setfirstName(desiredUser.firstName);
+    setlastName(desiredUser.lastName);
+    setUsername(desiredUser.email);
+    setUserType(desiredUser.type);
+    setLocation(desiredUser.location);
+    setPassword(desiredUser.password);
+  }
 
   const [signinTriggered, setsigninTriggered] = useState(false);
   const [reservationTriggered, setreservationTriggered] = useState(false);
@@ -47,7 +59,7 @@ export default function Card(props){
   return( 
     <>
       <div className={styles.card}>
-        <img className={styles.cardImage} src={penguinImage} alt="profile picture" />
+        <img className={styles.cardImage} src={props.carObject.carIMGstring} alt="profile picture" />
         <div id={styles.textWrapper}>
           <div id={styles.title}>
             <div id={styles.topRow}>
@@ -60,7 +72,6 @@ export default function Card(props){
             </div>
           </div>
         
-
           <div id={styles.intermediateInfo}>
             <div id={styles.leftCol}>
               <p className={styles.cardInfo}>Number of Seats: {props.carObject.seats}</p>
@@ -81,7 +92,7 @@ export default function Card(props){
           
         </div>
       </div>
-      <SigninPopup trigger={signinTriggered} setTrigger={setsigninTriggered} typeOfUser={setUserType} location={setLocation}></SigninPopup>
+      <SigninPopup trigger={signinTriggered} setTrigger={setsigninTriggered} typeOfUser={setUserType} location={setLocation} sendData={sendData}></SigninPopup>
       <CheckoutPopup trigger={reservationTriggered} setTrigger={setreservationTriggered} car={selectedCar}/>
     </>
     

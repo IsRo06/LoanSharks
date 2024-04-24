@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import HomeScreen from "./pages/HomeScreen.jsx";
 import CarsScreen from './pages/CarsScreen.jsx'
@@ -10,18 +10,22 @@ import HelpPage from "./pages/HelpPage.jsx";
 import LocationsScreen from "./pages/LocationsScreen.jsx";
 import OffersScreen from "./pages/OffersScreen.jsx";
 
-import { jwtDecode } from "jwt-decode";
-import gql from "graphql-tag";
-import { useQuery } from "@apollo/client";
-//import { AuthProvider } from "./context/auth";
 
+export const usernameContext = React.createContext();
+export const firstNameContext = React.createContext();
+export const lastNameContext = React.createContext();
+export const passwordContext = React.createContext();
 export const userContext = React.createContext();
 export const locationContext = React.createContext();
 export const rentalRangeContext = React.createContext();
 
 export default function App() {
   const [userType, setUserType] = useState("None");
-  const [location, setLocation] = useState("None");
+  const [username, setUsername] = useState("");
+  const [firstName, setfirstName] =  useState("");
+  const [lastName, setlastName]=useState("");
+  const [password, setPassword]= useState("");
+  const [location, setLocation] = useState("");
   const [rentalRange, setRentalRange] = useState([0,0,0,0]);
 
   function RouteRenderer(props) {
@@ -34,29 +38,21 @@ export default function App() {
     }, [navigate, props.usersAllowed]);
 
     return props.usersAllowed.includes(userType) ? <props.component/> : null
-  }
+  } 
 
-  /*var decodedToken = [];
-
-  if (localStorage.getItem("jwtToken")) {
-    decodedToken = jwtDecode(localStorage.getItem("jwtToken"));
-  }
-
-  var { data } = useQuery(FETCH_USER_QUERY, {
-    variables: {
-      userId: decodedToken.id
-    }
-  });*/
 
   return(
-    /*<AuthProvider>*/
     <userContext.Provider value={[userType, setUserType]}>
+      <usernameContext.Provider value={[username, setUsername]}>
+      <firstNameContext.Provider value={[firstName, setfirstName]}>
+      <lastNameContext.Provider value={[lastName, setlastName]}>
+      <passwordContext.Provider value={[password, setPassword]}>
       <locationContext.Provider value={[location, setLocation]}>
         <rentalRangeContext.Provider value={[rentalRange, setRentalRange]}>
           <BrowserRouter>
             <Routes>
               <Route path="/">
-                <Route index element={<HomeScreen />} />
+                <Route index element={<HomeScreen/>} />
                 <Route path="cars" element={<CarsScreen />} />
                 <Route path="account" element={<AccountScreen/>} />
                 <Route path="employees" element={<RouteRenderer usersAllowed={["Admin"]} component={EmployeeInfo}/>} />
@@ -72,18 +68,10 @@ export default function App() {
           </BrowserRouter>
         </rentalRangeContext.Provider>
       </locationContext.Provider>
-    </userContext.Provider>
-    /*</AuthProvider>*/
-    
+      </passwordContext.Provider>
+      </lastNameContext.Provider>
+      </firstNameContext.Provider>
+      </usernameContext.Provider>
+    </userContext.Provider> 
   )
-
-  /*const FETCH_USER_QUERY = gql`
-  query getUser($userId: ID!) {
-    getUser(userId: $userId) {
-      permission
-    }
-  }
-`;*/
 }
-
-
