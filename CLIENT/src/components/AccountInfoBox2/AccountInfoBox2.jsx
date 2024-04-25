@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useContext, useEffect } from 'react';
 import styles from './AccountInfoBox2.module.css'
-import { userContext } from '../../App';
+import { locationContext, userContext } from '../../App';
 import Dropdown from '../Dropdowns/Dropdowns';
 import { useNavigate } from 'react-router-dom';
 import { useMutation, gql } from '@apollo/client';
@@ -27,6 +27,7 @@ mutation UpdateLocation($input: updateInputLocation!) {
 export default function AccountInfoBox(props){
   const [pressed, setPressed] = useState(false);
   const [userType, setUserType] = useContext(userContext);
+  const [adminloc] = useContext(locationContext)
   const [userInfo, setUserInfo] = useState(props.information);
   const [inputsDisabled, setinputsDisabled] = useState(userType !== "None");
   const [btnWhenSignedIn, setbtnWhenSignedIn] = useState("Edit Information");
@@ -38,7 +39,7 @@ export default function AccountInfoBox(props){
   const [lastName, setlastName]=useState("");
   const[email, setEmail] = useState("");
   const [oldemail, setOldemail] = useState("");
-  const [location, setLocation] = useState("Gainesville");
+  const [location, setLocation] = useState(adminloc);
   const [password, setPassword]= useState("");
   const [confirmPassword, setConfirmPassword] =useState("");
 

@@ -49,6 +49,7 @@ export default function SigninPopup(props){
     setPassword(event.target.value)
   }
   function createNew() {
+    props.sendData(null)
     props.typeOfUser("None");
     props.setTrigger(false);
   }

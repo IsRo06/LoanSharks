@@ -28,6 +28,7 @@ query {
   }
 `
 export default function Dashboard(){
+  var doo = false;
   const {loading, error, data, refetch} = useQuery(FETCH_CAR_QUERY);  
   const [location, setLocation] = useContext(locationContext);
   const [allCars, setAllCars] = useState([]);
@@ -37,8 +38,8 @@ export default function Dashboard(){
   //refetch situation
   function reload(truth){
     if(truth === false){
-        window.alert("refetch");
         refetch();
+        doo = !doo;
     }
         
 }
@@ -69,7 +70,7 @@ export default function Dashboard(){
         }
   
     setAllCars(tempCars);
-}, [data, refetch, setAllCars]);
+}, [data, refetch, doo]);
 
   function getAllCars() {
     return allCars;
