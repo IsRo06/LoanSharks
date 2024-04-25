@@ -24,9 +24,9 @@ export default function CarInfoBox(props){
 
 
   const [status, setStatus] = useState(props.information.status);
-  const [maxmilesperday, setMaxMilesPerDay]= useState(0);
-  const [milecostaftermax, setMilesCostAfterMax]= useState(0);
-  const [costperday, setCostPerDay] =useState(0);
+  const [maxmilesperday, setMaxMilesPerDay]= useState(props.information.maxMilesPerDay);
+  const [milecostaftermax, setMilesCostAfterMax]= useState(props.information.carMileCostAfterMax);
+  const [costperday, setCostPerDay] =useState(props.information.carCostPerDay);
   const [id] =useState(props.information.id);
 
 
